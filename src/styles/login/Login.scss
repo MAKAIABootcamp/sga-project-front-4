@@ -1,0 +1,23 @@
+@import "../index.scss";
+
+.gradient-custom-2 {
+  background: linear-gradient(
+    to right,
+    $color-darker,
+    $color-base,
+    $color-lighter
+  );
+  box-shadow: 0 4px 8px rgba(106, 179, 238, 0.5);
+}
+
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important;
+  }
+}
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+  }
+}
