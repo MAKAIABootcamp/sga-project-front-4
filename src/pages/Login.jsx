@@ -14,7 +14,7 @@ const Login = () => {
                   <div className="card-body p-md-5 mx-md-4">
                     <div className="text-center">
                       {/* <h4 className="mt-1 mb-5 pb-1">We are The Lotus Team</h4> */}
-                      <h2 className="mt-1 mb-5 pb-1">Sistema de Gestión Académica</h2>
+                      <h2 className="mt-1 mb-5 pb-1 fw-bold">Sistema de Gestión Académica</h2>
                     </div>
                     <form>
                       <h5 className="mt-1 mb-6 pb-1">Ingresa tus credenciales</h5>
