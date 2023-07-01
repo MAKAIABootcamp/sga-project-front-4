@@ -6,6 +6,7 @@ import OlvidarContrasena from '../pages/OlvidarContrasena'
 import NotFound from '../components/notFound/NotFound'
 import Login from '../pages/Login'
 import PanelAdministrador from '../pages/PanelAdministrador'
+import Cronograma from '../pages/Cronograma'
 
 const AppRouter = () => {
   return (
@@ -15,6 +16,7 @@ const AppRouter = () => {
           <Route path="/login" element={<Navigate to="/" />}/>
           <Route path="/olvidar-contrasena" element={<OlvidarContrasena />}/>
           <Route path="/administrador" element={<PanelAdministrador />}/>
+          <Route path="/cronograma" element={<Cronograma />}/>
           <Route path="*" element={<NotFound />} />
       </Routes>
    </BrowserRouter>
