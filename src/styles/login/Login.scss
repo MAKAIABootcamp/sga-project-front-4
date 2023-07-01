@@ -3,9 +3,7 @@
 .gradient-custom-2 {
   background: linear-gradient(
     to right,
-    $color-darker,
-    $color-base,
-    $color-lighter
+   #4388a1, #2e6c80, #1a4f5e
   );
   box-shadow: 0 4px 8px rgba(106, 179, 238, 0.5);
 }

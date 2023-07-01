@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/login/Login.scss";
-import logo from "../assets/images/logoBootcamp1.png";
+import logo from "../assets/images/logo2.png";
 
 const Login = () => {
   return (
@@ -17,7 +17,7 @@ const Login = () => {
                       <h2 className="mt-1 mb-5 pb-1">Sistema de Gestión Académica</h2>
                     </div>
                     <form>
-                      <h5 className="mt-1 mb-5 pb-1">Ingresa tus credenciales</h5>
+                      <h5 className="mt-1 mb-6 pb-1">Ingresa tus credenciales</h5>
                       <div className="form-outline mb-4">
                         <input
                           type="email"
@@ -49,8 +49,16 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                  <div className="text-white px-3 py-4 p-md-5 mx-md-4">
-                  <img src={logo}/>
+                  <div className="text-white px-3 py-4 p-md-5 mx-md-4" style={{
+                      width: "100%",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}>
+                  <img src={logo} style={{
+                     maxWidth: '100%',
+                     height: 'auto'
+                    }}/>
                   </div>
                 </div>
               </div>
