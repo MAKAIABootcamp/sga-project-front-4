@@ -1,0 +1,63 @@
+// .clase-ejemplo {
+//     @include Texto1($color: 'azul-oscuro', $fontSize: 'grande');
+//   }
+  
+//   .otra-clase {
+//     @include Texto1($color: 'gris', $fontSize2: 'pequeno');
+//   }
+@import "./index.scss";
+@mixin Texto1($color: null, $fontWeight: null) {
+    color: $gray5;
+    font-family: $tipografiaPrincipal;
+    font-style:light;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    margin: 0px;
+    
+    @if $color == 'gris' {
+      color: #414141;
+    }
+    
+    @if $color == 'azul' {
+      color:#0B508C;
+    }
+    
+    @if $color == 'azul-oscuro' {
+      color: #072440;
+    }
+    @if $color == 'negro' {
+        color: black;
+      }
+    @if $fontWeight== 'grueso' {
+        font-weight: 400;
+    }
+
+  }
+  @mixin buttonSquare3($color: null,) {
+
+    height: 44px;
+    background-color:$colorBotonSecundario;
+    padding: 5px;
+    border: 2px solid $colorBotonSecundario;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 10px;
+    transition: 0.5s;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+    gap: 10px;
+
+    &:hover {
+        background-color: $colorPrincipal;
+        border: solid 2px $colorPrincipal;
+
+    }
+    @if $color== 'verde' {
+        color:$colorBotonExcel;
+    }
+ 
+}

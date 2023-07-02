@@ -1,0 +1,8 @@
+@import "./mixin.scss";
+@import"./index.scss";
+#verde{
+    @include  buttonSquare3($color: "verde")
+}
+#azul{
+    @include  buttonSquare3($color: null)
+}
