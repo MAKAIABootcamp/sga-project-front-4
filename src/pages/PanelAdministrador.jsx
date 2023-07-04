@@ -1,8 +1,11 @@
-import React from 'react'
+// import React from 'react'
 
 const PanelAdministrador = () => {
+
   return (
-    <div>PanelAdministrador</div>
+    <>
+    <h1>Registrar nuevo usuario</h1>
+    </>
   )
 }
 
