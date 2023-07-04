@@ -1,8 +1,124 @@
-@import "./mixin.scss";
-@import"./index.scss";
-#verde{
-    @include  buttonSquare3($color: "verde")
+@import "./index.scss";
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .react-calendar {
+    width: 100%;}
+  .calendario {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: #f2f2f2;
+    padding: 44px
+  }
+  .container{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    background-color: #f2f2f2;
+
+  }
+  .react-calendar__navigation {
+    display: flex;
+    height: 44px;
+    margin-bottom: 1em;
+    margin-top: 2em;
 }
-#azul{
-    @include  buttonSquare3($color: null)
+.react-calendar__navigation__label__labelText{
+    color: gray;
+}
+.react-calendar__month-view__weekdays {
+    text-align: center;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-size: 0.75em;
+}
+.react-calendar__tile {
+    max-width: 100%;
+    padding: 10px 6.6667px;
+    background: none;
+    text-align: center;
+    line-height: 53px;
+}
+.react-calendar{
+    border: none;
+}
+abbr{
+    text-decoration: none;
+}
+
+.division {
+    flex: 1;
+  }
+.evento-seleccionado{
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    margin-top: 22px;
+    height: 100px;
+    margin-left: 19px;
+    padding: 22px;
+    gap: 13px;
+    align-items: center;
+    width: fit-content;
+    h3{
+color: gray;
+    }
+h2{
+    color: black;
+}
+}
+
+.evento-marker.selected {
+  background: none;
+  color: inherit;
+}
+#division1 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* height: 649px; */
+    background-color: #337cb7;
+  /* Aplica 0 en la parte superior, 20px en la derecha e inferior, y 20px en la izquierda */
+  }
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  background-color: #e6e6e6;
+}
+
+.react-calendar button {
+  margin: 0;
+  border: 0;
+  outline: none;
+}
+
+.react-calendar__tile--active {
+  background: inherit;
+  color: black;
+}
+
+.evento-marker {
+  background: none;
+  color: white;
+  position: relative;
+}
+
+.evento-marker::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 33px;
+  height: 33px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px green;
+  z-index: -1;
+}
+
+.festivo-marker {
+  background-color: red;
+  color: white;
 }

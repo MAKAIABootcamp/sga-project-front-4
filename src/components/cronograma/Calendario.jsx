@@ -1,191 +1,202 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { format, isSameDay } from 'date-fns';
+import { isSameDay } from 'date-fns';
+import "../../styles/calendario.scss";
+import { useSelector, useDispatch } from 'react-redux';
+import { actualizarEventoSeleccionado } from '../../redux/actions/actions';
 
 const Calendario = () => {
-  const [eventos, setEventos] = useState([
-    {
-      titulo: 'Clase de Matemáticas',
-      fechaInicio: new Date(2023, 5, 1), // 1 de junio de 2023
-      fechaFin: new Date(2023, 5, 1), // 1 de junio de 2023
-      detalles: 'Clase de matemáticas para repasar álgebra lineal.',
-      esFestivo: false, // No es un día festivo
-    },
-    // ...otros eventos
-  ]);
-  const [eventoSeleccionado, setEventoSeleccionado] = useState(null);
+  const [diasSeleccionados, setDiasSeleccionados] = useState([]);
+  const eventos = useSelector((state) => state.eventos);
+ const eventoSeleccionado = useSelector((state) => state.evento.eventoSeleccionado);
 
-  const colorearDias = (date) => {
-    const estilo = {};
+  const dispatch = useDispatch();
+  const [todoslosEventos, setTodosLosEventos] = useState([
+        {
+          titulo: 'Clase de ',
+          fechaInicio: new Date("2023-07-02T15:30:00"),
+          fechaFin: new Date("2023-07-02T16:30:00"),
+          detalles: 'Clase de matemáticas para repasar álgebra lineal.',
+          esFestivo: false,
+          esEntrega: true,
+          categoria: "sprint"
+        },
+        {
+          titulo: 'Clase de Matemáticas',
+          fechaInicio: new Date("2023-07-03T15:30:00"),
+          fechaFin: new Date("2023-07-03T16:30:00"),
+          detalles: 'Clase de matemáticas para repasar álgebra lineal.',
+          esFestivo: true,
+          esEntrega: true,
+          categoria: "sprint"
+        },
+        // ... otros eventos
+      ]);
+    
+      const onClickDay = (date) => {
+        const selectedEvent = todoslosEventos.find((evento) =>
+          isSameDay(evento.fechaInicio, date)
+        );
+      
+        dispatch(actualizarEventoSeleccionado(selectedEvent))
+        console.log(selectedEvent);;
+      };
+      
 
-    const esDiaFestivo = eventos.some(
-      (evento) => evento.esFestivo && isSameDay(evento.fechaInicio, date)
-    );
+  const renderTileContent = ({ date, view }) => {
+    if (view === 'month') {
+      const esDiaFestivo = eventos.some(
+        (evento) => evento.esFestivo && isSameDay(evento.fechaInicio, date)
+      );
 
-    const tieneEvento = eventos.some(
-      (evento) => !evento.esFestivo && isSameDay(evento.fechaInicio, date)
-    );
+      const tieneEvento = eventos.some(
+        (evento) => !evento.esFestivo && isSameDay(evento.fechaInicio, date)
+      );
 
-    if (esDiaFestivo) {
-      estilo.backgroundColor = 'red';
-      estilo.color = 'white';
+      const isSelected = diasSeleccionados.some((dia) => isSameDay(dia, date));
+
+      if (esDiaFestivo) {
+        return <div className={`festivo-marker ${isSelected ? 'selected' : ''}`} />;
+      }
+
+      if (tieneEvento) {
+        return <div className={`evento-marker ${isSelected ? 'selected' : ''}`} />;
+      }
     }
 
-    if (tieneEvento) {
-      estilo.backgroundColor = 'green';
-      estilo.color = 'white';
-    }
-
-    return estilo;
+    return null;
   };
-
-  const onClickDay = (date) => {
-    const selectedEvent = eventos.find((evento) =>
-      isSameDay(evento.fechaInicio, date)
-    );
-
-    setEventoSeleccionado(selectedEvent);
-  };
-
-  const EventDetails = ({ evento }) => (
-    <div className="evento-seleccionado">
-      <h3>{evento.titulo}</h3>
-      <p>{evento.detalles}</p>
-      <p>Hora: {format(evento.fechaInicio, 'HH:mm')}</p>
-    </div>
-  );
 
   return (
-    <div>
-      <h2>Calendario</h2>
-      <Calendar
-        tileClassName={({ date }) => {
-          const estiloDia = colorearDias(date);
-          return Object.keys(estiloDia).join(' ');
-        }}
-        onClickDay={onClickDay}
-      />
-      {eventoSeleccionado && <EventDetails evento={eventoSeleccionado} />}
+    <div className="container">
+      <div className="division" id='division2'>
+        <Calendar
+          className="custom-calendar"
+          onClickDay={onClickDay}
+          tileContent={renderTileContent}
+          value={diasSeleccionados[0]}
+        />
+      </div>
+ 
     </div>
   );
 };
 
 export default Calendario;
 
-// import React,{useState} from 'react';
-// import { LocalizationProvider } from '@mui/x-date-pickers-pro';
-// import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
-// import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
-// import { isSameDay } from 'date-fns';
-
+// import React, { useState, useRef, useEffect } from 'react';
+// import Calendar from 'react-calendar';
+// import 'react-calendar/dist/Calendar.css';
+// import { format, isSameDay } from 'date-fns';
+// import "../../styles/calendario.scss";
+// import { useSelector, useDispatch } from 'react-redux';
+// import { actualizarEventoSeleccionado } from '../../redux/actions/actions';
 // const Calendario = () => {
-//     const [eventoSeleccionado, setEventoSeleccionado] = useState(null);
-  
-//     const colorearDias = (date) => {
-//       const estilo = {};
-  
+//   const [diasSeleccionados, setDiasSeleccionados] = useState([]);
+//   const eventosState = useSelector((state) => state.eventos);
+//   const eventoSeleccionado = useSelector((state) => state.evento.eventoSeleccionado); // Accede al evento seleccionado desde el estado
+//   const dispatch = useDispatch();
+
+//   const actualizarEventos = (nuevosEventos) => {
+//     // Despacha la acción para actualizar los eventos
+//     dispatch({ type: 'ACTUALIZAR_EVENTOS', payload: nuevosEventos });
+//   };
+
+
+//  
+ 
+//   const renderTileContent = ({ date, view }) => {
+//     if (view === 'month') {
 //       const esDiaFestivo = eventos.some(
-//         (evento) =>
-//           evento.esFestivo && isSameDay(evento.fechaInicio, date)
+//         (evento) => evento.esFestivo && isSameDay(evento.fechaInicio, date)
 //       );
   
 //       const tieneEvento = eventos.some(
-//         (evento) =>
-//           !evento.esFestivo && isSameDay(evento.fechaInicio, date)
+//         (evento) => !evento.esFestivo && isSameDay(evento.fechaInicio, date)
 //       );
   
+//       const isSelected = diasSeleccionados.some((dia) => isSameDay(dia, date));
+  
 //       if (esDiaFestivo) {
-//         estilo.backgroundColor = 'red';
-//         estilo.color = 'white';
+//         return <div className={`festivo-marker ${isSelected ? 'selected' : ''}`} />;
 //       }
   
 //       if (tieneEvento) {
-//         estilo.backgroundColor = 'green';
-//         estilo.color = 'white';
+//         return <div className={`evento-marker ${isSelected ? 'selected' : ''}`} />;
 //       }
+//     }
   
-//       return estilo;
-//     };
-  
-//     const eventos = [
-//       {
-//         titulo: 'Clase de Matemáticas',
-//         fechaInicio: new Date(2023, 5, 1), // 1 de junio de 2023
-//         fechaFin: new Date(2023, 5, 1), // 1 de junio de 2023
-//         detalles: 'Clase de matemáticas para repasar álgebra lineal.',
-//         esFestivo: false, // No es un día festivo
-//       },
-//       {
-//         titulo: 'Clase de Historia',
-//         fechaInicio: new Date(2023, 5, 5), // 5 de junio de 2023
-//         fechaFin: new Date(2023, 5, 5), // 5 de junio de 2023
-//         detalles: 'Clase de historia antigua sobre el Imperio Romano.',
-//         esFestivo: false, // No es un día festivo
-//       },
-//       {
-//         titulo: 'Actividad de Proyecto',
-//         fechaInicio: new Date(2023, 5, 10), // 10 de junio de 2023
-//         fechaFin: new Date(2023, 5, 16), // 16 de junio de 2023
-//         detalles: 'Trabajar en el proyecto grupal de ciencias.',
-//         esFestivo: false, // No es un día festivo
-//       },
-//       {
-//         titulo: 'Día Festivo',
-//         fechaInicio: new Date(2023, 5, 20), // 20 de junio de 2023 (Día festivo)
-//         fechaFin: new Date(2023, 5, 20), // 20 de junio de 2023 (Día festivo)
-//         detalles: 'Día festivo en Colombia.',
-//         esFestivo: true, // Es un día festivo
-//       },
-//     ];
-  
-//     return (
-//       <div>
-//         <h2>Calendario</h2>
-//         <LocalizationProvider dateAdapter={AdapterDayjs}>
-//           <DateRangePicker
-//             renderInput={(startProps, endProps) => (
-//               <div>
-//                 <input {...startProps.input} />
-//                 <input {...endProps.input} />
-//               </div>
-//             )}
-//             value={[eventos[0].fechaInicio, eventos[0].fechaFin]}
-//             onChange={(newValue) => {
-//               console.log(newValue);
-//             }}
-//             onCalendarChange={(date) => {
-//               const selectedEvent = eventos.find((evento) =>
-//                 isSameDay(evento.fechaInicio, date)
-//               );
-  
-//               setEventoSeleccionado(selectedEvent);
-//             }}
-//             renderDay={(day, _value, DayComponentProps) => {
-//               const estiloDia = colorearDias(day);
-  
-//               return (
-//                 <DayComponentProps
-//                   {...DayComponentProps}
-//                   style={estiloDia}
-//                 />
-//               );
-//             }}
-//           />
-//           <button id="verde"></button>
-//           <button id="azul"></button>
-//           {eventoSeleccionado && (
-//             <div className="evento-seleccionado">
-//               <h3>{eventoSeleccionado.titulo}</h3>
-//               <p>{eventoSeleccionado.detalles}</p>
-//               <p>
-//                 Hora: {eventoSeleccionado.fechaInicio.toLocaleTimeString()}
-//               </p>
-//             </div>
-//           )}
-//         </LocalizationProvider>
-//       </div>
-//     );
+//     return null;
 //   };
   
-//   export default Calendario;
+
+//   const tieneEvento = (date) => {
+//     return eventos.some((evento) => evento.esFestivo && isSameDay(evento.fechaInicio, date));
+//   };
+//   const [eventoSeleccionado, setEventoSeleccionado] = useState(null);
+//   const onClickDay = (date) => {
+//     const selectedEvent = eventos.find((evento) =>
+//       isSameDay(evento.fechaInicio, date)
+//     );
+  
+//     setEventoSeleccionado(selectedEvent);
+  
+//     // Agregar la clase .event-selected al elemento seleccionado
+//     const selectedElement = document.querySelector('.react-calendar__tile--has-event.react-calendar__tile--active');
+//     if (selectedElement) {
+//       selectedElement.classList.add('event-selected');
+//     }
+//   };
+  
+  
+//    const calendarRef = useRef(null); 
+//   // const handleOutsideClick = (event) => {
+//   //   // Comprobar si el clic ocurrió fuera del calendario
+//   //   if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+//   //     setEventoSeleccionado(null); // Limpiar evento seleccionado
+//   //   }
+//   // };
+
+//   // useEffect(() => {
+//   //   // Agregar el manejador de eventos en el montaje del componente
+//   //   document.addEventListener('click', handleOutsideClick);
+
+//   //   // Limpiar el manejador de eventos en el desmontaje del componente
+//   //   return () => {
+//   //     document.removeEventListener('click', handleOutsideClick);
+//   //   };
+//   // }, []);
+
+
+//   const getFormattedTime = (date) => {
+//     const hours = date.getHours();
+//     const minutes = date.getMinutes();
+//     const amOrPm = hours >= 12 ? "pm" : "am";
+  
+//     // Convertir las horas al formato de 12 horas
+//     const formattedHours = hours % 12 || 12;
+  
+//     return `${formattedHours}:${minutes < 10 ? "0" : ""}${minutes} ${amOrPm}`;
+//   };
+
+
+//   return (
+//     <div className="container">
+//       <div className="division" id='division2'>
+//       <Calendar
+//       ref={calendarRef}
+//         className="custom-calendar"
+//         onClickDay={onClickDay}
+//         tileContent={renderTileContent}
+//       />
+//       </div>
+      
+     
+//     </div>
+//   );
+// }
+
+// export default Calendario;
+
+
