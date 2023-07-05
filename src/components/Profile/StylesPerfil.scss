@@ -5,7 +5,7 @@
     flex-direction: column;
     background-color: $colorFondoContenido;
     height: auto;
-    padding: 3%;
+    padding: 2%;
 
     h3{
         font-size: 24px;
@@ -21,8 +21,8 @@
 
     &__img{
         display: flex;
-        width: 65%;
-        height: 50vh;
+        width: 50%;
+        height: 45vh;
         background-color: $colorSecundario;
         flex-direction: column;
         align-items: center;
@@ -35,7 +35,7 @@
             width: 100%;
             justify-content: center;
             img{
-                width: 40%;
+                width: 9.5rem;
                 border-radius: 100px;
                 margin-bottom: 1rem;
             }
@@ -56,6 +56,7 @@
 
                 &:hover{
                     color: #052c65;
+                    transition: .3s ease-in-out;
                 }
             }
         }
@@ -63,6 +64,9 @@
     }
     &__info{
         margin: 2% 0 0 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
         background-color: $colorSecundario;
         padding: 2%;
         border-radius: 10px;
@@ -75,7 +79,7 @@
             background-color: transparent;
             border: none;
             cursor: pointer;
-            padding: 0 .5rem .6rem .5rem;
+            padding: 0 0 .6rem .5rem;
             z-index: 999;
             font-size: 1.1rem;
         }
@@ -85,8 +89,8 @@
         position: relative;
         top: -0.3%;
         width: 90%;
-        border-bottom: 0;
-        border-top: 3px solid #dce5f3;
+        
+        border-top: 2px solid #dce5f3;
        }
     }
 }
