@@ -93,4 +93,14 @@
         border-top: 2px solid #dce5f3;
        }
     }
+
+    @media screen and (max-width:1071px) {
+        &__contenido{
+            flex-direction: column;
+            
+        }
+        &__img{
+            width: 100%;
+        }
+      }
 }

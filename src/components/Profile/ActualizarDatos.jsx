@@ -54,7 +54,7 @@ const ActualizarDatos = () => {
           <div>
             <label>Sobre mi</label>
             <textarea
-              cols="97"
+             
               rows="4"
               value={
                 "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, illum magni consequatur ab possimus non debitis iure eum temporibus facere ducimus quidem neque perspiciatis, atque dolore fuga inventore commodi expedita?"
