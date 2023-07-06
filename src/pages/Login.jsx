@@ -35,7 +35,7 @@ const Login = () => {
   };
   return (
     <section
-      className="h-100 gradient-form"
+      className="gradient-form"
       style={{ backgroundColor: "#eee" }}
     >
       <div className="container py-5 h-100">

@@ -3,7 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 // import PublicRouter from './PublicRouter'
 // import PrivateRouter from './PrivateRouter'
 import PerfilPage from '../pages/PerfilPage'
-import AsitenciaPage from '../pages/AsitenciaPage'
+import AsistenciaPage from '../pages/AsistenciaPage'
 import OlvidarContrasena from "../pages/OlvidarContrasena";
 import NotFound from "../components/notFound/NotFound";
 import Login from "../pages/Login";
@@ -20,10 +20,10 @@ const AppRouter = () => {
           <Route path="/login" element={<Navigate to="/" />}/>
           <Route path="/olvidar-contrasena" element={<OlvidarContrasena />}/>          
         <Route element={<Layout />}>
-          <Route path="/administrador" element={<PanelAdministrador />} />
+          <Route path="/estudiantes" element={<PanelAdministrador />} />
           <Route path="/cronograma" element={<Cronograma />} />
           <Route path='/perfil' element={<PerfilPage/>}/>
-          <Route path='/asistencia' element={<AsitenciaPage/>}/>
+          <Route path='/asistencia' element={<AsistenciaPage/>}/>
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

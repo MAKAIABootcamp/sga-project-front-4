@@ -1,7 +1,7 @@
 
 import PageAsistencia from '../components/Asistencia/PageAsistencia'
 
-const AsitenciaPage = () => {
+const AsistenciaPage = () => {
   return (
     <>
         <PageAsistencia/>
@@ -9,4 +9,4 @@ const AsitenciaPage = () => {
   )
 }
 
-export default AsitenciaPage
+export default AsistenciaPage

@@ -30,25 +30,6 @@ const AdminEstudiantes = () => {
 
   return (
     <>
-      <Header className="header">
-        <img src={Logo} alt="" />
-        <h1>SGA Makaia</h1>
-        <Input
-          icon="search"
-          size="small"
-          placeholder="Search..."
-          margin="10px"
-        />
-        Pintar Layout
-        <Image
-          circular
-          src="https://react.semantic-ui.com/images/avatar/large/patrick.png"
-        />{" "}
-        Patrick
-      </Header>
-
-      <aside className="sidebar">Pintar sidebar</aside>
-
       <section className="buttons">
         <div>
           <Select options={cohorte} placeholder="Cohorte" color="green" />

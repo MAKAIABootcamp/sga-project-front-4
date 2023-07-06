@@ -166,7 +166,7 @@ const NuevoEstudiante = () => {
             />
           </div>
 
-          <button type="submit">Registro</button>
+          <button type="submit" className="registro">Registro</button>
         </Form>
       </Formik>
     </main>
