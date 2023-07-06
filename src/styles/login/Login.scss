@@ -8,6 +8,10 @@
   box-shadow: 0 4px 8px rgba(106, 179, 238, 0.5);
 }
 
+.invalid-feedback{
+  color: red;
+}
+
 @media (min-width: 768px) {
   .gradient-form {
     height: 100vh !important;

@@ -2,14 +2,26 @@ import React from "react";
 import logo from "../assets/images/logo2.png";
 import "../styles/login/Login.scss";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const OlvidarContrasena = () => {
 
   const navigate = useNavigate();
 
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Ingrese un correo electrónico válido")
+      .required("El correo electrónico es obligatorio")
+  });
   const handleToLogin = () => {
     navigate("/login");
   }
+
+  const handleSubmit = (values) => {
+    
+    console.log(values);
+  };
   return (
     <section
       className="gradient-form"
@@ -27,17 +39,36 @@ const OlvidarContrasena = () => {
                         Sistema de Gestión Académica
                       </h2>
                     </div>
-                    <form>
+                    <Formik
+                      initialValues={{
+                        email: "",
+                      }}
+                      validationSchema={validationSchema}
+                      onSubmit={handleSubmit}
+                    >
+                      {({ errors, touched}) => (
+                    <Form>
                       <h5 className="mt-1 mb-6 pb-1">
                         Ingresa correo electronico
                       </h5>
                       <div className="form-outline mb-4">
-                        <input
+                        <Field
                           type="email"
                           id="form2Example11"
-                          className="form-control"
+                          className={`form-control ${
+                            errors.email && touched.email
+                              ? "is-invalid"
+                              : ""
+                          }`}
+                          name="email"
                           placeholder="Correo electrónico"
                         />
+                          <ErrorMessage
+                              name="email"
+                              component="div"
+                              className="invalid-feedback"
+                              render={(msg) => <div>{msg}</div>}
+                            />
                       </div>
                       <div
                         className="text-center pt-1 mb-5 pb-1"
@@ -49,11 +80,13 @@ const OlvidarContrasena = () => {
                         >
                           RECUPERAR CONTRASEÑA
                         </button>
-                        <a className="text-muted" style={{ cursor: 'pointer' }} onClick={handleToLogin}>
+                        <a className="text-muted" style={{ cursor: 'pointer' }} onClick={handleToLogin}  >
                           Regresar al login
                         </a>
                       </div>
-                    </form>
+                    </Form>
+                      )}
+                    </Formik>
                   </div>
                 </div>
                 <div
