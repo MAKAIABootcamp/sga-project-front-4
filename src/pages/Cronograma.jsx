@@ -8,11 +8,14 @@ import interactionPlugin from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
 import "../styles/cronograma/Cronograma.scss";
 import AgregarEvento from "../components/cronograma/AgregarEvento";
+import { getEvents } from "../services/getEvents";
 
 const Cronograma = () => {
 
   // Variable de estado para controlar la apertura y el cierre del modal
   const [showModal, setShowModal] = useState(false);
+
+  const [eventos, setEventos] = useState([]);
 
   // Para abrir el modal al darle click a un día
   const handleDayClick = () => {
@@ -29,6 +32,13 @@ const Cronograma = () => {
     console.log(evento);
     handleModalClose();
   };
+
+  useEffect(() => {
+    getEvents().then((data) => {
+      setEventos(data);
+    });
+  }, []);
+
 
   const events = [
     { title: 'Evento 1', start: '2023-07-14T10:00:00', end: '2023-07-14T12:00:00' },
@@ -58,7 +68,7 @@ const Cronograma = () => {
               center: "title",
               right: "dayGridMonth timeGridWeek listWeek",
             }}
-            events={events}
+            events={eventos}
             editable={true}
             dateClick={handleDayClick}
           />
