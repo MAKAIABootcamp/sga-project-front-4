@@ -33,8 +33,8 @@ const Cronograma = () => {
   ];
 
   return (
-    <div>
-      <div className="container"  style={{ padding: '8rem' }}>
+    <main id='main' className='main'>
+      <div className="container">
         <div id="calendar" className="custom-calendar">
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin]}
@@ -77,7 +77,7 @@ const Cronograma = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </div>
+    </main>
   );
 }
 

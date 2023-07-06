@@ -8,6 +8,8 @@
     background-color: #fff;
     padding-left: 20px;
 
+    
+
     &.header .toggle-sidebar-btn{
         font-size: 32px;
     
@@ -102,8 +104,9 @@
     padding: 10px 25px;
 }
 
-@media (max-width: 1199px) {
-    .sidebar {
-      left: -300px;
-    }
-  }
+// @media (max-width: 1199px) {
+//     .sidebar {
+//       left: -300px;
+//     }
+//   }
+

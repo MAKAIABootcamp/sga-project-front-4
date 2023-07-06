@@ -3,7 +3,8 @@ import LogoBootcamp from "../../assets/images/LogoBootcamp.png";
 import userProfile from "../../assets/images/profile-img.jpg";
 import { BsList } from "react-icons/bs";
 import "../../styles/header/Header.scss";
-
+import { BsBoxArrowRight } from "react-icons/bs";
+import { BsPerson } from "react-icons/bs";
 const Header = () => {
   const [hamburguerMenu, setHamburguerMenu] = useState(false);
   const [listProfileOpen, setListProfileOpen] = useState(false);
@@ -79,7 +80,7 @@ const Header = () => {
                       href="users-profile.html"
                     >
                       <i className="bi bi-person"></i>
-                      <span>Mi perfil</span>
+                     <BsPerson/> <span>Mi perfil</span>
                     </a>
                   </li>
                   <li>
@@ -92,7 +93,7 @@ const Header = () => {
                       href="#"
                     >
                       <i className="bi bi-box-arrow-right"></i>
-                      <span>Sign Out</span>
+                      <BsBoxArrowRight/> <span>Cerrar sesión</span>
                     </a>
                   </li>
                 </ul>
