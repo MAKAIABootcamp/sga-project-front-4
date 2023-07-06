@@ -5,9 +5,11 @@ import { BsList } from "react-icons/bs";
 import "../../styles/header/Header.scss";
 import { BsBoxArrowRight } from "react-icons/bs";
 import { BsPerson } from "react-icons/bs";
+import { useNavigate } from "react-router";
 const Header = () => {
   const [hamburguerMenu, setHamburguerMenu] = useState(false);
   const [listProfileOpen, setListProfileOpen] = useState(false);
+  const navigate = useNavigate();
 
   const handleMenuToggle = () => {
     setHamburguerMenu(!hamburguerMenu);
@@ -16,6 +18,16 @@ const Header = () => {
   const handleListProfile = () => {
     setListProfileOpen(!listProfileOpen);
   };
+
+  const handleToPerfil = () => {
+    navigate("/perfil")
+  }
+  const handleToCronograma = () => {
+    navigate("/cronograma")
+  }
+  const handleToStudents = () => {
+    navigate("/estudiantes")
+  }
   return (
     <>
       <header
@@ -77,7 +89,8 @@ const Header = () => {
                   <li>
                     <a
                       className="dropdown-item d-flex align-items-center"
-                      href="users-profile.html"
+                      style={{cursor: 'pointer'}}
+                      onClick={handleToPerfil}
                     >
                       <i className="bi bi-person"></i>
                      <BsPerson/> <span>Mi perfil</span>
@@ -111,7 +124,19 @@ const Header = () => {
             <li class="nav-item">
               <a class="nav-link collapsed">
                 <i class="bi bi-grid"></i>
-                <span>Cronograma</span>
+                <span onClick={handleToStudents}>Estudiantes</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link collapsed">
+                <i class="bi bi-grid"></i>
+                <span onClick={handleToCronograma}>Cronograma</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link collapsed">
+                <i class="bi bi-grid"></i>
+                <span onClick={handleToPerfil}>Perfil</span>
               </a>
             </li>
           </ul>
