@@ -24,8 +24,8 @@ const AppRouter = () => {
           <Route path="/cronograma" element={<Cronograma />} />
           <Route path='/perfil' element={<PerfilPage/>}/>
           <Route path='/asistencia' element={<AsistenciaPage/>}/>
-          <Route path="*" element={<NotFound />} />
         </Route>
+          <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

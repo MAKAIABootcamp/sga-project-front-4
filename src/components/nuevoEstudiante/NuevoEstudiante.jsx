@@ -42,7 +42,7 @@ const NuevoEstudiante = () => {
   };
 
   return (
-    <main>
+    <main className="main">
       <h1>Añadir estudiante</h1>
       <Formik
         initialValues={{

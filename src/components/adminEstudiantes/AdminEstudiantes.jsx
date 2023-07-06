@@ -34,7 +34,7 @@ const AdminEstudiantes = () => {
         <div>
           <Select options={cohorte} placeholder="Cohorte" color="green" />
           <Select options={entrenamiento} placeholder="entrenamiento" />
-          {/* <Button icon="search" color="green" /> */}
+          <Button icon="search" color="green" />
         </div>
         <div>
           <Button icon="download" color="green" />
@@ -49,7 +49,7 @@ const AdminEstudiantes = () => {
             trigger={<Button color="blue">Agregar estudiante</Button>}
           >
             <Modal.Content>
-            <NuevoEstudiante />
+              <NuevoEstudiante />
             </Modal.Content>
           </Modal>
         </div>
@@ -91,6 +91,12 @@ const AdminEstudiantes = () => {
                 </Header>
               </Table.Cell>
               <Table.Cell>Lena@gmail.com</Table.Cell>
+              <Table.Cell>C.C.</Table.Cell>
+              <Table.Cell>009876543</Table.Cell>
+              <Table.Cell>Front-end</Table.Cell>
+              <Table.Cell>4</Table.Cell>
+              <Table.Cell>Certificada</Table.Cell>
+              <Table.Cell icon="options"></Table.Cell>
             </Table.Row>
 
             <Table.Row>
@@ -110,6 +116,12 @@ const AdminEstudiantes = () => {
                 </Header>
               </Table.Cell>
               <Table.Cell>Matthew@gmail.com</Table.Cell>
+              <Table.Cell>C.C.</Table.Cell>
+              <Table.Cell>123456789</Table.Cell>
+              <Table.Cell>Back-end</Table.Cell>
+              <Table.Cell>3</Table.Cell>
+              <Table.Cell>Admitido</Table.Cell>
+              <Table.Cell icon="options"></Table.Cell>
             </Table.Row>
 
             <Table.Row>
@@ -129,6 +141,12 @@ const AdminEstudiantes = () => {
                 </Header>
               </Table.Cell>
               <Table.Cell>Lindsay@correo.com</Table.Cell>
+              <Table.Cell>C.C.</Table.Cell>
+              <Table.Cell>009876543</Table.Cell>
+              <Table.Cell>Análisis de datos</Table.Cell>
+              <Table.Cell>1</Table.Cell>
+              <Table.Cell>Admitida</Table.Cell>
+              <Table.Cell icon="options"></Table.Cell>
             </Table.Row>
 
             <Table.Row>
@@ -147,7 +165,13 @@ const AdminEstudiantes = () => {
                   </Header.Content>
                 </Header>
               </Table.Cell>
-              <Table.Cell>Mark@corre.com</Table.Cell>
+              <Table.Cell>Mark@correo.com</Table.Cell>
+              <Table.Cell>C.C.</Table.Cell>
+              <Table.Cell>123456789</Table.Cell>
+              <Table.Cell>Front-end</Table.Cell>
+              <Table.Cell>4</Table.Cell>
+              <Table.Cell>Admitido</Table.Cell>
+              <Table.Cell icon="options"></Table.Cell>
             </Table.Row>
           </Table.Body>
         </Table>
