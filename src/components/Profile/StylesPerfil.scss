@@ -1,0 +1,106 @@
+@import '../../styles/index.scss';
+ 
+.perfil{
+    display: flex;
+    flex-direction: column;
+    background-color: $colorFondoContenido;
+    height: auto;
+    padding: 2%;
+
+    h3{
+        font-size: 24px;
+        margin-bottom: 0;
+        font-weight: 600;
+        color: #012970;
+    }
+
+    &__contenido{
+        display: flex;
+        
+    }
+
+    &__img{
+        display: flex;
+        width: 50%;
+        height: 45vh;
+        background-color: $colorSecundario;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 2% 3% 0 0;
+        border-radius: 10px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        figure{
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            img{
+                width: 9.5rem;
+                border-radius: 100px;
+                margin-bottom: 1rem;
+            }
+        }
+        .name{
+            color: #2c384e;
+        }
+
+        .icons{
+            display: flex;
+            margin-top: 1rem;
+            gap: 1rem;
+
+            .icon{
+                font-size: 1.45rem;
+                color: rgba(1, 41, 112, 0.5);
+                cursor: pointer;
+
+                &:hover{
+                    color: #052c65;
+                    transition: .3s ease-in-out;
+                }
+            }
+        }
+        
+    }
+    &__info{
+        margin: 2% 0 0 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: $colorSecundario;
+        padding: 2%;
+        border-radius: 10px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+       &__buttons{
+        display: flex;
+        gap: 8%;
+       
+        button{
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0 0 .6rem .5rem;
+            z-index: 999;
+            font-size: 1.1rem;
+        }
+       }
+       hr{
+        color: $colorSecundario;
+        position: relative;
+        top: -0.18%;
+        width: 90%;
+        
+        border-top: 2px solid #dce5f3;
+       }
+    }
+
+    @media screen and (max-width:1071px) {
+        &__contenido{
+            flex-direction: column;
+            
+        }
+        &__img{
+            width: 100%;
+        }
+      }
+}

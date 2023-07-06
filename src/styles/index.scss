@@ -21,3 +21,24 @@ $tipografiaPrincipal: 'Poppins', sans-serif;
     box-sizing: border-box;
     font-family: $tipografiaPrincipal;
 }
+
+#main {
+    margin-top: 60px;
+    padding: 20px 30px;
+    transition: all 0.3s;
+}
+
+.main {
+    display: block;
+}
+@media (min-width: 1200px) {
+    #main, #footer {
+      margin-left: 300px;
+    }
+  }
+
+  @media (min-width: 1200px){
+  .toggle-sidebar #main {
+      margin-left: 0;
+  }
+}
