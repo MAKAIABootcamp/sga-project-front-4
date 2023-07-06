@@ -1,8 +1,15 @@
 import React from "react";
 import logo from "../assets/images/logo2.png";
 import "../styles/login/Login.scss";
+import { useNavigate } from "react-router-dom";
 
 const OlvidarContrasena = () => {
+
+  const navigate = useNavigate();
+
+  const handleToLogin = () => {
+    navigate("/login");
+  }
   return (
     <section
       className="gradient-form"
@@ -16,7 +23,6 @@ const OlvidarContrasena = () => {
                 <div className="col-lg-6">
                   <div className="card-body p-md-5 mx-md-4">
                     <div className="text-center">
-                      {/* <h4 className="mt-1 mb-5 pb-1">We are The Lotus Team</h4> */}
                       <h2 className="mt-1 mb-5 pb-1 fw-bold">
                         Sistema de Gestión Académica
                       </h2>
@@ -43,7 +49,7 @@ const OlvidarContrasena = () => {
                         >
                           RECUPERAR CONTRASEÑA
                         </button>
-                        <a className="text-muted" href="#!">
+                        <a className="text-muted" style={{ cursor: 'pointer' }} onClick={handleToLogin}>
                           Regresar al login
                         </a>
                       </div>
