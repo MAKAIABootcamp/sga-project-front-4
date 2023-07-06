@@ -42,7 +42,7 @@ const NuevoEstudiante = () => {
   };
 
   return (
-    <main>
+    <main className="main">
       <h1>Añadir estudiante</h1>
       <Formik
         initialValues={{
@@ -166,7 +166,7 @@ const NuevoEstudiante = () => {
             />
           </div>
 
-          <button type="submit">Registro</button>
+          <button type="submit" className="registro">Registro</button>
         </Form>
       </Formik>
     </main>

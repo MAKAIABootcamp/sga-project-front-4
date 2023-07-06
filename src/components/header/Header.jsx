@@ -28,6 +28,9 @@ const Header = () => {
   const handleToStudents = () => {
     navigate("/estudiantes")
   }
+  const handleToAsistencia = () => {
+    navigate("/asistencia")
+  }
   return (
     <>
       <header
@@ -137,6 +140,12 @@ const Header = () => {
               <a class="nav-link collapsed">
                 <i class="bi bi-grid"></i>
                 <span onClick={handleToPerfil}>Perfil</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link collapsed">
+                <i class="bi bi-grid"></i>
+                <span onClick={handleToAsistencia}>Asistencia</span>
               </a>
             </li>
           </ul>

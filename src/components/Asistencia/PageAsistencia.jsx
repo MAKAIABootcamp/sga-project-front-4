@@ -5,9 +5,9 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { Select } from "antd";
 import { Breadcrumb } from "antd";
-import { Icon, Input } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
-import { BsDownload } from "react-icons/bs";
+import { Button, Icon, Input } from "semantic-ui-react";
+// import "semantic-ui-css/semantic.min.css";
+// import { BsDownload } from "react-icons/bs";
 import { useState } from "react";
 import { Checkbox } from 'antd';
 
@@ -158,12 +158,13 @@ const PageAsistencia = () => {
             <Icon name="search" />
             <input />
           </Input>
+          <Button icon="download" color="green" />
         </div>
-        <div>
+        {/* <div>
           <button>
             <BsDownload />
           </button>
-        </div>
+        </div> */}
       </div>
       <div>
         <table>

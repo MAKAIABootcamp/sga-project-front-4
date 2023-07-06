@@ -1,21 +1,21 @@
-main {
+.main {
     background-color: #337cb7;
     color: white;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-h2{
     font-size: 1rem;
     font-weight: 400;
+    margin-top: 10%;
+    margin-left: 10%;
 }
 
 input, select{
-    margin: 10px;
-    gap: 10px
+    margin: 5px;
+    gap: 5px
 }
+
 .names{
     display: flex;
     flex-direction: row;
@@ -58,7 +58,7 @@ input, select{
     align-items: center;
 }
 
-button{
+.registro{
     display: flex;
     align-items: center;
     position: relative;
