@@ -1,9 +1,14 @@
-import React from 'react'
+import NuevoEstudiante from '../components/nuevoEstudiante/NuevoEstudiante';
+import AdminEstudiantes from '../components/adminEstudiantes/AdminEstudiantes';
 
 const PanelAdministrador = () => {
-  return (
-    <div>PanelAdministrador</div>
-  )
-}
 
-export default PanelAdministrador
+  return (
+    <>
+      <AdminEstudiantes />
+      {/* <NuevoEstudiante /> */}
+    </>
+  );
+};
+
+export default PanelAdministrador;
