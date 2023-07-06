@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 // import PublicRouter from './PublicRouter'
 // import PrivateRouter from './PrivateRouter'
 import PerfilPage from '../pages/PerfilPage'
+import AsitenciaPage from '../pages/AsitenciaPage'
 import OlvidarContrasena from "../pages/OlvidarContrasena";
 import NotFound from "../components/notFound/NotFound";
 import Login from "../pages/Login";
@@ -22,6 +23,7 @@ const AppRouter = () => {
           <Route path="/administrador" element={<PanelAdministrador />} />
           <Route path="/cronograma" element={<Cronograma />} />
           <Route path='/perfil' element={<PerfilPage/>}/>
+          <Route path='/asistencia' element={<AsitenciaPage/>}/>
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
