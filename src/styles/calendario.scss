@@ -1,92 +1,223 @@
 @import "./index.scss";
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  .react-calendar {
-    width: 100%;}
-  .calendario {
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    background-color: #f2f2f2;
-    padding: 44px
-  }
-  .container{
-    height: 100%;
-    display: flex;
-    flex-direction: row;
-    background-color: #f2f2f2;
+.event-day {
+  display: flex;
+  align-items: center;
+}
 
+.event-day__dot {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  z-index: -1;
+}
+.react-calendar__tile--active {
+  background: #006edc;
+  border-radius: 50%;
+  color: white;
+}
+
+.event-day--festive .event-day__dot {
+  background-color: red;
+}
+
+.event-day--delivery .event-day__dot {
+  background-color: blue;
+}
+
+.custom-calendar .react-calendar__tile {
+  position: relative;
+
+  .event-day {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
-  .react-calendar__navigation {
-    display: flex;
-    height: 44px;
-    margin-bottom: 1em;
-    margin-top: 2em;
 }
-.react-calendar__navigation__label__labelText{
-    color: gray;
+
+
+// .react-calendar__tile--has-event {
+//   position: relative;
+//   .evento-marker.selected::after,
+//   .festivo-marker.selected {
+//     box-shadow: 0 0 0 5px green;
+//   }
+  
+//   .evento-marker {
+//     background-color: blue;
+//     color: white;
+//     position: relative;
+
+//     &::after {
+//       content: "";
+//       position: absolute;
+//       top: 50%;
+//       left: 50%;
+//       transform: translate(-50%, -50%);
+//       width: 15px;
+//       height: 15px;
+//       border-radius: 50%;
+//       box-shadow: 0 0 0 5px blue;
+//       z-index: -1;
+//     }
+//   }
+
+//   &.react-calendar__tile--active {
+//     .evento-marker::after {
+//       box-shadow: 0 0 0 5px blue;
+//     }
+//   }
+// }
+
+// .evento-marker {
+//   color: white;
+
+//   &::after {
+//     content: "";
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     transform: translate(-50%, -50%) scale(0.5); /* Ajusta el valor de scale para disminuir el tamaño del fondo del evento */
+//     width: 33px;
+//     height: 33px;
+//     border-radius: 50%;
+//     box-shadow: 0 0 0 5px blue;
+//     z-index: -1;
+//   }
+
+//   &.selected {
+//     background-color: green;
+
+//     &::after {
+//       box-shadow: 0 0 0 5px green;
+//     }
+//   }
+// }
+
+// .react-calendar__tile--active {
+//   background-color: blue;
+// }
+// .react-calendar__tile--active::after {
+//   content: "";
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   width: 15px; /* Ajusta el tamaño del fondo del evento */
+//   height: 15px; /* Ajusta el tamaño del fondo del evento */
+//   border-radius: 50%;
+//   box-shadow: 0 0 0 5px blue;
+//   z-index: -1;
+// }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
-.react-calendar__month-view__weekdays {
-    text-align: center;
-    text-transform: capitalize;
-    font-weight: bold;
-    font-size: 0.75em;
-}
-.react-calendar__tile {
-    max-width: 100%;
-    padding: 10px 6.6667px;
+
+
+.react-calendar {
+  width: 100%;
+  height: 101%;
+  padding: 0px, 0px, 39px, 0px;
+  border: none;
+  padding-bottom: 65px;
+  padding-left: 10px;
+  .react-calendar__tile {
+    padding: -12px 51.6667px;
     background: none;
     text-align: center;
-    line-height: 53px;
+    line-height: 42px;
 }
-.react-calendar{
-    border: none;
+}
+
+#division2 {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  width: 500px;
+}
+
+.calendario {
+  display: flex;
+  flex-direction: row;
+  background-color: #f2f2f2;
+  padding: 44px;
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: #f2f2f2;
+}
+
+.react-calendar__navigation {
+  display: flex;
+  height: 44px;
+  margin-bottom: 1em;
+  margin-top: 2em;
+}
+
+.react-calendar__navigation__label__labelText {
+  color: gray;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 0.75em;
+}
+
+.react-calendar__tile {
+  padding: 10px 6.6667px;
+  background: none;
+  text-align: center;
+  line-height: 53px;
+}
+
+.evento-seleccionado {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  margin-top: 22px;
+  height: 100px;
+  margin-left: 19px;
+  padding: 22px;
+  gap: 13px;
+  align-items: center;
+  width: fit-content;
+}
+
+.evento-seleccionado h3 {
+  color: gray;
+  font-weight: 400;
+  font-size: inherit;
+}
+
+.evento-seleccionado h2 {
+  color: black;
+  font-weight: 400;
+  font-size: inherit;
+}
+
+
+#division1 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 843px;
+  background-color: #337cb7;
 }
 abbr{
-    text-decoration: none;
+  text-decoration: none;
 }
-
-.division {
-    flex: 1;
-  }
-.evento-seleccionado{
-    display: flex;
-    flex-direction: row;
-    background-color: white;
-    margin-top: 22px;
-    height: 100px;
-    margin-left: 19px;
-    padding: 22px;
-    gap: 13px;
-    align-items: center;
-    width: fit-content;
-    h3{
-color: gray;
-    }
-h2{
-    color: black;
-}
-}
-
-.evento-marker.selected {
-  background: none;
-  color: inherit;
-}
-#division1 {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    /* height: 649px; */
-    background-color: #337cb7;
-  /* Aplica 0 en la parte superior, 20px en la derecha e inferior, y 20px en la izquierda */
-  }
-.react-calendar__tile:enabled:hover,
-.react-calendar__tile:enabled:focus {
-  background-color: #e6e6e6;
-}
+// .react-calendar__tile:enabled:hover,
+// .react-calendar__tile:enabled:focus {
+//   background-color: #e6e6e6;
+// }
 
 .react-calendar button {
   margin: 0;
@@ -94,29 +225,10 @@ h2{
   outline: none;
 }
 
-.react-calendar__tile--active {
-  background: inherit;
-  color: black;
-}
-
-.evento-marker {
-  background: none;
-  color: white;
-  position: relative;
-}
-
-.evento-marker::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 33px;
-  height: 33px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 5px green;
-  z-index: -1;
-}
+// .react-calendar__tile--active {
+//   background: inherit;
+//   color: black;
+// }
 
 .festivo-marker {
   background-color: red;

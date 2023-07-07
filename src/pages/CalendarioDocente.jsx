@@ -5,7 +5,7 @@ import Evento from "../components/cronograma/Evento";
 const CalendarioConFechaActual = () => {
   return (
     <div className="calendario">  
-      <Calendario />
+      <Calendario  />
       <Evento></Evento>
     </div>
   );
