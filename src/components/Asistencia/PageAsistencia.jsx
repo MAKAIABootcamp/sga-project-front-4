@@ -11,61 +11,20 @@ import { BsDownload } from "react-icons/bs";
 import { Table } from 'antd';
 import { Progress } from 'antd';
 import './StylesAsistencia.scss'
+import { useEffect, useState } from "react";
 
 
 const today = dayjs();
 
-const handleChange = (value) => {
-  console.log(`selected ${value}`);
-};
-const PageAsistencia = () => {
-  const selectionType = 'checkbox';
-  const columns = [
-    {
-      title: 'Apellido',
-      dataIndex: 'apellido',
-      render: (text) =>
-        <>
-          <span style={{ marginRight: '8px', textTransform: 'uppercase' }}>
-            {text.slice(0, 2)}
-          </span>
-          <a>{text}</a>
-        </>
 
-    },
-    {
-      title: 'Nombre',
-      dataIndex: 'name',
-      render: (text) => <a>{text}</a>,
-    },
-    {
-      title: 'Documento',
-      dataIndex: 'doc',
-    },
-    {
-      title: 'Teléfono',
-      dataIndex: 'tel',
-    },
-    {
-      title: 'Email',
-      dataIndex: 'email',
-    },
-    {
-      title: '% Asistencia',
-      dataIndex: 'asistencia',
-      render: (asistencia) => (
-        <Progress percent={(asistencia / 10) * 100} />
-      )
-    },
-    {
-      title: 'Observaciones',
-      dataIndex: 'observaciones',
-      render: (text) => (
-        <textarea style={{ borderRadius: '8px', width: '75%', height: '4rem' }}>{text}</textarea>
-      )
-    },
-  ];
-  const students = [
+const PageAsistencia = () => {
+
+  const [entrenamiento, setEntrenamiento] = useState('');
+  const [modulo, setModulo] = useState('');
+  const [cohorte, setCohorte] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [students, setStudents] = useState([
     {
       key: 1,
       name: "Jose",
@@ -116,8 +75,74 @@ const PageAsistencia = () => {
       asistencia: 10,
       observaciones: ''
     },
-    // Agrega más estudiantes según sea necesario
+  ]) 
+
+
+  const handleChangeEntrenamiento = (value) => {
+    console.log(`selected ${value}`);
+    setEntrenamiento(value);
+  };
+  const handleChangeModulo = (value) => {
+    console.log(`selected ${value}`);
+    setModulo(value);
+  };
+  const handleChangeCohorte = (value) => {
+    console.log(`selected ${value}`);
+    setCohorte(value);
+  };
+
+  useEffect(() => {
+    const filtered = students.filter((user) => user.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    setFilteredUsers(filtered)
+  }, [searchTerm, students]);
+
+  const selectionType = 'checkbox';
+  const columns = [
+    {
+      title: 'Apellido',
+      dataIndex: 'apellido',
+      render: (text) =>
+        <>
+          <span style={{ marginRight: '8px', textTransform: 'uppercase' }}>
+            {text.slice(0, 2)}
+          </span>
+          <a>{text}</a>
+        </>
+
+    },
+    {
+      title: 'Nombre',
+      dataIndex: 'name',
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: 'Documento',
+      dataIndex: 'doc',
+    },
+    {
+      title: 'Teléfono',
+      dataIndex: 'tel',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+    },
+    {
+      title: '% Asistencia',
+      dataIndex: 'asistencia',
+      render: (asistencia) => (
+        <Progress percent={(asistencia / 10) * 100} />
+      )
+    },
+    {
+      title: 'Observaciones',
+      dataIndex: 'observaciones',
+      render: (text) => (
+        <textarea style={{ borderRadius: '8px', width: '75%', height: '4rem' }}>{text}</textarea>
+      )
+    },
   ];
+ 
 
 
   const rowSelection = {
@@ -149,7 +174,7 @@ const PageAsistencia = () => {
                   style={{
                     width: 200,
                   }}
-                  onChange={handleChange}
+                  onChange={handleChangeEntrenamiento}
                   options={[
                     {
                       label: "Entrenamiento",
@@ -175,7 +200,7 @@ const PageAsistencia = () => {
                   style={{
                     width: 200,
                   }}
-                  onChange={handleChange}
+                  onChange={handleChangeModulo}
                   options={[
                     {
                       label: "Modulo",
@@ -197,7 +222,7 @@ const PageAsistencia = () => {
                   style={{
                     width: 200,
                   }}
-                  onChange={handleChange}
+                  onChange={handleChangeCohorte}
                   options={[
                     {
                       label: "Cohorte",
@@ -218,22 +243,19 @@ const PageAsistencia = () => {
               <Breadcrumb
                 items={[
                   {
-                    title: "Home",
+                    title: <a href="">{entrenamiento}</a>,
                   },
                   {
-                    title: <a href="">Application Center</a>,
+                    title: <a href="">{modulo}</a>,
                   },
                   {
-                    title: <a href="">Application List</a>,
-                  },
-                  {
-                    title: "An Application",
+                    title: <a href="">{cohorte}</a>,
                   },
                 ]}
               />
             </div>
             <div className="search">
-              <Input icon placeholder="Search...">
+              <Input icon placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)}>
                 <Icon name="search" />
                 <input />
               </Input>
@@ -269,7 +291,7 @@ const PageAsistencia = () => {
             ...rowSelection,
           }}
           columns={columns}
-          dataSource={students}
+          dataSource={filteredUsers}
         />
       </div>
     </div>
