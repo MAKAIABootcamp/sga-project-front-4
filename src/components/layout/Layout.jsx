@@ -5,29 +5,15 @@ import Aside from "../aside/Aside";
 import { useNavigate } from "react-router";
 
 const Layout = () => {
-  const [hamburguerMenu, setHamburguerMenu] = useState(false);
+  const [hamburguerMenu, setHamburguerMenu] = useState(true);
   const navigate = useNavigate();
   const handleMenuToggle = () => {
     setHamburguerMenu(!hamburguerMenu);
   };
-
-const handleToCronograma = () => {
-    navigate("/cronograma")
-  }
-  const handleToStudents = () => {
-    navigate("/estudiantes")
-  }
-
-  const handleToPerfil = () => {
-    navigate("/perfil")
-  }
   return (
     <>
       <Header handleMenuToggle={handleMenuToggle} />
-      <Aside hamburguerMenu={hamburguerMenu}
-        handleToStudents={handleToStudents}
-        handleToCronograma={handleToCronograma}
-        handleToPerfil={handleToPerfil}/>
+      <Aside hamburguerMenu={hamburguerMenu}/>
       <Outlet />
     </>
   );

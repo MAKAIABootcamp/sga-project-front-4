@@ -1,35 +1,59 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/aside/Aside.scss"
+import "../../styles/aside/Aside.scss";
 
-const Aside = ({ hamburguerMenu, handleToStudents, handleToCronograma, handleToPerfil }) => {
+const Aside = ({hamburguerMenu,}) => {
   const navigate = useNavigate();
+  const AsideList = [
+    {
+      name: "Estudiantes",
+      url: "/estudiantes" ,
+    },
+    {
+      name: "Cronograma",
+      url: "/cronograma",
+    },
+    {
+      name: "Asistencia",
+      url: "",
+    },
+    {
+      name: "Recursos educativos",
+      url: "",
+    },
+    {
+      name: "Seguimiento académico",
+      url: "",
+    },
+    {
+      name: "Plan de estudios",
+      url: "",
+    },
+    {
+      name: "Perfil",
+      url: "/perfil",
+    },
+  ];
 
- 
-
+  const handleMenuItemClick = (url) => {
+    navigate(url);
+  };
   return (
     <>
       {hamburguerMenu && (
-        <aside id="sidebar" className={`sidebar ${hamburguerMenu ? "menu-open" : ""}`}>
+        <aside
+          id="sidebar"
+          className={`sidebar ${hamburguerMenu ? "menu-open" : ""}`}
+        >
           <ul className="sidebar-nav" id="sidebar-nav">
+          {AsideList.map((item, index) => (
             <li className="nav-item">
-              <a className="nav-link collapsed" onClick={handleToStudents}>
+              <a className="nav-link collapsed" onClick={() => handleMenuItemClick(item.url)}>
                 <i className="bi bi-grid"></i>
-                <span>Estudiantes</span>
+                <span>{item.name}</span>
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link collapsed" onClick={handleToCronograma}>
-                <i className="bi bi-grid"></i>
-                <span>Cronograma</span>
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link collapsed" onClick={handleToPerfil}>
-                <i className="bi bi-grid"></i>
-                <span>Perfil</span>
-              </a>
-            </li>
+             ))}
           </ul>
         </aside>
       )}
