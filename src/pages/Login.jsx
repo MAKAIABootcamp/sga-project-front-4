@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/login/Login.scss";
-import logo from "../assets/images/logo2.png";
+import logo from "../assets/images/Logo-Bootcamp.png";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -35,7 +35,7 @@ const Login = () => {
   };
   return (
     <section
-      className="h-100 gradient-form"
+      className="gradient-form"
       style={{ backgroundColor: "#eee" }}
     >
       <div className="container py-5 h-100">
@@ -46,8 +46,7 @@ const Login = () => {
                 <div className="col-lg-6">
                   <div className="card-body p-md-5 mx-md-4">
                     <div className="text-center">
-                      {/* <h4 className="mt-1 mb-5 pb-1">We are The Lotus Team</h4> */}
-                      <h2 className="mt-1 mb-5 pb-1">
+                      <h2 className="mt-1 mb-5 pb-1 fw-bold">
                         Sistema de Gestión Académica
                       </h2>
                     </div>
