@@ -47,11 +47,32 @@
         }
     }
 
+    &__vistaFiltros {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1.6rem;
+
+        a {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    }
+
+    .apodo {
+        margin-right: 1rem;
+        text-transform: uppercase;
+        padding: .7rem;
+        border-radius: 100px;
+        border: 3px solid #0d6efd;
+    }
+
     .search {
         margin-top: 2rem;
         display: flex;
         align-items: center;
         justify-content: space-around;
+        gap: 10%;
         width: 100%;
 
         button {
@@ -72,6 +93,58 @@
                 transition: .1s ease-in-out;
             }
         }
+
+        .input {
+            display: flex;
+            width: 100%;
+        }
     }
 
+    &__enviar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1% 2.5%;
+            border: none;
+            background-color: #0d6efd;
+            border-radius: 5px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #0b5ed7;
+                transition: .1s ease-in-out;
+            }
+        }
+    }
+
+    &__table {
+        .ant-table-thead>tr {
+            cursor: pointer;
+        }
+
+        .ant-table-tbody>tr {
+            cursor: pointer;
+
+            .ant-checkbox-wrapper {
+                padding-left: 1.5rem;
+            }
+
+        }
+
+        .ant-table-tbody>tr:hover .ant-checkbox-wrapper {
+            padding-left: 1.5rem;
+            border-left: 3px solid #0b5ed7;
+            height: 3.6rem;
+            transition: .1s ease-in-out;
+        }
+    }
 }

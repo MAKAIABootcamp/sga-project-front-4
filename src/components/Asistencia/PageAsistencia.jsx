@@ -11,7 +11,8 @@ import { BsDownload } from "react-icons/bs";
 import { Table } from 'antd';
 import { Progress } from 'antd';
 import './StylesAsistencia.scss'
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { utils, writeFileXLSX } from 'xlsx';
 
 
 const today = dayjs();
@@ -75,7 +76,15 @@ const PageAsistencia = () => {
       asistencia: 10,
       observaciones: ''
     },
-  ]) 
+  ]);
+  const [fallas, setFallas] = useState(0);
+
+  const exportFile = useCallback( () => {
+      const ws = utils.json_to_sheet(students);
+      const wb = utils.book_new();
+      utils.book_append_sheet(wb, ws, 'Data');
+      writeFileXLSX(wb, 'Prueba.xlsx');
+  }, [students]);
 
 
   const handleChangeEntrenamiento = (value) => {
@@ -103,7 +112,7 @@ const PageAsistencia = () => {
       dataIndex: 'apellido',
       render: (text) =>
         <>
-          <span style={{ marginRight: '8px', textTransform: 'uppercase' }}>
+          <span className="apodo">
             {text.slice(0, 2)}
           </span>
           <a>{text}</a>
@@ -142,12 +151,13 @@ const PageAsistencia = () => {
       )
     },
   ];
- 
+
 
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      setFallas(selectedRows.length)
     },
 
   };
@@ -159,10 +169,10 @@ const PageAsistencia = () => {
         <div className="infoAsistencia">
           <div className="totalidad">
             <p>
-              Total de estudiantes: <span>23</span>
+              Total de estudiantes: <span>{students.length}</span>
             </p>
             <p>
-              Total de fallas: <span>1</span>
+              Total de fallas: <span>{students.length - fallas}</span>
             </p>
           </div>
 
@@ -240,7 +250,7 @@ const PageAsistencia = () => {
                   ]}
                 />
               </div>
-              <Breadcrumb
+              <Breadcrumb className="asistencia__vistaFiltros"
                 items={[
                   {
                     title: <a href="">{entrenamiento}</a>,
@@ -255,12 +265,12 @@ const PageAsistencia = () => {
               />
             </div>
             <div className="search">
-              <Input icon placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)}>
+              <Input className="input" icon placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)}>
                 <Icon name="search" />
                 <input />
               </Input>
 
-              <button>
+              <button onClick={exportFile}>
                 <BsDownload />
               </button>
             </div>
@@ -284,7 +294,7 @@ const PageAsistencia = () => {
 
       </div>
 
-      <div>
+      <div className="asistencia__table">
         <Table
           rowSelection={{
             type: selectionType,
@@ -292,8 +302,14 @@ const PageAsistencia = () => {
           }}
           columns={columns}
           dataSource={filteredUsers}
+          
         />
       </div>
+      <div className="asistencia__enviar">
+          <button type="submit">
+            Enviar
+          </button>
+        </div>
     </div>
   );
 };
