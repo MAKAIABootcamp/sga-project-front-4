@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -14,12 +13,16 @@ const Cronograma = () => {
 
   // Variable de estado para controlar la apertura y el cierre del modal
   const [showModal, setShowModal] = useState(false);
+  // Variable de estado para controlar los eventos que llegan del json server
+  const [events, setEvents] = useState([]);
 
-  const [eventos, setEventos] = useState([]);
+  const [selectedDateString, setSelectedDateString] = useState('');
 
   // Para abrir el modal al darle click a un día
-  const handleDayClick = () => {
+  const handleDayClick = (info) => {
     setShowModal(true);
+    const selectedDate  = info.dateStr;
+    setSelectedDateString(selectedDate);
   };
 
   // Para cerrar el modal
@@ -29,30 +32,30 @@ const Cronograma = () => {
 
   // Para agregar un evento, acá debería ir la lógica del post a la base de datos, revisar el getAPI de full calendar
   const handleAgregarEvento = (evento) => {
-    console.log(evento);
-    handleModalClose();
+    const formattedStart = moment(evento.start).format('YYYY-MM-DDTHH:mm:ss');
+  const formattedEnd = moment(evento.end).format('YYYY-MM-DDTHH:mm:ss');
+
+  const newEvento = {
+    title: evento.title,
+    start: formattedStart,
+    end: formattedEnd
+  };
+
+  console.log(newEvento);
+  handleModalClose();
   };
 
   useEffect(() => {
     getEvents().then((data) => {
-      setEventos(data);
+      setEvents(data);
     });
   }, []);
-
-
-  const events = [
-    { title: 'Evento 1', start: '2023-07-14T10:00:00', end: '2023-07-14T12:00:00' },
-    { title: 'Evento 2', start: '2023-07-02T15:30:00', end: '2023-07-02T16:30:00' },
-    { title: 'Evento 3', start: '2023-07-03T09:45:00', end: '2023-07-03T11:30:00' },
-    { title: "Evento 4", date: "2023-07-02" },
-    { title: "Evento 5", date: "2023-07-03" },
-    
-  ];
 
   return (
     <section>
       <div className="container" style={{ padding: "8rem" }}>
         <div id="calendar" className="custom-calendar">
+          <button onClick={handleDayClick}>Agregar evento</button>
           <FullCalendar
             plugins={[
               dayGridPlugin,
@@ -60,17 +63,21 @@ const Cronograma = () => {
               listPlugin,
               interactionPlugin,
             ]}
-            timeZone= 'America/Bogota'
+            timeZone= "America/Bogota"
             initialView="dayGridMonth"
             locale={esLocale}
             headerToolbar={{
               left: "prev next today",
               center: "title",
-              right: "dayGridMonth timeGridWeek listWeek",
+              right: "dayGridMonth timeGridWeek timeGridDay listWeek",
             }}
-            events={eventos}
+            events={events}
             editable={true}
             dateClick={handleDayClick}
+            slotLabelFormat={{
+              hour: "numeric",
+              hour12: true,
+            }}
           />
         </div>
       </div>
@@ -78,34 +85,8 @@ const Cronograma = () => {
         show={showModal}
         onClose={handleModalClose}
         onAgregarEvento={handleAgregarEvento}
+        selectedDateString={selectedDateString}
       />
-
-      {/* <Modal show={modalOpen} onHide={handleModalClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Agregar evento</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <label htmlFor="eventName">Nombre del evento:</label>
-          <input
-            type="text"
-            id="eventName"
-            className="form-control"
-            value={eventName}
-            onChange={(e) => setEventName(e.target.value)}
-          />
-            </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}>
-            Cancelar
-          </Button>
-          <Button variant="primary" onClick={handleEventSubmit}>
-            Guardar evento
-          </Button>
-          <Button variant="danger">
-           Eliminar 
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
     </section>
   );
 };
