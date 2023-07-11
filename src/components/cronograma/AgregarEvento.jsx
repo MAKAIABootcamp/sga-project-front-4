@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import { Modal, Button } from "react-bootstrap";
-
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
-import moment from "moment";
+import { DateTime } from "luxon";
 
 const AgregarEvento = ({
   show,
@@ -15,36 +14,38 @@ const AgregarEvento = ({
 
   const [evento, setEvento] = useState({
     title: "",
-    start: "YYYY-MM-DDTHH:mm:ss",
-    end: "",
+    start: DateTime.local().toISO(),
+    end: DateTime.local().toISO(),
   });
 
   const handleInputChange = (e) => {
-    setEvento({
-      ...evento
-    });
-    console.log(e.target.value)
+    const { name, value } = e.target;
+    setEvento((prevEvento) => ({
+      ...prevEvento,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formattedStart = moment(selectedDateString + ' ' + evento.start, 'YYYY-MM-DD HH:mm').format();
-    const formattedEnd = moment(selectedDateString + ' ' + evento.end, 'YYYY-MM-DD HH:mm').format();
+     // Obtener las fechas y horas del estado del evento
+    const { startDate, endDate, start, end } = evento;
 
-    const updatedEvento = { ...evento, start: formattedStart, end: formattedEnd };
-    onAgregarEvento(updatedEvento);
+    // Convertir las fechas y horas a objetos DateTime de Luxon
+    const startDateTime = DateTime.fromISO(startDate + "T" + start);
+    const endDateTime = DateTime.fromISO(endDate + "T" + end);
+
+    // Actualizar el estado del evento con los valores formateados
+    setEvento((prevEvento) => ({
+      ...prevEvento,
+      start: startDateTime.toISO(),
+      end: endDateTime.toISO(),
+    }));
   };
 
   useEffect(() => {
     console.log(evento);
   }, [evento]);
-
-    const [selectedDate, setSelectedDate] = useState(null);
-
-  const handleDateChange = (date) => {
-    console.log(date)
-    setSelectedDate(date);
-  };
 
   return (
     <Modal show={show} onHide={onClose}>
@@ -69,18 +70,17 @@ const AgregarEvento = ({
                 <Form.Control
                   type="date"
                   name="startDate"
-                  value={selectedDateString}
+                  value={evento.startDate}
                   onChange={handleInputChange}
                   readOnly
                 />
-                 <Datetime value={selectedDate} onChange={handleDateChange} />
               </div>
               <div className="col">
                 <Form.Label>Fecha de fin</Form.Label>
                 <Form.Control
                   type="date"
                   name="endDate"
-                  value={selectedDateString}
+                  value={evento.endDate}
                   onChange={handleInputChange}
                   readOnly
                 />
