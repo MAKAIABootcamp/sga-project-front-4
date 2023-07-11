@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import PanelAdministrador from "../pages/PanelAdministrador";
 import Cronograma from "../pages/Cronograma";
 import Layout from "../components/layout/Layout";
+import PanelSuperAdministrador from "../pages/PanelSuperAdministrador";
 
 const AppRouter = () => {
   return (
@@ -19,6 +20,7 @@ const AppRouter = () => {
         <Route element={<Layout />}>
           <Route path="/administrador" element={<PanelAdministrador />} />
           <Route path="/cronograma" element={<Cronograma />} />
+          <Route path="/resgistro-administradores" element={<PanelSuperAdministrador />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

@@ -1,0 +1,31 @@
+.table{
+    margin-left: 1%;
+    margin-top: 5%;
+    line-height: normal;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.buttons{
+    background-color: #25ABBC;
+    color: white;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    width: 10%;
+ 
+}
+
+.main__panel{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 80px;
+}
+
+.container__buttons{
+    gap: 10px;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+}
