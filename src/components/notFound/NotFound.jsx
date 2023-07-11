@@ -1,5 +1,5 @@
 import { Button } from "semantic-ui-react";
-import logo from "../../assets/images/logo2.png";
+import logo from "../../assets/images/Logo-Bootcamp.png";
 import { useNavigate } from 'react-router-dom';
 
 const NotFound = () => {
