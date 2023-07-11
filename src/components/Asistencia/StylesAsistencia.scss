@@ -46,10 +46,21 @@
 
 
         }
+        @keyframes aparecer-calendario{
+            0% {
+              transform: translateY(100%);
+              opacity: 0;
+            }
+            100% {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
         .calendar{
             padding: 2rem;
             border-radius:  18px;
             background-color: #6a86b286;
+            animation: aparecer-calendario 1s ease-in-out forwards;
         }
     }
 
