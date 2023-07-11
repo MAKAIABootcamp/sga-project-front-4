@@ -296,7 +296,7 @@ const PageAsistencia = () => {
       </div>
 
       <div className="asistencia__table">
-        <Table
+        <Table className="tabla"
           rowSelection={{
             type: selectionType,
             ...rowSelection,

@@ -109,6 +109,10 @@
                 background-color: #0b5ed7;
                 transition: .1s ease-in-out;
             }
+            &:active{
+                transform: scale(.9);
+                transition: .09s ease-in-out ;
+            }
         }
 
         .input {
@@ -140,13 +144,19 @@
                 background-color: #0b5ed7;
                 transition: .1s ease-in-out;
             }
+            &:active{
+                transform: scale(.9);
+                transition: .09s ease-in-out ;
+            }
         }
     }
 
     &__table {
         .ant-table-thead>tr {
             cursor: pointer;
+            background-color: red !important;
         }
+        
 
         .ant-table-tbody>tr {
             cursor: pointer;
@@ -163,6 +173,7 @@
             height: 3.6rem;
             transition: .1s ease-in-out;
         }
+      
     }
     
 }
