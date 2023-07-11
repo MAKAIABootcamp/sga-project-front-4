@@ -27,6 +27,7 @@
             .totalidad {
                 display: flex;
                 width: 100%;
+                margin-bottom: 2rem;
                 justify-content: space-between;
 
                 span {
@@ -44,6 +45,11 @@
             }
 
 
+        }
+        .calendar{
+            padding: 2rem;
+            border-radius:  18px;
+            background-color: #6a86b286;
         }
     }
 
@@ -72,10 +78,10 @@
         display: flex;
         align-items: center;
         justify-content: space-around;
-        gap: 10%;
+        gap: 25%;
         width: 100%;
 
-        button {
+        .btnDescarga {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -147,4 +153,5 @@
             transition: .1s ease-in-out;
         }
     }
+    
 }

@@ -5,8 +5,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { Select } from "antd";
 import { Breadcrumb } from "antd";
-import { Icon, Input } from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
+import { Input} from 'antd';
 import { BsDownload } from "react-icons/bs";
 import { Table } from 'antd';
 import { Progress } from 'antd';
@@ -15,6 +14,9 @@ import { useCallback, useEffect, useState } from "react";
 import { utils, writeFileXLSX } from 'xlsx';
 
 
+
+
+const { Search } = Input;
 const today = dayjs();
 
 
@@ -79,11 +81,11 @@ const PageAsistencia = () => {
   ]);
   const [fallas, setFallas] = useState(0);
 
-  const exportFile = useCallback( () => {
-      const ws = utils.json_to_sheet(students);
-      const wb = utils.book_new();
-      utils.book_append_sheet(wb, ws, 'Data');
-      writeFileXLSX(wb, 'Prueba.xlsx');
+  const exportFile = useCallback(() => {
+    const ws = utils.json_to_sheet(students);
+    const wb = utils.book_new();
+    utils.book_append_sheet(wb, ws, 'Data');
+    writeFileXLSX(wb, 'Prueba.xlsx');
   }, [students]);
 
 
@@ -101,7 +103,7 @@ const PageAsistencia = () => {
   };
 
   useEffect(() => {
-    const filtered = students.filter((user) => user.name.toLowerCase().includes(searchTerm.toLowerCase()));
+    const filtered = students.filter((user) => (user.name).toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredUsers(filtered)
   }, [searchTerm, students]);
 
@@ -147,7 +149,7 @@ const PageAsistencia = () => {
       title: 'Observaciones',
       dataIndex: 'observaciones',
       render: (text) => (
-        <textarea style={{ borderRadius: '8px', width: '75%', height: '4rem' }}>{text}</textarea>
+        <textarea style={{ borderRadius: '8px', width: '75%', height: '4rem' }} defaultValue={text} />
       )
     },
   ];
@@ -161,6 +163,8 @@ const PageAsistencia = () => {
     },
 
   };
+
+  const onSearch = (value) => console.log(value);
 
   return (
     <div className="asistencia">
@@ -253,24 +257,21 @@ const PageAsistencia = () => {
               <Breadcrumb className="asistencia__vistaFiltros"
                 items={[
                   {
-                    title: <a href="">{entrenamiento}</a>,
+                    title: <a>{entrenamiento}</a>,
                   },
                   {
-                    title: <a href="">{modulo}</a>,
+                    title: <a>{modulo}</a>,
                   },
                   {
-                    title: <a href="">{cohorte}</a>,
+                    title: <a>{cohorte}</a>,
                   },
                 ]}
               />
             </div>
             <div className="search">
-              <Input className="input" icon placeholder="Search..." value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)}>
-                <Icon name="search" />
-                <input />
-              </Input>
-
-              <button onClick={exportFile}>
+              <Search placeholder="Buscar participante" value={searchTerm} onChange={(e) =>setSearchTerm(e.target.value) }  onSearch={onSearch} enterButton />
+              
+              <button className="btnDescarga" onClick={exportFile}>
                 <BsDownload />
               </button>
             </div>
@@ -302,14 +303,14 @@ const PageAsistencia = () => {
           }}
           columns={columns}
           dataSource={filteredUsers}
-          
+
         />
       </div>
       <div className="asistencia__enviar">
-          <button type="submit">
-            Enviar
-          </button>
-        </div>
+        <button type="submit">
+          Enviar
+        </button>
+      </div>
     </div>
   );
 };
