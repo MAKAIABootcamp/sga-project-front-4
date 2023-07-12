@@ -27,9 +27,8 @@ const Cursos = () => {
     // Consumir los datos de los cursos desde los endpoints
     axios
       .all([
-        axios.get("https://api.example.com/cursos/curso1"),
-        axios.get("https://api.example.com/cursos/curso2"),
-        axios.get("https://api.example.com/cursos/curso3"),
+        axios.get("http://localhost:3000/eventosFrontend3"),
+
       ])
       .then((responses) => {
         // Obtener los datos de respuesta de cada endpoint
@@ -38,8 +37,8 @@ const Cursos = () => {
         const data3 = responses[2].data;
 
         // Actualizar el estado con los datos de los cursos
-        setCursos([data1, data2, data3]);
-      })
+        setCursos([data1]);
+        log     })
       .catch((error) => {
         console.error("Error al obtener los cursos:", error);
       });
