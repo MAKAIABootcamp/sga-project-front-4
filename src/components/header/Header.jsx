@@ -22,7 +22,7 @@ const Header = ({ handleMenuToggle }) => {
     <>
         <header className="header fixed-top d-flex align-items-center">
       <div className="d-flex align-items-center justify-content-between">
-        <figure className="logo d-flex align-items-center">
+        <figure className="logo d-flex align-items-center m-0">
           <img src={LogoBootcamp} alt="Logo" />
           <span className="d-none d-lg-block">SGA</span>
           <i className="bi bi-list toggle-sidebar-btn" onClick={handleMenuToggle}>
@@ -30,8 +30,8 @@ const Header = ({ handleMenuToggle }) => {
           </i>
         </figure>
       </div>
-      <nav className="header-nav ms-auto">
-        <ul className="d-flex align-items-center">
+      <nav className="header-nav ms-auto ">
+        <ul className="d-flex align-items-center m-0">
           <li className="nav-item dropdown pe-3">
             <a
               className="nav-link nav-profile d-flex align-items-center pe-0"

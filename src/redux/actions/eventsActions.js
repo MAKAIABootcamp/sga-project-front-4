@@ -1,55 +1,16 @@
 import axios from "axios";
-import { adminTypes, eventsTypes } from "../types/types";
+import { setEventos } from "../reducers/eventsReducer";
 
-const URL_BASE = "https://backend-sga-icqb.vercel.app/";
-const endpointEvents = "eventos";
-const endpointAdmins = "administradores";
+const URL = 'https://backend-sga-icqb.vercel.app/';
 
-//FUNCIÓN PARA TRAER TODOS LOS EVENTOS
-
-export const actionGetEventsAsync = () => {
-  return async (dispatch) => {
-    await axios
-      .get(`${URL_BASE}${endpointEvents}`)
-      .then((response) => {
-        const eventos = response.data;
-        dispatch(actionGetEventsSync(eventos));
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-};
-
-const actionGetEventsSync = (eventos) => {
-  return {
-    type: eventsTypes.OBTENER_EVENTOS,
-    payload: eventos,
-  };
-};
-
-//FUNCIÓN PARA TRAER TODOS LOS ADMINISTRADORES
-
-export const actionGetAdminsAsync = () => {
+export const listEvents = (endpoint) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get(`${URL_BASE}${endpointAdmins}`);
-      console.log(data);
-      return data;
+      const eventos = await axios.get(`${URL}${endpoint}`);
+      console.log(eventos.data);
+      dispatch(setEventos(eventos.data));
     } catch (error) {
-      console.log(error);
-      return [];
-    } finally {
-      dispatch(actionGetAdminsSync(data));
+      console.log('error', error);
     }
-  };
-};
-
-const actionGetAdminsSync = (data) => {
-  return {
-    type: adminTypes.OBTENER_ADMINISTRADORES,
-    payload: {
-      data: data,
-    },
-  };
-};
+  }
+}

@@ -1,9 +1,11 @@
-import AdminEstudiantes from '../components/adminEstudiantes/AdminEstudiantes'
+
+// import AdminEstudiantes from '../components/adminEstudiantes/AdminEstudiantes'
 
 const Estudiantes = () => {
+
   return (
     <>
-      <AdminEstudiantes />
+      {/* <AdminEstudiantes /> */}
     </>
   )
 }
