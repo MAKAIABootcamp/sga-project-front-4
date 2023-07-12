@@ -8,21 +8,19 @@ import esLocale from "@fullcalendar/core/locales/es";
 import "../styles/cronograma/Cronograma.scss";
 import AgregarEvento from "../components/cronograma/AgregarEvento";
 import { getEvents } from "../services/getEvents";
+import { useDispatch, useSelector } from "react-redux";
+import { listEvents } from "../redux/actions/eventsActions";
 
 const Cronograma = () => {
-
   // Variable de estado para controlar la apertura y el cierre del modal
   const [showModal, setShowModal] = useState(false);
-  // Variable de estado para controlar los eventos que llegan del json server
-  const [events, setEvents] = useState([]);
-
-  const [selectedDateString, setSelectedDateString] = useState('');
+  const dispatch = useDispatch();
+  const eventos = useSelector((store) => store.eventsReducer.eventos);
+  console.log("eventos desde page estudiantes", eventos);
 
   // Para abrir el modal al darle click a un día
   const handleDayClick = (info) => {
     setShowModal(true);
-    const selectedDate  = info.dateStr;
-    setSelectedDateString(selectedDate);
   };
 
   // Para cerrar el modal
@@ -32,24 +30,22 @@ const Cronograma = () => {
 
   // Para agregar un evento, acá debería ir la lógica del post a la base de datos, revisar el getAPI de full calendar
   const handleAgregarEvento = (evento) => {
-    const formattedStart = moment(evento.start).format('YYYY-MM-DDTHH:mm:ss');
-  const formattedEnd = moment(evento.end).format('YYYY-MM-DDTHH:mm:ss');
+    const formattedStart = moment(evento.start).format("YYYY-MM-DDTHH:mm:ss");
+    const formattedEnd = moment(evento.end).format("YYYY-MM-DDTHH:mm:ss");
 
-  const newEvento = {
-    title: evento.title,
-    start: formattedStart,
-    end: formattedEnd
-  };
+    const newEvento = {
+      title: evento.title,
+      start: formattedStart,
+      end: formattedEnd,
+    };
 
-  console.log(newEvento);
-  handleModalClose();
+    console.log(newEvento);
+    handleModalClose();
   };
 
   useEffect(() => {
-    getEvents().then((data) => {
-      setEvents(data);
-    });
-  }, []);
+    dispatch(listEvents("eventos"));
+  }, [dispatch]);
 
   return (
     <section>
@@ -63,7 +59,7 @@ const Cronograma = () => {
               listPlugin,
               interactionPlugin,
             ]}
-            timeZone= "America/Bogota"
+            timeZone="America/Bogota"
             initialView="dayGridMonth"
             locale={esLocale}
             headerToolbar={{
@@ -71,7 +67,7 @@ const Cronograma = () => {
               center: "title",
               right: "dayGridMonth timeGridWeek timeGridDay listWeek",
             }}
-            events={events}
+            events={eventos}
             editable={true}
             dateClick={handleDayClick}
             slotLabelFormat={{
@@ -85,7 +81,6 @@ const Cronograma = () => {
         show={showModal}
         onClose={handleModalClose}
         onAgregarEvento={handleAgregarEvento}
-        selectedDateString={selectedDateString}
       />
     </section>
   );
