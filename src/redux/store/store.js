@@ -3,8 +3,7 @@ import { adminReducer } from "../reducers/adminReducer";
 import { eventsReducer } from "../reducers/eventsReducer";
 
 const reducer = {
-    administradores: adminReducer,
-    eventos: eventsReducer
+    eventos: eventsReducer,
 };
 
 

@@ -9,7 +9,7 @@ const initialState = {
       case eventsTypes.OBTENER_EVENTOS:
         return {
           ...state,
-          eventos: action.payload.eventos,
+          eventos: action.payload,
         };
       case eventsTypes.AGREGAR_EVENTO:
         return {

@@ -10,6 +10,7 @@ import "../styles/cronograma/Cronograma.scss";
 import AgregarEvento from "../components/cronograma/AgregarEvento";
 import { getEvents } from "../services/getEvents";
 import { useDispatch, useSelector } from "react-redux";
+import { actionGetEventsAsync } from "../redux/actions/eventsActions";
 
 const Cronograma = () => {
 
@@ -36,9 +37,13 @@ const Cronograma = () => {
 
   const dispatch = useDispatch();
 
-  const { eventos } = useSelector((store) => store.eventos);
-  console.log(eventos)
+  const {eventos} = useSelector((store) => store.eventos);
 
+  useEffect(() => {
+    dispatch(actionGetEventsAsync());
+  }, [dispatch]);
+
+  console.log(eventos);
   // useEffect(() => {
   //   getEvents().then((data) => {
   //     setEventos(data);
@@ -74,7 +79,7 @@ const Cronograma = () => {
               center: "title",
               right: "dayGridMonth timeGridWeek listWeek",
             }}
-            events={events}
+            events={eventos}
             editable={true}
             dateClick={handleDayClick}
           />
