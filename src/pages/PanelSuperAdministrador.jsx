@@ -79,7 +79,7 @@ const PanelSuperAdministrador = () => {
           
           />
           <div className="contenedor__icon_search">
-
+            
           <GrSearch/>
           </div>
         </div>

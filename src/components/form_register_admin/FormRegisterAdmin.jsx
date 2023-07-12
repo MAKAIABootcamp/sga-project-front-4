@@ -15,18 +15,15 @@ const FormRegisterAdmin = () => {
         }))
         console.log(administradores)
       }
-    
-    const handleAgregarAdmin = () => {
-      addAdmin(administradores)
-        .then((response) => {
+      const handleAgregarAdmin = async () => {
+        try {
+          const response = await addAdmin(administradores);
           console.log('Administrador agregado:', response);
-        })
-        .catch((error) => {
+        } catch (error) {
           console.error('Error al agregar administrador:', error);
-        });
-
-
-    };
+        }
+      };
+      
   return (
     <section className="container__form">
       <form className="formularioAdmin">
