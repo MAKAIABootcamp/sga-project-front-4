@@ -34,5 +34,7 @@ export const addAdmin = async (adminData) => {
       throw error;
     }
   };
+
+  
   
  
