@@ -9,13 +9,14 @@ import esLocale from "@fullcalendar/core/locales/es";
 import "../styles/cronograma/Cronograma.scss";
 import AgregarEvento from "../components/cronograma/AgregarEvento";
 import { getEvents } from "../services/getEvents";
+import { useDispatch, useSelector } from "react-redux";
 
 const Cronograma = () => {
 
   // Variable de estado para controlar la apertura y el cierre del modal
   const [showModal, setShowModal] = useState(false);
 
-  const [eventos, setEventos] = useState([]);
+  // const [eventos, setEventos] = useState([]);
 
   // Para abrir el modal al darle click a un día
   const handleDayClick = () => {
@@ -33,11 +34,16 @@ const Cronograma = () => {
     handleModalClose();
   };
 
-  useEffect(() => {
-    getEvents().then((data) => {
-      setEventos(data);
-    });
-  }, []);
+  const dispatch = useDispatch();
+
+  const { eventos } = useSelector((store) => store.eventos);
+  console.log(eventos)
+
+  // useEffect(() => {
+  //   getEvents().then((data) => {
+  //     setEventos(data);
+  //   });
+  // }, []);
 
 
   const events = [
@@ -68,7 +74,7 @@ const Cronograma = () => {
               center: "title",
               right: "dayGridMonth timeGridWeek listWeek",
             }}
-            events={eventos}
+            events={events}
             editable={true}
             dateClick={handleDayClick}
           />
