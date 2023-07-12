@@ -31,7 +31,7 @@ const Login = () => {
   };
 
   const handleToPanel = () => {
-    navigate("/cronograma");
+    navigate("/dashboard");
   };
   return (
     <section

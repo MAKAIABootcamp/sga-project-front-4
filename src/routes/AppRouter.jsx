@@ -18,15 +18,20 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
+        {/* RUTAS PUBLICAS */}
           <Route path="/" element={<Login />}/>
           <Route path="/login" element={<Navigate to="/" />}/>
-          <Route path="/olvidar-contrasena" element={<OlvidarContrasena />}/>          
+          <Route path="/olvidar-contrasena" element={<OlvidarContrasena />}/>  
+        {/* RUTAS PRIVADAS */}
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Panel/>} />
+          {/* MODULOS DE PANEL DE ADMINISTRADOR */}
           <Route path="/estudiantes" element={<Estudiantes />} />
           <Route path="/cronograma" element={<Cronograma />} />
-          <Route path="/registro-administradores" element={<PanelSuperAdministrador />} />
           <Route path='/perfil' element={<PerfilPage/>}/>
+          {/* MODULO REGISTRO SUPER ADMINISTRADOR */}
+          <Route path="/registro-administradores" element={<PanelSuperAdministrador />} />
+          {/* MODULO DE  FORMADOR*/}
           <Route path='/asistencia' element={<AsistenciaPage/>}/>
         </Route>
         <Route path="*" element={<NotFound />} />
