@@ -1,22 +1,21 @@
-import { eventsTypes } from "../types/types";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     eventos: [],
-  };
-  
-  export const eventsReducer = (state = initialState, action) => {
-    switch (action.type) {
-      case eventsTypes.OBTENER_EVENTOS:
-        return {
-          ...state,
-          eventos: action.payload.eventos,
-        };
-      case eventsTypes.AGREGAR_EVENTO:
-        return {
-          ...state,
-          eventos: [...state.eventos, action.payload],
-        };        
-      default:
-        return state;
+};
+
+const eventsSlice = createSlice({
+    name: 'events',
+    initialState,
+
+    reducers: {
+        setEventos: (state, action) => {
+            state.eventos = action.payload
+        },
     }
-  };
+});
+
+export const {
+    setEventos
+} = eventsSlice.actions;
+export default eventsSlice.reducer;

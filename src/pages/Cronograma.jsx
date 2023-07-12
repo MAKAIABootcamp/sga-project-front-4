@@ -8,13 +8,18 @@ import interactionPlugin from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
 import "../styles/cronograma/Cronograma.scss";
 import AgregarEvento from "../components/cronograma/AgregarEvento";
-import { getEvents } from "../services/getEvents";
 import { useDispatch, useSelector } from "react-redux";
+import { listEvents } from "../redux/actions/eventsActions";
 
 const Cronograma = () => {
 
   // Variable de estado para controlar la apertura y el cierre del modal
   const [showModal, setShowModal] = useState(false);
+
+  const eventos = useSelector((store) => store.eventsReducer.eventos);
+  console.log('eventos desde page estudiantes', eventos);
+  
+  const dispatch = useDispatch();
 
   // const [eventos, setEventos] = useState([]);
 
@@ -34,10 +39,10 @@ const Cronograma = () => {
     handleModalClose();
   };
 
-  const dispatch = useDispatch();
-
-  const { eventos } = useSelector((store) => store.eventos);
-  console.log(eventos)
+  useEffect(() => {
+    dispatch(listEvents('eventos'));
+    
+  }, [dispatch])
 
   // useEffect(() => {
   //   getEvents().then((data) => {

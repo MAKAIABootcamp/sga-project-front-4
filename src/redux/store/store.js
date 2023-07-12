@@ -1,20 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { adminReducer } from "../reducers/adminReducer";
-import { eventsReducer } from "../reducers/eventsReducer";
-
-const reducer = {
-    administradores: adminReducer,
-    eventos: eventsReducer
-};
-
+import thunk from 'redux-thunk';
+import eventsReducer from "../reducers/eventsReducer";
 
 const store = configureStore({
-  reducer,
-  devTool: process.env.NODE_ENV !== "production",
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+    reducer: {eventsReducer},
+    middleware: [thunk],
 });
 
 export default store;
