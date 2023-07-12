@@ -10,8 +10,8 @@ import Login from "../pages/Login";
 import PanelAdministrador from "../pages/PanelAdministrador";
 import Cronograma from "../pages/Cronograma";
 import Layout from "../components/layout/Layout";
-import CalendarioVisualizacion from "../components/cronograma/CalendarioVisualizacion";
-import RecursosEducativos from "../components/recursosEducativos/client";
+import CalendarioConFechaActual from "../pages/CronogramaEstudiantes";
+import RecursosEducativosDocente from "../pages/RecursosEducativosDocente";
 const AppRouter = () => {
   return (
     <BrowserRouter>
@@ -24,8 +24,8 @@ const AppRouter = () => {
           <Route path="/cronograma" element={<Cronograma />} />
           <Route path='/perfil' element={<PerfilPage/>}/>
           <Route path='/asistencia' element={<AsistenciaPage/>}/>
-          <Route path="/cronogramaestudiante" element={<CalendarioVisualizacion />} />
-          <Route path="/recursosEducativos" element={<RecursosEducativos/>}></Route>
+          <Route path="/cronogramaestudiante" element={<CalendarioConFechaActual/>} />
+          <Route path="/recursoseducativos" element={<RecursosEducativosDocente/>}></Route>
         </Route>
           <Route path="*" element={<NotFound />} />
       </Routes>

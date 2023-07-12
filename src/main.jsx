@@ -9,7 +9,7 @@ import 'semantic-ui-css/semantic.min.css'
 createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <React.StrictMode>
-      <AppRouter />
+   <AppRouter/>
     </React.StrictMode>
   </Provider>
 );
