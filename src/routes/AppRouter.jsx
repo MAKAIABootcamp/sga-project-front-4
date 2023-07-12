@@ -20,7 +20,7 @@ const AppRouter = () => {
         <Route element={<Layout />}>
           {/* <Route path="/dashboard" element={<Panel/>} /> */}
           <Route path="/cronograma" element={<Cronograma />} />
-          <Route path="/resgistro-administradores" element={<PanelSuperAdministrador />} />
+          <Route path="/registro-administradores" element={<PanelSuperAdministrador />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
