@@ -11,6 +11,7 @@ import Cronograma from "../pages/Cronograma";
 import Layout from "../components/layout/Layout";
 import Panel from "../pages/Panel";
 import Estudiantes from "../pages/Estudiantes";
+import PanelSuperAdministrador from "../pages/PanelSuperAdministrador";
 
 
 const AppRouter = () => {
