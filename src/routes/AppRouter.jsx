@@ -8,7 +8,7 @@ import Login from "../pages/Login";
 import Cronograma from "../pages/Cronograma";
 import Layout from "../components/layout/Layout";
 import PanelSuperAdministrador from "../pages/PanelSuperAdministrador";
-import Panel from "../pages/Panel";
+// import Panel from "../pages/Panel";
 
 const AppRouter = () => {
   return (
@@ -18,7 +18,7 @@ const AppRouter = () => {
         <Route path="/login" element={<Navigate to="/" />} />
         <Route path="/olvidar-contrasena" element={<OlvidarContrasena />} />
         <Route element={<Layout />}>
-          <Route path="/dashboard" element={<Panel/>} />
+          {/* <Route path="/dashboard" element={<Panel/>} /> */}
           <Route path="/cronograma" element={<Cronograma />} />
           <Route path="/resgistro-administradores" element={<PanelSuperAdministrador />} />
         </Route>

@@ -1,15 +1,18 @@
 import React, { useEffect, useState} from "react";
 import { MdDeleteForever } from "react-icons/md";
+import { GrSearch } from "react-icons/gr";
 import { CiEdit } from "react-icons/ci";
 import "../styles/super-administrador/SuperAdmin.scss";
 import { Button, Modal } from "react-bootstrap";
 import FormRegisterAdmin from "../components/form_register_admin/FormRegisterAdmin";
-import { getAdmin } from "../services/getAdmin"
+import { getAdmin, deleteAdmin } from "../services/getAdmin"
 
 
 const PanelSuperAdministrador = () => {
   const [showModal, setShowModal] = useState(false);
   const [administradores, setAdministradores] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredAdministradores, setFilteredAdministradores] = useState([]);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -19,20 +22,67 @@ const PanelSuperAdministrador = () => {
     setShowModal(true);
   };
 
+  const handleChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
   useEffect(() => {
     getAdmin().then((data) => {
       setAdministradores(data);
     });
   }, []);
 
- 
+  useEffect(() => {
+    if (searchQuery) {
+      const filteredData = administradores.filter((admin) =>
+        Object.values(admin).some((value) =>
+          (value || "").toString().toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      );
+      setFilteredAdministradores(filteredData);
+    } else {
+      setFilteredAdministradores(administradores);
+    }
+  }, [searchQuery, administradores]);
+  
+
+  const handleEliminarAdmin = (id) => {
+    deleteAdmin(id)
+      .then((response) => {
+        console.log('Administrador eliminado:', response);
+        // Actualizar la lista de administradores después de eliminar uno con éxito
+        getAdmin().then((data) => {
+          setAdministradores(data);
+        });
+      })
+      .catch((error) => {
+        console.error('Error al eliminar administrador:', error);
+      });
+  };
+
+  
+
   return (
     <main id="main" className="main__panel">
+      
       <div>
+        <div className="container__inputs">
         <button className="buttons" onClick={handleOpenModal}>
           Agregar
         </button>
+        <input
+          type="text"
+          name="search"
+          placeholder="Buscar..."
+          value={searchQuery}
+          onChange={handleChange}
+          className="filter__search"
+          
+          />
+          <div className="contenedor__icon_search">
 
+          <GrSearch/>
+          </div>
+        </div>
         <Modal show={showModal} onHide={handleCloseModal}>
           <Modal.Body
             closeButton
@@ -48,7 +98,7 @@ const PanelSuperAdministrador = () => {
             <Button variant="danger" onClick={handleCloseModal}>
               Cancelar
             </Button>
-            <Button>Agregar administrador</Button>
+
             </div>
           </Modal.Body>
         </Modal>
@@ -68,7 +118,7 @@ const PanelSuperAdministrador = () => {
           </tr>
         </thead>
         <tbody>
-        {administradores.map((admin, index) => (
+        {filteredAdministradores.map((admin, index) => (
           <tr key={index}>
             <th scope="row">{index + 1}</th>
             <td>{admin.nombre_completo}</td>
@@ -78,7 +128,7 @@ const PanelSuperAdministrador = () => {
       <td>{admin.contraseña}</td>
       <td>{admin.rol}</td>
       <td>
-        <MdDeleteForever />
+        <MdDeleteForever onClick={() => handleEliminarAdmin(admin.id)}/>
         <CiEdit />
       </td>
           </tr>

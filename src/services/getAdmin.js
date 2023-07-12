@@ -13,14 +13,26 @@ export const getAdmin= async () => {
     }
 
 }
-getAdmin()
 
-// export const createPost = async (postData) => {
-//     try {
-//       const response = await axios.post(`${URL_API}`, postData);
-//       return response.data;
-//     } catch (error) {
-//       console.error(error);
-//       return null;
-//     }
-//   };
+
+
+export const addAdmin = async (adminData) => {
+    try {
+      const response = await axios.post(`${URL_API}`, adminData);
+      return response.data;
+    } catch (error) {
+        console.log(error)
+        return [];
+    }
+  };
+
+  export const deleteAdmin = async (id) => {
+    try {
+      const response = await axios.delete(`${URL_API}/${id}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  };
+  
+ 
