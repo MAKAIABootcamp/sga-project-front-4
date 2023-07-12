@@ -1,0 +1,134 @@
+@import '../../styles/index.scss';
+
+
+.actualizarDatos {
+  display: flex;
+  flex-direction: column;
+
+  &__image {
+    display: flex;
+    width: 90%;
+    gap: 10%;
+
+    h4 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: rgba(1, 41, 112, 0.6);
+    }
+
+    img {
+      width: 9.5rem;
+    }
+
+    &__btns {
+      display: flex;
+      width: 1rem;
+      gap: 50%;
+
+      .btn1 {
+        background-color: #0d6efd;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .6rem .8rem;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #0b5ed7;
+          transition: .3s ease-in-out;
+        }
+      }
+
+      .btn2 {
+        background-color: #dc3545;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .6rem .8rem;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #b02a37;
+          transition: .3s ease-in-out;
+        }
+      }
+
+    }
+
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+
+      input {
+        width: 73.5%;
+        padding: 1%;
+        border: 1px solid rgba(135, 151, 178, 0.6);
+        border-radius: 10px;
+      }
+
+      label {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: rgba(1, 41, 112, 0.6);
+      }
+
+      textarea {
+        padding: 1%;
+        border: 1px solid rgba(135, 151, 178, 0.6);
+        border-radius: 10px;
+        width: 73.6%;
+      }
+    }
+
+  }
+
+  &__btnSave {
+    display: flex;
+    justify-content: center;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1% 2%;
+      margin: 3% 0 0 0;
+      border: none;
+      background-color: #0d6efd;
+      border-radius: 10px;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #0b5ed7;
+        transition: .1s ease-in-out;
+      }
+    }
+  }
+
+  @media screen and (max-width:850px) {
+    &__image {
+      display: block;
+      
+    }
+    form{
+      div{
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  }
+}

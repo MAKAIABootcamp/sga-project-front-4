@@ -1,8 +1,12 @@
-import React from 'react'
+
+import AdminEstudiantes from '../components/adminEstudiantes/AdminEstudiantes'
 
 const Estudiantes = () => {
+
   return (
-    <div>Estudiantes</div>
+    <>
+      <AdminEstudiantes />
+    </>
   )
 }
 

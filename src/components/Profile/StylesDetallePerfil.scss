@@ -1,0 +1,50 @@
+.detalle{
+    display: flex;
+    flex-direction: column;
+    margin: 1.7rem 0 0 0;
+
+    &__sobremi{
+        display: flex;
+        flex-direction: column;
+
+        
+
+        p{
+            font-style: italic ;
+            margin-bottom: 1.7rem;
+        }
+    }
+    .title{
+        font-size: 1.4rem;
+        margin-bottom: 1.7rem;
+        font-weight: 600;
+        color: #012970;
+    }
+
+    &__info{
+        display: flex;
+        flex-direction: column;
+
+        .info{
+            display: flex;
+            width: 60%;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+           
+            span{
+                font-size: 1.2rem;
+                font-weight: 300 ;
+                color: rgba(1, 41, 112, 0.6);
+            }
+            p{
+                font-size: 1.2rem;
+            }
+        }
+    }
+    @media screen and (max-width:850px) {
+        .info{
+            display: block;
+        }
+    }
+}
