@@ -8,6 +8,7 @@ import Login from '../pages/Login'
 import PanelAdministrador from '../pages/PanelAdministrador'
 import PerfilPage from '../pages/PerfilPage'
 import AsitenciaPage from '../pages/AsitenciaPage'
+import Calificaiones from '../components/Calificaciones/Calificaiones'
 
 
 const AppRouter = () => {
@@ -20,6 +21,7 @@ const AppRouter = () => {
           <Route path="/administrador" element={<PanelAdministrador />}/>
           <Route path='/perfil' element={<PerfilPage/>}/>
           <Route path='/asistencia' element={<AsitenciaPage/>}/>
+          <Route path='/calificaciones' element={<Calificaiones/>} />
           <Route path="*" element={<NotFound />} />
       </Routes>
    </BrowserRouter>

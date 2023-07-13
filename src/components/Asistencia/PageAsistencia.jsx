@@ -3,8 +3,6 @@ import Grid from "@mui/material/Grid";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
-import { Select } from "antd";
-import { Breadcrumb } from "antd";
 import { Input} from 'antd';
 import { BsDownload } from "react-icons/bs";
 import { Table } from 'antd';
@@ -12,6 +10,7 @@ import { Progress } from 'antd';
 import './StylesAsistencia.scss'
 import { useCallback, useEffect, useState } from "react";
 import { utils, writeFileXLSX } from 'xlsx';
+import BotonesFiltrado from "./BtnFintrado/BotonesFiltrado";
 
 
 
@@ -22,9 +21,7 @@ const today = dayjs();
 
 const PageAsistencia = () => {
 
-  const [entrenamiento, setEntrenamiento] = useState('');
-  const [modulo, setModulo] = useState('');
-  const [cohorte, setCohorte] = useState('');
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [students, setStudents] = useState([
@@ -89,18 +86,7 @@ const PageAsistencia = () => {
   }, [students]);
 
 
-  const handleChangeEntrenamiento = (value) => {
-    console.log(`selected ${value}`);
-    setEntrenamiento(value);
-  };
-  const handleChangeModulo = (value) => {
-    console.log(`selected ${value}`);
-    setModulo(value);
-  };
-  const handleChangeCohorte = (value) => {
-    console.log(`selected ${value}`);
-    setCohorte(value);
-  };
+  
 
   useEffect(() => {
     const filtered = students.filter((user) => (user.name).toLowerCase().includes(searchTerm.toLowerCase()));
@@ -182,91 +168,7 @@ const PageAsistencia = () => {
 
           <div className="">
             <div>
-              <div className="select">
-                <Select
-                  defaultValue="Entrenamiento"
-                  style={{
-                    width: 200,
-                  }}
-                  onChange={handleChangeEntrenamiento}
-                  options={[
-                    {
-                      label: "Entrenamiento",
-                      options: [
-                        {
-                          label: "Frontend",
-                          value: "Frontend",
-                        },
-                        {
-                          label: "Backend",
-                          value: "Backend",
-                        },
-                        {
-                          label: "Análisis de Datos",
-                          value: "Análisis de Datos",
-                        },
-                      ],
-                    },
-                  ]}
-                />
-                <Select
-                  defaultValue="Modulo"
-                  style={{
-                    width: 200,
-                  }}
-                  onChange={handleChangeModulo}
-                  options={[
-                    {
-                      label: "Modulo",
-                      options: [
-                        {
-                          label: "Fundamentos",
-                          value: "Fundamentos",
-                        },
-                        {
-                          label: "Profundización",
-                          value: "Profundización",
-                        },
-                      ],
-                    },
-                  ]}
-                />
-                <Select
-                  defaultValue="Cohorte"
-                  style={{
-                    width: 200,
-                  }}
-                  onChange={handleChangeCohorte}
-                  options={[
-                    {
-                      label: "Cohorte",
-                      options: [
-                        {
-                          label: "Front 1",
-                          value: "Front 1",
-                        },
-                        {
-                          label: "Front 2",
-                          value: "Front 2",
-                        },
-                      ],
-                    },
-                  ]}
-                />
-              </div>
-              <Breadcrumb className="asistencia__vistaFiltros"
-                items={[
-                  {
-                    title: <a>{entrenamiento}</a>,
-                  },
-                  {
-                    title: <a>{modulo}</a>,
-                  },
-                  {
-                    title: <a>{cohorte}</a>,
-                  },
-                ]}
-              />
+              <BotonesFiltrado/>
             </div>
             <div className="search">
               <Search placeholder="Buscar participante" value={searchTerm} onChange={(e) =>setSearchTerm(e.target.value) }  onSearch={onSearch} enterButton />
