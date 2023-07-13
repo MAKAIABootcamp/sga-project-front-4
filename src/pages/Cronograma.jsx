@@ -117,4 +117,4 @@ const Cronograma = () => {
   );
 };
 
-export default Cronograma;
+export default Cronograma
