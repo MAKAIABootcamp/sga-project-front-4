@@ -4,12 +4,10 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 // import PrivateRouter from './PrivateRouter'
 import NotFound from '../components/notFound/NotFound'
 import Login from '../pages/Login'
-import PanelAdministrador from '../pages/PanelAdministrador'
 import PerfilPage from '../pages/PerfilPage'
 import Calificaiones from '../components/Calificaciones/Calificaiones'
 import AsistenciaPage from '../pages/AsistenciaPage'
 import OlvidarContrasena from "../pages/OlvidarContrasena";
-import Login from "../pages/Login";
 import Cronograma from "../pages/Cronograma";
 import Layout from "../components/layout/Layout";
 import Panel from "../pages/Panel";
