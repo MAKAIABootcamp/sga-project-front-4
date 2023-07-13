@@ -12,6 +12,7 @@ import Cronograma from "../pages/Cronograma";
 import Layout from "../components/layout/Layout";
 import CalendarioConFechaActual from "../pages/CronogramaEstudiantes";
 import RecursosEducativosDocente from "../pages/RecursosEducativosDocente";
+import RecursosEducativos from "../components/recursosEducativos/client";
 const AppRouter = () => {
   return (
     <BrowserRouter>
@@ -26,6 +27,8 @@ const AppRouter = () => {
           <Route path='/asistencia' element={<AsistenciaPage/>}/>
           <Route path="/cronogramaestudiante" element={<CalendarioConFechaActual/>} />
           <Route path="/recursoseducativos" element={<RecursosEducativosDocente/>}></Route>
+          <Route path="/agregarrecursoseducativos/:tituloCurso" element={<RecursosEducativos />} />
+
         </Route>
           <Route path="*" element={<NotFound />} />
       </Routes>
