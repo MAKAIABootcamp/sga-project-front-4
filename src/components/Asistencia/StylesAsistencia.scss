@@ -54,10 +54,11 @@
             }
           }
         .calendar{
-            padding: 2rem;
             border-radius:  18px;
             background-color: #6a86b286;
             animation: aparecer-calendario 1s ease-in-out forwards;
+            position: relative;
+            left:2%
         }
     }
 
