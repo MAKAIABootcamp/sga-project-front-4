@@ -1,4 +1,4 @@
-
+import React from "react";
 import logo from "../assets/images/Logo-Bootcamp.png";
 import "../styles/login/Login.scss";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 
 const OlvidarContrasena = () => {
+
   const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
@@ -119,7 +120,7 @@ const OlvidarContrasena = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default OlvidarContrasena
+export default OlvidarContrasena;

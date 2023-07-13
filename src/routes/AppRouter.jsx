@@ -1,13 +1,12 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 // import DashboardRouter from './DashboardRouter'
 // import PublicRouter from './PublicRouter'
 // import PrivateRouter from './PrivateRouter'
-import NotFound from '../components/notFound/NotFound'
-import Login from '../pages/Login'
 import PerfilPage from '../pages/PerfilPage'
-import Calificaiones from '../components/Calificaciones/Calificaiones'
 import AsistenciaPage from '../pages/AsistenciaPage'
 import OlvidarContrasena from "../pages/OlvidarContrasena";
+import NotFound from "../components/notFound/NotFound";
+import Login from "../pages/Login";
 import Cronograma from "../pages/Cronograma";
 import Layout from "../components/layout/Layout";
 import Panel from "../pages/Panel";
@@ -42,12 +41,11 @@ const AppRouter = () => {
           <Route path='/plan' element={<PlanDeEstudios/>}/>
           <Route path='/notas' element={<Notas/>}/>
           <Route path='/recursos' element={<RecursosEstudiantes/>}/>
-          <Route path='/calificaciones' element={<Calificaiones/>} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-   </BrowserRouter>
-  )
-}
+    </BrowserRouter>
+  );
+};
 
-export default AppRouter
+export default AppRouter;
