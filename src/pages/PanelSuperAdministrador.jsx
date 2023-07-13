@@ -6,13 +6,20 @@ import "../styles/super-administrador/SuperAdmin.scss";
 import { Button, Modal } from "react-bootstrap";
 import FormRegisterAdmin from "../components/form_register_admin/FormRegisterAdmin";
 import { getAdmin, deleteAdmin } from "../services/getAdmin"
+import { listAdmin } from "../redux/actions/adminRegisterAction";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const PanelSuperAdministrador = () => {
   const [showModal, setShowModal] = useState(false);
-  const [administradores, setAdministradores] = useState([]);
+  const [administrador, setAdministradores] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredAdministradores, setFilteredAdministradores] = useState([]);
+  
+  const dispatch = useDispatch();
+  
+  const administradores = useSelector((store) => store.adminRegisterReducer.administradores);
+  console.log("eventos desde page estudiantes", administradores);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -25,11 +32,10 @@ const PanelSuperAdministrador = () => {
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
   };
+  
   useEffect(() => {
-    getAdmin().then((data) => {
-      setAdministradores(data);
-    });
-  }, []);
+    dispatch(listAdmin("administradores"));
+  }, [dispatch]);
 
   useEffect(() => {
     if (searchQuery) {
@@ -44,12 +50,13 @@ const PanelSuperAdministrador = () => {
     }
   }, [searchQuery, administradores]);
   
+  
 
   const handleEliminarAdmin = (id) => {
     deleteAdmin(id)
       .then((response) => {
         console.log('Administrador eliminado:', response);
-        // Actualizar la lista de administradores después de eliminar uno con éxito
+        // Actualizar la lista de administrador después de eliminar uno con éxito
         getAdmin().then((data) => {
           setAdministradores(data);
         });
@@ -87,10 +94,8 @@ const PanelSuperAdministrador = () => {
           <Modal.Body
             closeButton
             style={{
-              backgroundImage: `url(https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2023/03/Software-Developer-Programming-Computer.jpeg?fit=1200%2C801&quality=50&strip=all&ssl=1)`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
+              
+              backgroundColor:"#03203A"
             }}
           >
             <FormRegisterAdmin />
@@ -125,7 +130,7 @@ const PanelSuperAdministrador = () => {
       <td>{admin.tipo_documento}</td>
       <td>{admin.numero_documento}</td>
       <td>{admin.email}</td>
-      <td>{admin.contraseña}</td>
+      <td>{admin.contraseña.toString().replace(/./g, "*")}</td>
       <td>{admin.rol}</td>
       <td>
         <MdDeleteForever onClick={() => handleEliminarAdmin(admin.id)}/>

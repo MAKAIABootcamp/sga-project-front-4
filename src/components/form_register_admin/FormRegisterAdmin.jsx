@@ -1,43 +1,47 @@
 import React, { useEffect, useState } from "react";
 import "../../styles/form_register_admin/formRegisterAdmin.scss";
 import { Button, Modal } from "react-bootstrap";
-import { addAdmin, getAdmin } from "../../services/getAdmin";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addAdmin } from "../../redux/actions/adminRegisterAction";
 const FormRegisterAdmin = () => {
-  
-    const [administradores, setAdministradores] = useState({});
+    const [showPassword, setShowPassword] = useState(false);
+    const [admin, setAdmin] = useState({});
+    const dispatch = useDispatch();
+
+    const administradores = useSelector((store) => store.adminRegisterReducer.admin);
+  console.log("eventos desde page estudiantes", administradores);
 
       const handleChange= e => {
         const {name, value} = e.target;
-        setAdministradores(preveState=>({
+        setAdmin(preveState=>({
           ...preveState,
           [name]: value
         }))
-        console.log(administradores)
+        console.log(admin)
       }
       const handleAgregarAdmin = async () => {
         try {
-          const response = await addAdmin(administradores);
-          console.log('Administrador agregado:', response);
+          await dispatch(addAdmin("administradores", admin)); 
+          console.log('Administrador agregado correctamente');
         } catch (error) {
           console.error('Error al agregar administrador:', error);
         }
-      };
+      }
       
   return (
     <section className="container__form">
       <form className="formularioAdmin">
         <div className="formularioAdmin__title">
-          <h4>¡Registra los administradores del sistema!</h4>
+          <h4>¡Registra los admin del sistema!</h4>
         </div>
         <div className="formularioAdmin__labels">
           <div className="formularioAdmin__inputs">
             <h5>Nombre Completo</h5>
-            <input type="text" name="nombre_completo"  value={administradores.nombre_completo} onChange={handleChange} />
+            <input type="text" name="nombre_completo"  value={admin.nombre_completo} onChange={handleChange} />
           </div>
           <div className="formularioAdmin__inputs">
             <h5>Tipo de documento</h5>
-            <select className="select"  name="tipo_documento" value={administradores.tipo_documento} onChange={handleChange}>
+            <select className="select"  name="tipo_documento" value={admin.tipo_documento} onChange={handleChange}>
               <option selected>Selecciona tu tipo de documento</option>
               <option >Cédula</option>
               <option >Two</option>
@@ -45,15 +49,24 @@ const FormRegisterAdmin = () => {
           </div>
           <div className="formularioAdmin__inputs">
             <h5>Número de documento</h5>
-            <input type="number" name="numero_documento"   value={administradores.numero_documento} onChange={handleChange}/>
+            <input type="number" name="numero_documento"   value={admin.numero_documento} onChange={handleChange}/>
           </div>
           <div className="formularioAdmin__inputs">
             <h5>Email</h5>
-            <input type="email" name="email"  value={administradores.email} onChange={handleChange} />
+            <input type="email" name="email"  value={admin.email} onChange={handleChange} />
           </div>
           <div className="formularioAdmin__inputs">
             <h5>Contraseña</h5>
-            <input type="password" name="contraseña"   value={administradores.contraseña} onChange={handleChange}/>
+            <input
+  type={showPassword ? "text" : "password"}
+  name="contraseña"
+  value={admin.contraseña}
+  onChange={handleChange}
+/>
+<button type="button" onClick={() => setShowPassword(!showPassword)}>
+  Mostrar contraseña
+</button>
+
           </div>
           <div class="form-check">
             <h5>Rol</h5>
@@ -62,7 +75,7 @@ const FormRegisterAdmin = () => {
               type="radio"
               name="rol"
               value="administrador"
-              checked={administradores.rol === "administrador"}
+              checked={admin.rol === "administrador"}
               onChange={handleChange}
             />
             <label class="form-check-label" for="flexRadioDefault1">
@@ -75,11 +88,11 @@ const FormRegisterAdmin = () => {
               type="radio"
               name="rol"
               value="default"
-              checked={administradores.rol === "default"}
+              checked={admin.rol === "default"}
               onChange={handleChange}
             />
             <label class="form-check-label" for="flexRadioDefault1">
-              Default radio
+             Formador
             </label>
           </div>
           <div>
