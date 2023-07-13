@@ -1,9 +1,11 @@
 import dayjs from "dayjs";
-import { Input} from 'antd';
+import { Input } from "antd";
+import { Modal, Button } from "react-bootstrap";
 import { BsDownload } from "react-icons/bs";
-import { Table } from 'antd';
-import { Progress } from 'antd';
-import '../styles/admin_estudiantes/estudiantes.scss'
+import { Table } from "antd";
+import { Progress } from "antd";
+import "../styles/admin_estudiantes/estudiantes.scss";
+import NuevoEstudiante from "../components/nuevoEstudiante/NuevoEstudiante";
 import { useCallback, useEffect, useState } from "react";
 import ButtonsFiltro from "../components/buttonsFiltro/ButtonsFiltro";
 // import { utils, writeFileXLSX } from 'xlsx';
@@ -11,12 +13,10 @@ const { Search } = Input;
 const today = dayjs();
 // import AdminEstudiantes from '../components/adminEstudiantes/AdminEstudiantes'
 
-
-
-
 const Estudiantes = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [showModal, setShowModal] = useState(false);
   const [students, setStudents] = useState([
     {
       key: 1,
@@ -24,11 +24,9 @@ const Estudiantes = () => {
       apellido: "Sanmiguel",
       type_doc: "Cédula",
       doc: 10014053343,
-      email: 'example@example.com',
+      email: "example@example.com",
       entrenamiento: "Front-end",
       cohorte: "3",
-      
-
     },
     {
       key: 2,
@@ -36,7 +34,7 @@ const Estudiantes = () => {
       apellido: "Urrego",
       type_doc: "Cédula",
       doc: 10014053343,
-      email: 'example@example.com',
+      email: "example@example.com",
       entrenamiento: "Front-end",
       cohorte: "3",
     },
@@ -46,7 +44,7 @@ const Estudiantes = () => {
       apellido: "Vanegas",
       type_doc: "Cédula",
       doc: 10014053343,
-      email: 'example@example.com',
+      email: "example@example.com",
       entrenamiento: "Front-end",
       cohorte: "3",
     },
@@ -56,10 +54,9 @@ const Estudiantes = () => {
       apellido: "Cartagena",
       type_doc: "Cédula",
       doc: 10014053343,
-      email: 'example@example.com',
+      email: "example@example.com",
       entrenamiento: "Front-end",
       cohorte: "3",
-      
     },
     {
       key: 5,
@@ -67,14 +64,19 @@ const Estudiantes = () => {
       apellido: "Moreno",
       type_doc: "Cédula",
       doc: 10014053343,
-      email: 'example@example.com',
+      email: "example@example.com",
       entrenamiento: "Front-end",
       cohorte: "3",
-   
     },
   ]);
   const [fallas, setFallas] = useState(0);
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
   // const exportFile = useCallback(() => {
   //   const ws = utils.json_to_sheet(students);
   //   const wb = utils.book_new();
@@ -82,119 +84,127 @@ const Estudiantes = () => {
   //   writeFileXLSX(wb, 'Prueba.xlsx');
   // }, [students]);
 
-
-  
-
   useEffect(() => {
-    const filtered = students.filter((user) => (user.name).toLowerCase().includes(searchTerm.toLowerCase()));
-    setFilteredUsers(filtered)
+    const filtered = students.filter((user) =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredUsers(filtered);
   }, [searchTerm, students]);
 
-  const selectionType = 'checkbox';
+  const selectionType = "checkbox";
   const columns = [
     {
-      title: 'Nombre',
-      dataIndex: 'name',
-      render: (text) =>
-      <>
-        <span className="apodo">
-          {text.slice(0, 2)}
-        </span>
-        <a>{text}</a>
-      </>
+      title: "Nombre",
+      dataIndex: "name",
+      render: (text) => (
+        <>
+          <span className="apodo">{text.slice(0, 2)}</span>
+          <a>{text}</a>
+        </>
+      ),
     },
     {
-      title: 'Apellido',
-      dataIndex: 'apellido',
-   
-
+      title: "Apellido",
+      dataIndex: "apellido",
     },
     {
-      title: 'Tipo de documento',
-      dataIndex: 'type_doc',
+      title: "Tipo de documento",
+      dataIndex: "type_doc",
     },
     {
-      title: 'Documento',
-      dataIndex: 'doc',
+      title: "Documento",
+      dataIndex: "doc",
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
+      title: "Email",
+      dataIndex: "email",
     },
     {
-      title: 'Entrenamiento',
-      dataIndex: 'entrenamiento',
+      title: "Entrenamiento",
+      dataIndex: "entrenamiento",
     },
     {
-      title: 'Cohorte',
-      dataIndex: 'cohorte',
+      title: "Cohorte",
+      dataIndex: "cohorte",
     },
     {
-      title: 'Estado',
-      dataIndex: 'estado',
+      title: "Estado",
+      dataIndex: "estado",
     },
     {
-      title: 'Acciones',
-      dataIndex: 'estado',
+      title: "Acciones",
+      dataIndex: "estado",
     },
   ];
 
-
-
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-      setFallas(selectedRows.length)
+      console.log(
+        `selectedRowKeys: ${selectedRowKeys}`,
+        "selectedRows: ",
+        selectedRows
+      );
+      setFallas(selectedRows.length);
     },
-
   };
 
   const onSearch = (value) => console.log(value);
   return (
-    <div className="asistencia">
-      <div className="asistencia__calendar">
+    <div className="estudiantes">
         <div className="infoAsistencia">
           <div className="totalidad">
             <p>
               Total de estudiantes: <span>{students.length}</span>
             </p>
-
           </div>
 
           <div className="">
             <div>
-              <ButtonsFiltro/>
+              <ButtonsFiltro />
             </div>
             <div className="search">
-              <Search placeholder="Buscar participante" value={searchTerm} onChange={(e) =>setSearchTerm(e.target.value) }  onSearch={onSearch} enterButton />
-              
+              <Search
+                placeholder="Buscar participante"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onSearch={onSearch}
+                enterButton
+              />
+              <button className="button__agg" onClick={handleOpenModal}>
+                Agregar
+              </button>
               {/* <button className="btnDescarga" onClick={exportFile}>
                 <BsDownload />
               </button> */}
             </div>
+            <div></div>
           </div>
         </div>
-      </div>
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <NuevoEstudiante />
+        <div className="container__button">
+          <button className="button__cancelar" onClick={handleCloseModal}>
+            Cancelar
+          </button>
+        </div>
+      </Modal>
 
-      <div className="asistencia__table">
-        <Table className="tabla"
+      <div className="estudiantes__table">
+        <Table
+          className="tabla"
           rowSelection={{
             type: selectionType,
             ...rowSelection,
           }}
           columns={columns}
           dataSource={filteredUsers}
-
         />
       </div>
-      <div className="asistencia__enviar">
-        <button type="submit">
-          Enviar
-        </button>
+      <div className="estudiantes__enviar">
+        <button type="submit">Enviar</button>
       </div>
     </div>
   );
 };
 
-
-export default Estudiantes
+export default Estudiantes;

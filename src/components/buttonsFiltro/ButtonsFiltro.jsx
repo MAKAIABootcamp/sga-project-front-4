@@ -23,7 +23,7 @@ const ButtonsFiltro = () => {
         };
   return (
     <div>
-    <div className="select">
+    <div className="filters">
             <Select
               defaultValue="Entrenamiento"
               style={{
