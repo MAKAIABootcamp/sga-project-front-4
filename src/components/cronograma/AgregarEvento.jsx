@@ -4,6 +4,8 @@ import { Modal, Button } from "react-bootstrap";
 import { DateTime } from "luxon";
 import { useDispatch, useSelector } from "react-redux";
 import { addEvent } from "../../redux/actions/eventsActions";
+import '../../styles/cronograma/styleModal.scss';
+import Swal from "sweetalert2";
 
 const AgregarEvento = ({ show, onClose }) => {
 
@@ -40,14 +42,18 @@ const AgregarEvento = ({ show, onClose }) => {
       end: formattedEnd,
     };
 
-    setEvento(formattedEvento)
 
     console.log(evento);
-    dispatch(addEvent("eventos", evento));
+    dispatch(addEvent("eventos", formattedEvento));
+    Swal.fire(
+      'Buen trabajo!',
+      'Tu evento fue agregado con éxito!',
+      'success'
+    )
+    setTimeout(() => {
+      window.location.reload(); // Recargar la página después de 2 segundos
+    }, 1000);
 
-    // // Llamar a la función addEvent para realizar la solicitud POST
-    // const response = await addEvent(evento);
-    // console.log(response);
   };
 
   // useEffect(() => {
@@ -118,20 +124,16 @@ const AgregarEvento = ({ show, onClose }) => {
               </div>
             </div>
           </Form.Group>
-          {/* <button type="submit">enviar</button> */}
-          <Button variant="primary" type="submit">
-          Añadir evento
-          </Button>
+          <div className="buttons__actions">
+            <Button variant="primary" type="submit">
+            Añadir evento
+            </Button>
+            <Button variant="secondary" onClick={onClose}>
+              Cancelar
+            </Button>
+          </div>
         </Form>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
-          Cancelar
-        </Button>
-        <Button variant="primary" type="submit">
-          Añadir evento
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 };

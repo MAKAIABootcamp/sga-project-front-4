@@ -10,10 +10,16 @@ import AgregarEvento from "../components/cronograma/AgregarEvento";
 import { getEvents } from "../services/getEvents";
 import { useDispatch, useSelector } from "react-redux";
 import { listEvents } from "../redux/actions/eventsActions";
+import { Button } from "react-bootstrap";
+import EditarEvento from "../components/cronograma/EditarEvento";
 
 const Cronograma = () => {
   // Variable de estado para controlar la apertura y el cierre del modal
   const [showModal, setShowModal] = useState(false);
+  const [showModalEdit, setShowModalEdit] = useState(false);
+  const [eventoSeleccionado, setEventoSeleccionado] = useState({});
+
+
   const dispatch = useDispatch();
   const eventos = useSelector((store) => store.eventsReducer.eventos);
   console.log("eventos desde page estudiantes", eventos);
@@ -23,9 +29,26 @@ const Cronograma = () => {
     setShowModal(true);
   };
 
+  const handleEventClick = (event) => {
+    // Abre el modal
+    // setShowModal(true);
+    console.log(event)
+    let eventoSeleccionado = {
+      id: event.event.id,
+      title: event.event.title,
+      start: event.event.startStr,
+      end: event.event.endStr
+    }
+    setEventoSeleccionado(eventoSeleccionado)
+    setShowModalEdit(true);
+  };
+
   // Para cerrar el modal
   const handleModalClose = () => {
     setShowModal(false);
+  };
+  const handleModalCloseEdit = () => {
+    setShowModalEdit(false);
   };
 
   // Para agregar un evento, acá debería ir la lógica del post a la base de datos, revisar el getAPI de full calendar
@@ -51,7 +74,9 @@ const Cronograma = () => {
     <section>
       <div className="container" style={{ padding: "8rem" }}>
         <div id="calendar" className="custom-calendar">
-          <button onClick={handleDayClick}>Agregar evento</button>
+        <div className="d-flex justify-content-end">
+          <Button onClick={handleDayClick} variant="primary" className="mb-2">Agregar evento</Button>
+        </div>
           <FullCalendar
             plugins={[
               dayGridPlugin,
@@ -70,6 +95,7 @@ const Cronograma = () => {
             events={eventos}
             editable={true}
             dateClick={handleDayClick}
+            eventClick={handleEventClick}
             slotLabelFormat={{
               hour: "numeric",
               hour12: true,
@@ -80,7 +106,11 @@ const Cronograma = () => {
       <AgregarEvento
         show={showModal}
         onClose={handleModalClose}
-        onAgregarEvento={handleAgregarEvento}
+      />
+      <EditarEvento
+        show={showModalEdit}
+        onClose={handleModalCloseEdit}
+        eventoSeleccionado={eventoSeleccionado}
       />
     </section>
   );
