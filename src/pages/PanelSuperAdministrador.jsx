@@ -9,6 +9,7 @@ import FormRegisterAdmin from "../components/form_register_admin/FormRegisterAdm
 import { deleteAdmin, listAdmin } from "../redux/actions/adminRegisterAction";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAdministrador } from "../redux/reducers/adminRegisterReducer";
+import Swal from "sweetalert2";
 
 
 const PanelSuperAdministrador = () => {
@@ -51,18 +52,28 @@ const PanelSuperAdministrador = () => {
   
 
   const handleEliminarAdmin = (id) => {
-    return (dispatch) => {
-      deleteAdmin(id)
-        .then((response) => {
-          console.log('Administrador eliminado:', response);
-          listAdmin().then((data) => {
-            dispatch(deleteAdministrador(data));
-          });
-        })
-        .catch((error) => {
-          console.error('Error al eliminar administrador:', error);
-        });
-    };
+    dispatch(deleteAdmin("administradores", id));
+    Swal.fire(
+      'Buen trabajo!',
+      'El administrador fue eliminado con éxito!',
+      'success'
+    )
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+
+    // return (dispatch) => {
+    //   deleteAdmin(id)
+    //     .then((response) => {
+    //       console.log('Administrador eliminado:', response);
+    //       listAdmin().then((data) => {
+    //         dispatch(deleteAdministrador(data));
+    //       });
+    //     })
+    //     .catch((error) => {
+    //       console.error('Error al eliminar administrador:', error);
+    //     });
+    // };
   }
  
 
@@ -135,7 +146,7 @@ const PanelSuperAdministrador = () => {
       <td>{admin.contraseña}</td>
       <td>{admin.rol}</td>
       <td>
-        <MdDeleteForever onClick={() => handleEliminarAdmin(administradores.id)}/>
+        <MdDeleteForever onClick={() => handleEliminarAdmin(admin.id)}/>
         <CiEdit />
       </td>
           </tr>

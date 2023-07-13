@@ -16,7 +16,9 @@ const administradorSlice = createSlice({
             state.administradores = [...state.administradores, action.payload];
         },
         deleteAdministrador: (state, action) => {
-            state.administradores = [...state.administradores, action.payload];
+            state.eventos = state.eventos.filter(
+                (evento) => evento.id !== action.payload
+              );
           },
         
     }

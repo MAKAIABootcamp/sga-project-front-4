@@ -4,6 +4,7 @@ import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addAdmin } from "../../redux/actions/adminRegisterAction";
 import { AiOutlineEye } from "react-icons/ai";
+import Swal from "sweetalert2";
 const FormRegisterAdmin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [admin, setAdmin] = useState({});
@@ -22,13 +23,17 @@ const FormRegisterAdmin = () => {
     }));
     console.log(admin);
   };
-  const handleAgregarAdmin = async () => {
-    try {
-      await dispatch(addAdmin("administradores", admin));
-      console.log("Administrador agregado correctamente");
-    } catch (error) {
-      console.error("Error al agregar administrador:", error);
-    }
+  const handleAgregarAdmin =  () => {
+      dispatch(addAdmin("administradores", admin));
+      Swal.fire(
+        'Buen trabajo!',
+        'El administrador fue agregado con éxito!',
+        'success'
+      )
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+   
   };
 
   return (
