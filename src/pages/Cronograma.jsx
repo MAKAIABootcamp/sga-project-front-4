@@ -9,6 +9,8 @@ import "../styles/cronograma/Cronograma.scss";
 import AgregarEvento from "../components/cronograma/AgregarEvento";
 import { useDispatch, useSelector } from "react-redux";
 import { listEvents } from "../redux/actions/eventsActions";
+import { Button } from "react-bootstrap";
+import EditarEvento from "../components/cronograma/EditarEvento";
 
 const Cronograma = () => {
   const dispatch = useDispatch();
