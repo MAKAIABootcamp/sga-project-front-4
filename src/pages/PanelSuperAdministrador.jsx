@@ -5,9 +5,10 @@ import { CiEdit } from "react-icons/ci";
 import "../styles/super-administrador/SuperAdmin.scss";
 import { Button, Modal } from "react-bootstrap";
 import FormRegisterAdmin from "../components/form_register_admin/FormRegisterAdmin";
-import { getAdmin, deleteAdmin } from "../services/getAdmin"
-import { listAdmin } from "../redux/actions/adminRegisterAction";
+// import { getAdmin, deleteAdmin } from "../services/getAdmin"
+import { deleteAdmin, listAdmin } from "../redux/actions/adminRegisterAction";
 import { useDispatch, useSelector } from "react-redux";
+import { deleteAdministrador } from "../redux/reducers/adminRegisterReducer";
 
 
 const PanelSuperAdministrador = () => {
@@ -33,9 +34,7 @@ const PanelSuperAdministrador = () => {
     setSearchQuery(e.target.value);
   };
   
-  useEffect(() => {
-    dispatch(listAdmin("administradores"));
-  }, [dispatch]);
+
 
   useEffect(() => {
     if (searchQuery) {
@@ -50,23 +49,26 @@ const PanelSuperAdministrador = () => {
     }
   }, [searchQuery, administradores]);
   
-  
 
   const handleEliminarAdmin = (id) => {
-    deleteAdmin(id)
-      .then((response) => {
-        console.log('Administrador eliminado:', response);
-        // Actualizar la lista de administrador después de eliminar uno con éxito
-        getAdmin().then((data) => {
-          setAdministradores(data);
+    return (dispatch) => {
+      deleteAdmin(id)
+        .then((response) => {
+          console.log('Administrador eliminado:', response);
+          listAdmin().then((data) => {
+            dispatch(deleteAdministrador(data));
+          });
+        })
+        .catch((error) => {
+          console.error('Error al eliminar administrador:', error);
         });
-      })
-      .catch((error) => {
-        console.error('Error al eliminar administrador:', error);
-      });
-  };
+    };
+  }
+ 
 
-  
+  useEffect(() => {
+    dispatch(listAdmin("administradores"));
+  }, [dispatch]);
 
   return (
     <main id="main" className="main__panel">
@@ -95,7 +97,7 @@ const PanelSuperAdministrador = () => {
             closeButton
             style={{
               
-              backgroundColor:"#03203A"
+              backgroundColor:"gray"
             }}
           >
             <FormRegisterAdmin />
@@ -130,10 +132,10 @@ const PanelSuperAdministrador = () => {
       <td>{admin.tipo_documento}</td>
       <td>{admin.numero_documento}</td>
       <td>{admin.email}</td>
-      <td>{admin.contraseña.toString().replace(/./g, "*")}</td>
+      <td>{admin.contraseña}</td>
       <td>{admin.rol}</td>
       <td>
-        <MdDeleteForever onClick={() => handleEliminarAdmin(admin.id)}/>
+        <MdDeleteForever onClick={() => handleEliminarAdmin(administradores.id)}/>
         <CiEdit />
       </td>
           </tr>

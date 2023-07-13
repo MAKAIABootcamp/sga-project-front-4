@@ -26,14 +26,14 @@ export const getAdmin= async () => {
 //     }
 //   };
 
-  export const deleteAdmin = async (id) => {
-    try {
-      const response = await axios.delete(`${URL_API}/${id}`);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  };
+  // export const deleteAdmin = async (id) => {
+  //   try {
+  //     const response = await axios.delete(`${URL_API}/${id}`);
+  //     return response.data;
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // };
 
   
   

@@ -1,8 +1,8 @@
 import axios from "axios";
-import { addAdministrador, setAdministradores } from "../reducers/adminRegisterReducer";
+import { addAdministrador, deleteAdministrador, setAdministradores } from "../reducers/adminRegisterReducer";
 
 
-const URL = 'https://backend-sga-icqb.vercel.app/';
+const URL = 'http://localhost:3000/';
 
 export const listAdmin = (endpoint) => {
   return async (dispatch) => {
@@ -16,10 +16,10 @@ export const listAdmin = (endpoint) => {
   }
 }
 
-export const addAdmin = (endpoint, administrador) => {
+export const addAdmin = (endpoint, administradores) => {
     return async (dispatch) => {
       try {
-        const { data } = await axios.post(`${URL}${endpoint}`, administrador);
+        const { data } = await axios.post(`${URL}${endpoint}`, administradores);
         console.log(data);
         dispatch(addAdministrador(data));
       } catch (error) {
@@ -27,3 +27,14 @@ export const addAdmin = (endpoint, administrador) => {
       }
     }
 }  
+ 
+
+export const deleteAdmin = async (id) => {
+  try {
+    const { data } = await axios.delete(`${URL}${id}`);
+    console.log(data);
+      dispatch(deleteAdministrador(data));
+  } catch (error) {
+    console.log(error);
+  }
+};
