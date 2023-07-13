@@ -2,7 +2,7 @@
 @import "../index.scss";
 
 button {
-  @include buttonSquare3
+  @include buttonSquare3;
 }
 
 ;
@@ -139,5 +139,25 @@ button {
 
 .card {
   width: 300px; /* Ajusta el ancho de cada card según tus necesidades */
-  margin-right: 10px; /* Espacio entre las cards */
+  margin-right: 10px; 
+  margin-left: 10px; /* Espacio entre las cards */
+}
+.card-body{
+  h5{
+    @include Texto1($color: 'azul-oscuro', $fontWeight: 'grueso');
+    font-size: 32px;
+  
+
+  }
+  p{
+    @include Texto1($color: 'gris', $fontWeight: 'grueso');
+
+  }
+  display: flex;
+  flex-direction: column;
+  padding: 39px;
+  gap: 34px;
+  button{
+    align-self: center;
+  }
 }

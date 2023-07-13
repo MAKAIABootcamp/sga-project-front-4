@@ -63,11 +63,13 @@ const RecursosEducativos = ({ tituloCurso }) => {
   };
   const storedResponses = localStorage.getItem('serverResponse');
   const parsedResponses = storedResponses ? JSON.parse(storedResponses) : [];
+  console.log(parsedResponses);
+
 
   return (
     <div style={{ marginTop: '54px' }} className='inputs'>
       <div id='divisionprincipal'>
-        <form onSubmit={handleSubmit} class="division">
+        <form onSubmit={handleSubmit} className="division">
           <section>
             <h1>Recursos Educativos</h1>
           </section>
@@ -103,17 +105,20 @@ const RecursosEducativos = ({ tituloCurso }) => {
           </section>
 
         </form>   
+        
         <div className="card-container inputs__respuesta">
-    {Array.isArray(parsedResponses) &&
-      parsedResponses.map((response, index) => (
-        <div className="card" key={index}>
-          <h3>Respuesta {index + 1}</h3>
-          <p>Modulo: {response.modulo}</p>
-          <p>Tipo de Recurso: {response.tipoRecurso}</p>
-          {/* Mostrar otros campos almacenados */}
-        </div>
-      ))}
-  </div>
+  {Array.isArray(parsedResponses) &&
+    parsedResponses.map((response, index) => (
+      
+      <div className="card" key={index}>
+        <h3>Respuesta {index + 1}</h3>
+        <p>Modulo: {response.modulo}</p>
+        <p>Tipo de Recurso: {response.tipoRecurso}</p>
+        {/* Mostrar otros campos almacenados */}
+      </div>
+    ))}
+</div> {/* Move this closing div tag here */}
+
       </div>
 
       {/* <div id='logo' > <img src='../../../src/assets/images/logoMakaia.png'alt="logo makaia"></img></div> */}

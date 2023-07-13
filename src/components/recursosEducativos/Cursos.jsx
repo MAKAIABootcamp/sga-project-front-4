@@ -5,11 +5,8 @@ import "../../styles/recursoseducativos/cursos.scss";
 const CursoCard = ({ curso, handleCursoClick }) => {
   return (
     <div className="card" style={{ marginTop: '106px' }}>
-      <img src={curso.imagen} className="card-img-top" alt={curso.titulo} />
       <div className="card-body">
         <h5 className="card-title">{curso.titulo}</h5>
-        <p className="card-text">{curso.descripcion}</p>
-        <p className="card-text">Duración: {curso.duracion}</p>
         <p className="card-text">Instructor: {curso.instructor}</p>
         <button onClick={() => handleCursoClick(curso.titulo)}>Agregar Material</button>
       </div>
