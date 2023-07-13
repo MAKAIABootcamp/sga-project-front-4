@@ -30,6 +30,10 @@ const Aside = ({hamburguerMenu,}) => {
       url: "",
     },
     {
+      name: "Registro admin",
+      url: "/registro-administradores",
+    },
+    {
       name: "Perfil",
       url: "/perfil",
     },
