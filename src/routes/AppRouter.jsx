@@ -12,6 +12,10 @@ import Layout from "../components/layout/Layout";
 import Panel from "../pages/Panel";
 import Estudiantes from "../pages/Estudiantes";
 import PanelSuperAdministrador from "../pages/PanelSuperAdministrador";
+import PlanDeEstudios from "../pages/PlanDeEstudios";
+import Notas from "../pages/Notas";
+import RecursosEstudiantes from "../pages/RecursosEstudiantes";
+
 
 
 const AppRouter = () => {
@@ -31,8 +35,12 @@ const AppRouter = () => {
           <Route path='/perfil' element={<PerfilPage/>}/>
           {/* MODULO REGISTRO SUPER ADMINISTRADOR */}
           <Route path="/registro-administradores" element={<PanelSuperAdministrador />} />
-          {/* MODULO DE  FORMADOR*/}
+          {/* MODULO DE FORMADOR*/}
           <Route path='/asistencia' element={<AsistenciaPage/>}/>
+          {/* MODULO DE ESTUDIANTE*/}
+          <Route path='/plan' element={<PlanDeEstudios/>}/>
+          <Route path='/notas' element={<Notas/>}/>
+          <Route path='/recursos' element={<RecursosEstudiantes/>}/>
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

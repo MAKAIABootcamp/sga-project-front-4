@@ -19,7 +19,11 @@ const Aside = ({hamburguerMenu,}) => {
     },
     {
       name: "Recursos educativos",
-      url: "",
+      url: "/recursos",
+    },
+    {
+      name: "Notas",
+      url: "/notas",
     },
     {
       name: "Seguimiento académico",
@@ -27,7 +31,7 @@ const Aside = ({hamburguerMenu,}) => {
     },
     {
       name: "Plan de estudios",
-      url: "",
+      url: "/plan",
     },
     {
       name: "Perfil",
