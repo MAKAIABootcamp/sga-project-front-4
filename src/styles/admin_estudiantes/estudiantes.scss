@@ -1,0 +1,178 @@
+@import '../../styles/index.scss';
+
+.asistencia {
+    display: flex;
+    flex-direction: column;
+    background-color: $colorFondoContenido;
+    padding: 2% 4%;
+    width: 100%;
+    margin-top: 46px;
+
+    h2 {
+        display: flex;
+        justify-content: center;
+        color: #676767;
+        font-size: 2rem;
+    }
+
+    &__calendar {
+        display: flex;
+        margin: 1rem 10%;
+        justify-content: space-between;
+        align-items: center;
+
+        .infoAsistencia {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .totalidad {
+                display: flex;
+                width: 100%;
+                margin-bottom: 2rem;
+                justify-content: space-between;
+
+                span {
+                    margin-left: 1rem;
+                    font-size: large;
+                    font-weight: 700;
+                    color: #184899;
+                    font-family: "Nunito", sans-serif;
+                }
+            }
+
+            
+
+
+        }
+        @keyframes aparecer-calendario{
+            0% {
+              transform: translateY(100%);
+              opacity: 0;
+            }
+            100% {
+              transform: translateY(0);
+              opacity: 1;
+            }
+          }
+        .calendar{
+            padding: 2rem;
+            border-radius:  18px;
+            background-color: #6a86b286;
+            animation: aparecer-calendario 1s ease-in-out forwards;
+        }
+    }
+
+    &__vistaFiltros {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1.6rem;
+
+        a {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+    }
+
+    .apodo {
+        margin-right: 1rem;
+        text-transform: uppercase;
+        padding: .7rem;
+        border-radius: 100px;
+        border: 3px solid #0d6efd;
+    }
+
+    .search {
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 25%;
+        width: 100%;
+
+        .btnDescarga {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5%;
+            border: none;
+            background-color: #0d6efd;
+            border-radius: 5px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #0b5ed7;
+                transition: .1s ease-in-out;
+            }
+            &:active{
+                transform: scale(.9);
+                transition: .09s ease-in-out ;
+            }
+        }
+
+        .input {
+            display: flex;
+            width: 100%;
+        }
+    }
+
+    &__enviar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1% 2.5%;
+            border: none;
+            background-color: #0d6efd;
+            border-radius: 5px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #0b5ed7;
+                transition: .1s ease-in-out;
+            }
+            &:active{
+                transform: scale(.9);
+                transition: .09s ease-in-out ;
+            }
+        }
+    }
+
+    &__table {
+        .ant-table-thead>tr {
+            cursor: pointer;
+            background-color: red !important;
+        }
+        
+
+        .ant-table-tbody>tr {
+            cursor: pointer;
+
+            .ant-checkbox-wrapper {
+                padding-left: 1.5rem;
+            }
+
+        }
+
+        .ant-table-tbody>tr:hover .ant-checkbox-wrapper {
+            padding-left: 1.5rem;
+            border-left: 3px solid #0b5ed7;
+            height: 3.6rem;
+            transition: .1s ease-in-out;
+        }
+      
+    }
+    
+}
