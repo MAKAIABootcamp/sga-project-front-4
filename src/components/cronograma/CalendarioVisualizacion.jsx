@@ -8,7 +8,7 @@ import esLocale from "@fullcalendar/core/locales/es";
 import "../../styles/cronograma/Cronograma.scss";
 import { getEvents } from "../../services/getEvents";
 
-const Cronograma = () => {
+const CalendarioVisualizacion = () => {
   const [eventos, setEventos] = useState([]);
   const [selectedWeek, setSelectedWeek] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
@@ -119,7 +119,7 @@ const Cronograma = () => {
   );
 };
 
-export default Cronograma;
+export default CalendarioVisualizacion;
 
 
 
