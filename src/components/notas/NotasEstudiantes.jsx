@@ -84,13 +84,15 @@ const NotasEstudiantes = () => {
       <aside className="notas__porcentajes">
         <section className="notas__actual">
         <Card title="Última calificación" style={{ width: '100%' }}>
+        <Tooltip title="Sprint 2 - aerolíneas">
           <Progress type="circle" percent={90} className="porcentaje2"/>
             <p>Sprint 2 - aerolíneas</p>
+        </Tooltip>
         </Card>
         </section>
 
         <section className="notas__promedio">
-        <Card title="Nota promedio" style={{ width: '100%' }}>
+        <Card title="Nota promedio" style={{ width: '100%' }} extra={<select><option value="1">Fundamentos</option><option value="2">Profundización</option></select>}>
           <Tooltip title="2 Sprints completados de 4">
           <Progress
             percent={80}
