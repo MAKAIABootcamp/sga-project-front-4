@@ -38,6 +38,10 @@ const Aside = ({hamburguerMenu,}) => {
       url: "/registro-administradores",
     },
     {
+      name: "Recursos Formador",
+      url: "/recursoseducativos",
+    },
+    {
       name: "Perfil",
       url: "/perfil",
     },

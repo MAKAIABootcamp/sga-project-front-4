@@ -15,9 +15,9 @@ import PanelSuperAdministrador from "../pages/PanelSuperAdministrador";
 import PlanDeEstudios from "../pages/PlanDeEstudios";
 import Notas from "../pages/Notas";
 import RecursosEstudiantes from "../pages/RecursosEstudiantes";
-
-
-
+import CalendarioConFechaActual from "../pages/CronogramaEstudiantes";
+import RecursosEducativosDocente from "../pages/RecursosEducativosDocente";
+import RecursosEducativos from "../components/recursosEducativos/client";
 const AppRouter = () => {
   return (
     <BrowserRouter>
@@ -37,10 +37,14 @@ const AppRouter = () => {
           <Route path="/registro-administradores" element={<PanelSuperAdministrador />} />
           {/* MODULO DE FORMADOR*/}
           <Route path='/asistencia' element={<AsistenciaPage/>}/>
+          <Route path="/recursoseducativos" element={<RecursosEducativosDocente/>}></Route>
+          <Route path="/agregarrecursoseducativos/:tituloCurso" element={<RecursosEducativos />} />
           {/* MODULO DE ESTUDIANTE*/}
           <Route path='/plan' element={<PlanDeEstudios/>}/>
           <Route path='/notas' element={<Notas/>}/>
           <Route path='/recursos' element={<RecursosEstudiantes/>}/>
+          <Route path="/cronogramaestudiante" element={<CalendarioConFechaActual/>} />
+
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
