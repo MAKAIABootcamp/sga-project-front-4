@@ -6,8 +6,6 @@
     background-color: $colorFondoContenido;
     height: auto;
     padding: 2%;
-    width: 100%;
-    margin-top: 60px;
 
     h3{
         font-size: 24px;
@@ -24,7 +22,7 @@
     &__img{
         display: flex;
         width: 50%;
-        height: 54vh;
+        height: 45vh;
         background-color: $colorSecundario;
         flex-direction: column;
         align-items: center;

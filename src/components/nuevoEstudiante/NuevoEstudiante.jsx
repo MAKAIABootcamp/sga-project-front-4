@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
-import "../../components/nuevoEstudiante/nuevoEstudiante.scss"
+import "./nuevoEstudiante.scss"
 // import { Button, Input } from 'semantic-ui-react'
 
 const NuevoEstudiante = () => {
@@ -43,7 +43,7 @@ const NuevoEstudiante = () => {
 
   return (
     <main className="main">
-      <h1 className="title_añadir_estudiante">Añadir estudiante</h1>
+      <h1>Añadir estudiante</h1>
       <Formik
         initialValues={{
           nombres: "",
