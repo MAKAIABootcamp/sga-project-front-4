@@ -28,17 +28,23 @@ $tipografiaPrincipal: 'Poppins', sans-serif;
     transition: all 0.3s;
 }
 
-.main {
-    display: block;
-}
-@media (min-width: 1200px) {
-    #main, #footer {
-      margin-left: 300px;
-    }
+// main {
+//     display: block;
+// }
+
+// @media (min-width: 1200px){
+// #main {
+//     margin-left: 300px;
+// }
+// }
+
+
+.main-with-aside {
+    margin-left: 300px; /* Margen izquierdo cuando el aside está presente */
+  }
+  
+  .main-full-width {
+    margin-left: 0; /* Margen izquierdo cero cuando el aside está oculto */
   }
 
-  @media (min-width: 1200px){
-  .toggle-sidebar #main {
-      margin-left: 0;
-  }
-}
+

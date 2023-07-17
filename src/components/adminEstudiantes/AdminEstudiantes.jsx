@@ -29,7 +29,7 @@ const AdminEstudiantes = () => {
   const [open, setOpen] = useState(false)
 
   return (
-    <>
+    <div>
       <section className="buttons">
         <div>
           <Select options={cohorte} placeholder="Cohorte" color="green" />
@@ -176,7 +176,7 @@ const AdminEstudiantes = () => {
           </Table.Body>
         </Table>
       </section>
-    </>
+    </div>
   );
 };
 

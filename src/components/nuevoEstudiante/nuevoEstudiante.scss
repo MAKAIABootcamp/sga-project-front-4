@@ -1,68 +1,85 @@
-.main {
-    background-color: #337cb7;
-    color: white;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 1rem;
+
+  
+ .main {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(
+    360deg,
+    hsl(208deg 90% 12%) 0%,
+    hsl(205deg 72% 18%) 15%,
+    hsl(203deg 69% 23%) 22%,
+    hsl(202deg 67% 26%) 28%,
+    hsl(202deg 66% 29%) 33%,
+    hsl(201deg 66% 32%) 37%,
+    hsl(201deg 65% 35%) 42%,
+    hsl(201deg 65% 37%) 46%,
+    hsl(201deg 65% 39%) 50%,
+    hsl(200deg 65% 42%) 54%,
+    hsl(200deg 64% 44%) 58%,
+    hsl(200deg 64% 46%) 63%,
+    hsl(200deg 64% 47%) 67%,
+    hsl(200deg 64% 49%) 72%,
+    hsl(200deg 67% 51%) 78%,
+    hsl(200deg 71% 53%) 85%,
+    hsl(200deg 76% 54%) 100%
+  );
+  box-shadow: 0 4px 8px rgba(106, 179, 238, 0.5);
+  border-radius: 5px;
+  }
+  
+  
+  .title_añadir_estudiante {
+    font-size: 30px;
+    margin-bottom: 1rem;
     font-weight: 400;
-    margin-top: 10%;
-    margin-left: 10%;
-}
+    color: black;
+  }
+  
 
-input, select{
+  
+  input,
+  select {
     margin: 5px;
-    gap: 5px
-}
+    gap: 5px;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    width: 172px;
+  }
+  
+  .names,
+  .document,
+  .email,
+  .teléfono,
+  .dirección,
+  .curso,
+  .cohorte,
+  .edad {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 7px;
 
-.names{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.document{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.email{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.teléfono{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.dirección{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.curso{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.cohorte{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-.edad{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.registro{
-    display: flex;
-    align-items: center;
-    position: relative;
-    left: 40%;
-    margin-top: 3%;
-}
-
+    h2 {
+        font-size: 20px;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: black;
+      }
+  }
+  
+  button.registro {
+    padding: 0.5rem 1rem;
+    background-color: #25ABBC;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 29px;
+    width: 30%;
+  }
+  
+  .error-message {
+    color:red;
+  }
