@@ -9,7 +9,7 @@ import { Table } from 'antd';
 import { Progress } from 'antd';
 import './StylesAsistencia.scss'
 import { useCallback, useEffect, useState } from "react";
-// import { utils, writeFileXLSX } from 'xlsx';
+import { utils, writeFileXLSX } from 'xlsx';
 import BotonesFiltrado from "./BtnFintrado/BotonesFiltrado";
 
 

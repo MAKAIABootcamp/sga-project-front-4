@@ -7,6 +7,7 @@ import { Progress } from "antd";
 import "../styles/admin_estudiantes/estudiantes.scss";
 import NuevoEstudiante from "../components/nuevoEstudiante/NuevoEstudiante";
 import { useCallback, useEffect, useState } from "react";
+import BotonesFiltrado from "../components/Asistencia/BtnFintrado/BotonesFiltrado";
 // import ButtonsFiltro from "../components/buttonsFiltro/ButtonsFiltro";
 // import { utils, writeFileXLSX } from 'xlsx';
 const { Search } = Input;
@@ -160,7 +161,7 @@ const Estudiantes = () => {
 
           <div className="">
             <div>
-              <ButtonsFiltro />
+              <BotonesFiltrado />
             </div>
             <div className="search">
               <Search
