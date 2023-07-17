@@ -9,8 +9,8 @@ button {
 
 .inputs {
     margin-top: 110px;
-    margin-left: inherit;
-    padding-left: 11%;
+
+
 
     h1 {
         font-weight: bolder;
@@ -30,10 +30,18 @@ button {
 
     select {
         background-color: $colorFondoContenido;
+
     }
-    option{
+
+    option {
         background-color: $colorBotonSecundario;
         color: $colorFondoContenido;
+
+        select#mySelect option:selected {
+            /* Estilos para la opción seleccionada */
+            background-color: $colorBotonExcel;
+            color: $colorFondoContenido;
+        }
     }
 
     form {
@@ -63,21 +71,23 @@ button {
         display: flex;
         padding-top: 10px;
         align-items: center;
-
-        width: initial;
-
-
     }
 
     input#archivo {
-
         border: solid 2px $colorFondoContenido;
+        width: initial;
 
     }
 
     button#botonparasubirarchivo {
-
         margin-top: 10px;
-
     }
+}
+
+#inputs__titulo__responsive {
+    h1 {
+        font-size: large;
+    }
+
+
 }

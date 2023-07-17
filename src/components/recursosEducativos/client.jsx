@@ -67,7 +67,7 @@ const RecursosEducativos = ({ tituloCurso }) => {
     
         <div id="divisionprincipal">
           <form onSubmit={handleSubmit} className="division">
-            <section style={{ backgroundColor: " #B5B2B2", padding: "10px 20px", borderRadius: "5px" }} className='inputs__titulo'>
+            <section style={{ backgroundColor: " #B5B2B2", padding: "10px 20px", borderRadius: "5px" }} className='inputs__titulo' id="inputs__titulo__responsive">
               <h1>Material de estudio</h1>
             </section>
             <div className="inputs__input">
@@ -76,7 +76,7 @@ const RecursosEducativos = ({ tituloCurso }) => {
             </div>
             <div className="inputs__input">
               <label htmlFor="tipoRecurso">Tipo de Recurso:</label>
-              <select id="tipoRecurso" value={tipoRecurso} onChange={handleTipoRecursoChange}>
+              <select  value={tipoRecurso} onChange={handleTipoRecursoChange}id="mySelect" onchange="applyStyles()">
                 <option value="grabacion">Grabación de Clase</option>
                 <option value="diapositivas">Diapositivas de Clase</option>
                 <option value="lectura">Material de Lectura</option>
@@ -125,12 +125,6 @@ const RecursosEducativos = ({ tituloCurso }) => {
 
       <h1>Material de estudio</h1>
 </div>
-
-
-      <div>
-        <input type="text" />
-        <button type="submit"></button>
-      </div>
       <section>
         <h2>Diapositivas de la clase</h2>
         <label htmlFor="diapositivasInput">
