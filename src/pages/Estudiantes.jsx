@@ -7,7 +7,7 @@ import { Progress } from "antd";
 import "../styles/admin_estudiantes/estudiantes.scss";
 import NuevoEstudiante from "../components/nuevoEstudiante/NuevoEstudiante";
 import { useCallback, useEffect, useState } from "react";
-import ButtonsFiltro from "../components/buttonsFiltro/ButtonsFiltro";
+// import ButtonsFiltro from "../components/buttonsFiltro/ButtonsFiltro";
 // import { utils, writeFileXLSX } from 'xlsx';
 const { Search } = Input;
 const today = dayjs();

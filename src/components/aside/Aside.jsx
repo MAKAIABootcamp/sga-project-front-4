@@ -15,15 +15,15 @@ const Aside = ({hamburguerMenu,}) => {
     },
     {
       name: "Asistencia",
-      url: "",
+      url: "/asistencia",
     },
     {
       name: "Recursos educativos",
       url: "/recursos",
     },
     {
-      name: "Notas",
-      url: "/notas",
+      name: "Calificaciones",
+      url: "/calificaciones",
     },
     {
       name: "Seguimiento académico",

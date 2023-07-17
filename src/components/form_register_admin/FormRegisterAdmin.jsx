@@ -55,7 +55,7 @@ const FormRegisterAdmin = () => {
           <div className="formularioAdmin__inputs">
             <h5>Tipo de documento</h5>
             <select
-              className="select"
+              className="select__form_register"
               name="tipo_documento"
               value={admin.tipo_documento}
               onChange={handleChange}
