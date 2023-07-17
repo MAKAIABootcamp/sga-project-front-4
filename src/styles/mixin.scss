@@ -1,18 +1,11 @@
-// .clase-ejemplo {
-//     @include Texto1($color: 'azul-oscuro', $fontSize: 'grande');
-//   }
-  
-//   .otra-clase {
-//     @include Texto1($color: 'gris', $fontSize2: 'pequeno');
-//   }
+
 @import "./index.scss";
 @mixin Texto1($color: null, $fontWeight: null) {
-    color: $gray5;
+    color:  #414141;;
     font-family: $tipografiaPrincipal;
     font-style:light;
     font-weight: 300;
     font-size: 14px;
-    line-height: 16px;
     text-align: center;
     margin: 0px;
     
@@ -35,13 +28,15 @@
     }
 
   }
-  @mixin buttonSquare3($color: null,) {
-
+  @mixin buttonSquare3($color:null) {
+    box-shadow: 0 0 0 0 rgba(34,36,38,.15) inset;
+    border-radius: .28571429rem!important;
+    padding: .78571429em 1.5em .78571429em;
+color: white;
     height: 44px;
     background-color:$colorBotonSecundario;
     padding: 5px;
     border: 2px solid $colorBotonSecundario;
-    border-radius: 10px;
     cursor: pointer;
     padding: 10px;
     transition: 0.5s;
@@ -57,7 +52,7 @@
 
     }
     @if $color== 'verde' {
-        color:$colorBotonExcel;
+        background-color:$colorBotonExcel;
     }
  
 }

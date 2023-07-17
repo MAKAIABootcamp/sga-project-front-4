@@ -15,7 +15,7 @@ import PanelSuperAdministrador from "../pages/PanelSuperAdministrador";
 import PlanDeEstudios from "../pages/PlanDeEstudios";
 import Notas from "../pages/Notas";
 import RecursosEstudiantes from "../pages/RecursosEstudiantes";
-
+import RecursosEducativos from "../components/recursosEducativos/client";
 
 
 const AppRouter = () => {
@@ -37,6 +37,7 @@ const AppRouter = () => {
           <Route path="/registro-administradores" element={<PanelSuperAdministrador />} />
           {/* MODULO DE FORMADOR*/}
           <Route path='/asistencia' element={<AsistenciaPage/>}/>
+          <Route path='/recursos-educativos' element={<RecursosEducativos/>}/>
           {/* MODULO DE ESTUDIANTE*/}
           <Route path='/plan' element={<PlanDeEstudios/>}/>
           <Route path='/notas' element={<Notas/>}/>

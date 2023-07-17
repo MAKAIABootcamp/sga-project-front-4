@@ -1,0 +1,15 @@
+.inputs{
+    margin-top: 110px;
+    margin-left: inherit;
+    padding-left: 11%;
+    
+    h1 {
+        font-weight: bolder;
+        font-size: xx-large;
+        color: #03203a;
+      }
+      &__titulo{
+      display: flex;
+      justify-content: center;
+      }
+}
