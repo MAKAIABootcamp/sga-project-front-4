@@ -98,7 +98,7 @@ const RecursosEducativos = ({ tituloCurso }) => {
               </div>
             )}
             <section>
-              <button type="submit">Subir Archivo</button>
+              <button type="submit" id='botonparasubirarchivo'>Subir Archivo</button>
             </section>
           </form>
 
