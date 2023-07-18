@@ -17,7 +17,7 @@ import Notas from "../pages/Notas";
 import RecursosEstudiantes from "../pages/RecursosEstudiantes";
 import RecursosEducativos from "../components/recursosEducativos/client";
 import Cursos from "../components/recursosEducativos/Cursos"
-
+import CronogramaEstudiantes from "../components/cronograma/CalendarioVisualizacion";
 const AppRouter = () => {
   return (
     <BrowserRouter>
@@ -43,6 +43,7 @@ const AppRouter = () => {
           <Route path='/plan' element={<PlanDeEstudios/>}/>
           <Route path='/notas' element={<Notas/>}/>
           <Route path='/recursos' element={<RecursosEstudiantes/>}/>
+          <Route path="/calendario" element={<CronogramaEstudiantes/>}></Route>
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

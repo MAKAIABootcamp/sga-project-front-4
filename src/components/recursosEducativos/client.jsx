@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useMediaQuery } from '@material-ui/core';
-import "../../styles/recursos/RecursosDocentes.scss"
+import "../../styles/recursos/RecursosDocentes.scss";
+
 const RecursosEducativos = ({ tituloCurso }) => {
   const isDesktop = useMediaQuery('(min-width: 769px)'); // Verifica si la pantalla es desktop o no
 
@@ -40,34 +41,36 @@ const RecursosEducativos = ({ tituloCurso }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+  
     const data = {
       modulo,
       tipoRecurso,
       enlaceGrabacion,
       archivos
     };
-
+  
     axios.post('http://localhost:3000/recursosEndpoint1', data)
       .then(response => {
         setServerResponse(response.data);
+        console.log(response.data); // Accede al valor actualizado aquí
         localStorage.setItem('serverResponse', JSON.stringify(response.data));
       })
       .catch(error => {
         console.error(error);
       });
   };
-
+  
   const storedResponses = localStorage.getItem('serverResponse');
   const parsedResponses = storedResponses ? JSON.parse(storedResponses) : [];
+  console.log(parsedResponses);
+  
 
   if (!isDesktop) {
     return (
-      <div  className="inputs">
-    
+      <div className="inputs">
         <div id="divisionprincipal">
           <form onSubmit={handleSubmit} className="division">
-            <section style={{ backgroundColor: " #B5B2B2", padding: "10px 20px", borderRadius: "5px" }} className='inputs__titulo' id="inputs__titulo__responsive">
+            <section className="inputs__titulo" id="inputs__titulo__responsive" style={{ backgroundColor: "#B5B2B2", padding: "10px 20px", borderRadius: "5px" }}>
               <h1>Material de estudio</h1>
             </section>
             <div className="inputs__input">
@@ -76,7 +79,7 @@ const RecursosEducativos = ({ tituloCurso }) => {
             </div>
             <div className="inputs__input">
               <label htmlFor="tipoRecurso">Tipo de Recurso:</label>
-              <select  value={tipoRecurso} onChange={handleTipoRecursoChange}id="mySelect" onchange="applyStyles()">
+              <select value={tipoRecurso} onChange={handleTipoRecursoChange} id="mySelect" >
                 <option value="grabacion">Grabación de Clase</option>
                 <option value="diapositivas">Diapositivas de Clase</option>
                 <option value="lectura">Material de Lectura</option>
@@ -102,17 +105,37 @@ const RecursosEducativos = ({ tituloCurso }) => {
             </section>
           </form>
 
-          <div className="card-container inputs__respuesta">
-            {Array.isArray(parsedResponses) &&
-              parsedResponses.map((response, index) => (
-                <div className="card" key={index}>
-                  <h3>Respuesta {index + 1}</h3>
-                  <p>Modulo: {response.modulo}</p>
-                  <p>Tipo de Recurso: {response.tipoRecurso}</p>
-                  {/* Mostrar otros campos almacenados */}
-                </div>
-              ))}
+<div className="card-container inputs__respuesta">
+  {Array.isArray(parsedResponses) &&
+    parsedResponses.map((response, index) => (
+      <div className="card" key={index}>
+        <h3>Respuesta {index + 1}</h3>
+        <p>Modulo: {response.modulo}</p>
+        <p>Tipo de Recurso: {response.tipoRecurso}</p>
+        {response.tipoRecurso === 'grabacion' && (
+          <div>
+            <p>Enlace de Grabación: {response.enlaceGrabacion}</p>
           </div>
+        )}
+        {response.tipoRecurso !== 'grabacion' && response.archivos && (
+          <div>
+            {Object.entries(response.archivos).map(([tipoRecurso, archivo], i) => (
+              <div key={i}>
+                <p>{tipoRecurso}: </p>
+                {archivo && (
+                  <a href={URL.createObjectURL(archivo)} target="_blank" rel="noopener noreferrer">
+                    Ver archivo
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    ))}
+</div>
+
+
         </div>
       </div>
     );
@@ -120,24 +143,24 @@ const RecursosEducativos = ({ tituloCurso }) => {
 
   return (
     <div className="inputs">
-
-<div style={{ backgroundColor: " #B5B2B2", padding: "10px 122px", borderRadius: "5px" }} className='inputs__titulo'>
-
-      <h1>Material de estudio</h1>
-</div>
+      <div className="inputs__titulo" style={{ backgroundColor: "#B5B2B2", padding: "10px 122px", borderRadius: "5px" }}>
+        <h1>Material de estudio</h1>
+      </div>
       <section>
-        <h2>Diapositivas de la clase</h2>
-        <label htmlFor="diapositivasInput">
-          <img src="ruta-a-tu-imagen" alt="Diapositivas" />
-          <input
-            type="file"
-            id="diapositivasInput"
-            onChange={(e) => handleArchivoChange(e, 'diapositivas')}
-            accept=".pdf,.doc,.docx"
-            required
-          />
-        </label>
-        {error && <p>{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <h2>Diapositivas de la clase</h2>
+          <label htmlFor="diapositivasInput">
+            <img src="ruta-a-tu-imagen" alt="Diapositivas" />
+            <input
+              type="file"
+              id="diapositivasInput"
+              onChange={(e) => handleArchivoChange(e, 'diapositivas')}
+              accept=".pdf,.doc,.docx"
+              required
+            />
+          </label>
+          {error && <p>{error}</p>}
+        </form>
       </section>
       <section>
         <h2>Material de lectura</h2>
@@ -181,6 +204,7 @@ const RecursosEducativos = ({ tituloCurso }) => {
         </label>
         {error && <p>{error}</p>}
       </section>
+      <button type="submit" id='botonparasubirarchivo'>Subir Archivo</button>
     </div>
   );
 };
