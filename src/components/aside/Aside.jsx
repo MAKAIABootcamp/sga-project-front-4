@@ -42,6 +42,10 @@ const Aside = ({hamburguerMenu,}) => {
       url: "/recursoseducativos",
     },
     {
+      name: "Cronograma Estudiante",
+      url: "/cronogramaestudiante",
+    },
+    {
       name: "Perfil",
       url: "/perfil",
     },

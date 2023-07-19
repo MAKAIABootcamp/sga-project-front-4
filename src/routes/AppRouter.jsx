@@ -37,7 +37,7 @@ const AppRouter = () => {
           <Route path="/registro-administradores" element={<PanelSuperAdministrador />} />
           {/* MODULO DE FORMADOR*/}
           <Route path='/asistencia' element={<AsistenciaPage/>}/>
-          <Route path="/recursoseducativos" element={<RecursosEducativosDocente/>}></Route>
+          <Route path="/recursoseducativos" element={<RecursosEducativosDocente/>}/>
           <Route path="/agregarrecursoseducativos/:tituloCurso" element={<RecursosEducativos />} />
           {/* MODULO DE ESTUDIANTE*/}
           <Route path='/plan' element={<PlanDeEstudios/>}/>
