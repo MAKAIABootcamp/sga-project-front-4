@@ -11,16 +11,14 @@ button {
     margin-top: 110px;
 
 
-
-    h1 {
+    &__titulo {
+        display: flex;
+        justify-content: center;
+        h1 {
         font-weight: bolder;
         font-size: xx-large;
         color: #03203a;
     }
-
-    &__titulo {
-        display: flex;
-        justify-content: center;
     }
 
     label {
@@ -32,7 +30,10 @@ button {
         background-color: $colorFondoContenido;
 
     }
-
+input{
+    
+    border: solid 2px $gris;
+}
     option {
         background-color: $colorBotonSecundario;
         color: $colorFondoContenido;
@@ -72,6 +73,26 @@ button {
         padding-top: 10px;
         align-items: center;
     }
+    &__division{
+        gap: 10px;
+        display: flex;
+        flex-direction: row;
+    }
+    &__responsive {
+      
+        display: flex;
+     flex-direction: column;
+     label   {
+        @include Texto1($color: 'negro', $fontWeight: 'supergrueso');
+    }
+    input{
+      width: 300px;
+    } 
+    h2{
+        @include Texto1($color: 'negro', $fontWeight: 'supergrueso');
+    }
+    }
+
 
     input#archivo {
         border: solid 2px $colorFondoContenido;

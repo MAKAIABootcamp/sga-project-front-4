@@ -27,6 +27,10 @@
         font-weight: 400;
         font-size: 18px;
     }
+    @if $fontWeight== 'supergrueso' {
+      font-weight: 700;
+      font-size: 18px;
+  }
 
   }
   @mixin buttonSquare3($color:null) {
