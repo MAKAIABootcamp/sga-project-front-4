@@ -17,7 +17,7 @@ button {
         h1 {
         font-weight: bolder;
         font-size: xx-large;
-        color: #03203a;
+        color:$azul;
     }
     }
 
@@ -49,8 +49,8 @@ input{
         gap: 23px;
         flex-direction: column;
         display: flex;
-        justify-content: inherit;
-        align-items: baseline;
+        justify-content: center;
+        align-items: center;
         margin-left: 16rem;
         margin-top: 4rem;
 
@@ -58,8 +58,8 @@ input{
             gap: 10px;
             flex-direction: column;
             display: flex;
-            justify-content: inherit;
-            align-items: baseline;
+            justify-content: center;
+            align-items: center;
             margin-left: 3rem;
             margin-top: 2rem;
 
@@ -78,10 +78,15 @@ input{
         display: flex;
         flex-direction: row;
     }
+    
     &__responsive {
       
         display: flex;
      flex-direction: column;
+     border: solid 5px $colorFondoContenido;
+     padding: 28px;
+     
+     
      label   {
         @include Texto1($color: 'negro', $fontWeight: 'supergrueso');
     }
@@ -89,11 +94,27 @@ input{
       width: 300px;
     } 
     h2{
+        padding: 30px;
         @include Texto1($color: 'negro', $fontWeight: 'supergrueso');
+
     }
     }
 
-
+    figure {
+        width: 300px;
+        height: 200px;
+        border: 2px dashed $azul; /* Borde punteado */
+        display: flex;
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+      }
+      
+      img {
+        width: 100px;
+        height: 100px; /* Ajusta la altura de la imagen según tus necesidades */
+        object-fit: contain; /* Ajusta la imagen dentro del contenedor manteniendo la proporción */
+      }
+      
     input#archivo {
         border: solid 2px $colorFondoContenido;
         width: initial;
@@ -105,10 +126,15 @@ input{
     }
 }
 
-#inputs__titulo__responsive {
+#inputs__titulo__responsive__mobile{
     h1 {
         font-size: large;
     }
 
-
 }
+#inputs__titulo__responsive__desktop{
+
+padding-left: 20%;
+padding-right: 20%;
+}
+
