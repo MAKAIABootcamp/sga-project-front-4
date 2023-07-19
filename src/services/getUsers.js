@@ -15,8 +15,8 @@ export const fuctionGet = async (endpoint) => {
   }
 };
 
-const collection = collections.USUARIOS;
-const refCollection = collection(dataBase, collection);
+const colection = collections.USUARIOS;
+const refCollection = collection(dataBase, colection);
 
 export const login = async (email, password) => {
   const usersFromCollection = [];
