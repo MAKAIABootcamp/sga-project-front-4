@@ -20,8 +20,9 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { auth } from "../firebase/firebaseConfig";
+import { auth, dataBase } from "../firebase/firebaseConfig";
 import PublicRouter from "./PublicRouter";
 import PrivateRouter from "./PrivateRouter";
 import { useSelector } from "react-redux";
@@ -50,13 +51,29 @@ const AppRouter = () => {
   const [checking, setCheking] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(undefined);
 
-  const { user } = useSelector((store) => store.userReducer);
-  console.log(user);
 
+  async function getRol(uid) {
+    const refDocument = doc(dataBase, `usuarios/${uid}`);
+    const document = await getDoc(refDocument);
+    // const infoFinal = document.data().tipo;
+    console.log(document);
+    // console.log(infoFinal);
+    // return infoFinal;
+
+  }
+  
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user?.uid) {
-        setIsLoggedIn(true);
+      if (user) {
+        getRol(user.uid).then((tipo) => {
+          const userInfo = {
+            uid: user.uid,
+            email: user.email,
+            tipo: tipo,
+          };
+          setIsLoggedIn(userInfo);
+          console.log("Data fina", userInfo);
+        });
       } else {
         setIsLoggedIn(false);
       }
