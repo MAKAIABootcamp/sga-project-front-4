@@ -1,28 +1,25 @@
 import { collections } from "../../services/data";
 
 const initialValues = {
-    user: {},
-    error: null
-}
-
+  user: {},
+  error: null,
+};
 
 const userReducer = (state = initialValues, action) => {
-    switch (action.type) {
-        case collections.USUARIOS :
-            
-          return {
-            ...state,
-            user: {
-                ...action.payload.user
-            },
-            error: action.payload.error
-          }
-    
-        default:
-            return {
-                ...state
-            }
-    }
+  switch (action.type) {
+    case collections.USUARIOS:
+      return {
+        ...state,
+        user: {
+          ...action.payload.user,
+        },
+        error: action.payload.error,
+      };
 
-}
-export default userReducer
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+export default userReducer;

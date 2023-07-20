@@ -2,6 +2,7 @@ import axios from "axios";
 import { auth, dataBase } from "../firebase/firebaseConfig";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { collections } from "./data";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const API_FAKE = "https://backend-sga-icqb.vercel.app/";
 

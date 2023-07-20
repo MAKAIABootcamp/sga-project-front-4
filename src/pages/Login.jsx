@@ -38,9 +38,6 @@ const Login = () => {
     navigate("/olvidar-contrasena");
   };
 
-  // const handleToPanel = () => {
-  //   navigate("/dashboard");
-  // };
   return (
     <section
       className="gradient-form"
