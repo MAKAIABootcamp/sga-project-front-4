@@ -56,7 +56,7 @@ const Perfil = () => {
             <button onClick={() => handleClickActualizarDatos()}
             style={{
               color: botonSeleccionado === "actualizar" ? "#4154f1" : "",
-              borderBottom: botonSeleccionado === 'actualizar' ? '2px solid #4154f1' : '',
+              borderBottom: botonSeleccionado === 'actualizarj' ? '2px solid #4154f1' : '',
             }}
             >
               Actualizar Datos

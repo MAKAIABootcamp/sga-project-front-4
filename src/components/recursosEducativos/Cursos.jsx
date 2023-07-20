@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { fetchCourse } from '../../redux/actions/cursosActions';
 const CursoCard = ({ curso, onClick }) => {
   return (
     <div className="card">
@@ -23,30 +23,20 @@ const Cursos = () => {
   const navigate = useNavigate();
   const [cursos, setCursos] = useState([]);
 
+ 
   useEffect(() => {
-    // Consumir los datos de los cursos desde los endpoints
-    axios
-      .all([
-        axios.get("http://localhost:3000/eventosFrontend3"),
-        axios.get("http://localhost:3000/eventosFrontend3"),
-
-      ])
-      .then((responses) => {
-        // Obtener los datos de respuesta de cada endpoint
-        const data1 = responses[0].data;
-        const data2 = responses[1].data;
-       
-
-        // Actualizar el estado con los datos de los cursos
-        setCursos([data1,data2]);
-        log     })
+    axios.get('http://localhost:3000/cursos')
+      .then((response) => {
+        const courses = response.data;
+        setCursos(courses);
+      })
       .catch((error) => {
-        console.error("Error al obtener los cursos:", error);
+        console.error('Error fetching courses:', error);
       });
   }, []);
 
   const handleCursoClick = (cursoId) => {
-    // Redireccionar al usuario a la página del curso
+    dispatch(fetchCourse(cursoId));
     navigate(`/cursos/${cursoId}`);
   };
 
