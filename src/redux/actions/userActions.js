@@ -5,7 +5,7 @@ export const loginActionAsync = (email, password) => {
     try {
       const response = await login(email, password);
       if (response) {
-        //Se dispara la accion sincrona
+        //Se dispara la acción sincrona
       }
     } catch (error) {
       console.log(error);

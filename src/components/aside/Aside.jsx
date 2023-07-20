@@ -27,7 +27,7 @@ const Aside = ({hamburguerMenu,}) => {
     },
     {
       name: "Seguimiento académico",
-      url: "",
+      url: "/notas",
     },
     {
       name: "Plan de estudios",
