@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../../styles/recursoseducativos/cursos.scss";
-const CursoCard = ({ curso, handleCursoClick }) => {
+import { fetchCourse } from '../../redux/actions/cursosActions';
+import { useSelector, useDispatch } from 'react-redux';
+
+const CursoCard = ({ curso, onClick }) => {
   return (
-    <div className="card" style={{ marginTop: '106px' }}>
+    <div className="card">
+
       <div className="card-body">
         <h5 className="card-title">{curso.titulo}</h5>
         <p className="card-text">Instructor: {curso.instructor}</p>
@@ -14,40 +17,41 @@ const CursoCard = ({ curso, handleCursoClick }) => {
   );
 };
 
+
 const Cursos = () => {
+     const dispatch = useDispatch(); 
+
   const [cursos, setCursos] = useState([]);
   const [cursoInfo, setCursoInfo] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/eventosFrontend3")
+    axios.get('http://localhost:3000/cursos')
       .then((response) => {
-        const data = response.data;
-        setCursos(data);
-        const curso = data.find(item => item.curso !== undefined)?.curso;
-        if (curso) {
-          setCursoInfo(curso);
-          console.log(curso.titulo); // "Título del Curso"
-          console.log(curso.descripcion); // "Descripción del curso"
-          console.log(curso.duracion); // "4 horas"
-          console.log(curso.instructor); // "Nombre del Instructor"
-        }
+        const courses = response.data;
+        setCursos(courses);
       })
       .catch((error) => {
-        console.error("Error al obtener los cursos:", error);
+        console.error('Error fetching courses:', error);
       });
   }, []);
 
-  const handleCursoClick = (titulo) => {
-    navigate(`/agregarrecursoseducativos/${titulo}`);
-  };
+
+    const handleCursoClick = (cursoId) => {
+      dispatch(fetchCourse(cursoId));
+     
+      navigate(`/recursos-educativos/${cursoId}`);
+    };
 
   return (
-    <div>
-      <CursoCard curso={cursoInfo} handleCursoClick={handleCursoClick} />
-
-
+    <div  style={{ display: 'flex', flexDirection: 'column', paddingLeft:"10px" , gap: "10px",paddingTop: '100px' }}>
+      {cursos.map((curso) => (
+        <CursoCard
+          key={curso.id}
+          curso={curso}
+          onClick={() => handleCursoClick(curso.id)}
+        />
+      ))}
     </div>
   );
 };

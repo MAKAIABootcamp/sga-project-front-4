@@ -1,58 +1,63 @@
 
-// @import "./index.scss";
-// @mixin Texto1($color: null, $fontWeight: null) {
-//     color:  #414141;;
-//     font-family: $tipografiaPrincipal;
-//     font-style:light;
-//     font-weight: 300;
-//     font-size: 14px;
-//     text-align: center;
-//     margin: 0px;
+@import "./index.scss";
+@mixin Texto1($color: null, $fontWeight: null) {
+    color:  #414141;;
+    font-family: $tipografiaPrincipal;
+    font-style:light;
+    font-weight: 300;
+    font-size: 14px;
+    text-align: center;
+    margin: 0px;
     
-//     @if $color == 'gris' {
-//       color: #414141;
-//     }
+    @if $color == 'gris' {
+      color: #414141;
+    }
     
-//     @if $color == 'azul' {
-//       color:#0B508C;
-//     }
+    @if $color == 'azul' {
+      color:#0B508C;
+    }
     
-//     @if $color == 'azul-oscuro' {
-//       color: #072440;
-//     }
-//     @if $color == 'negro' {
-//         color: black;
-//       }
-//     @if $fontWeight== 'grueso' {
-//         font-weight: 400;
-//     }
+    @if $color == 'azul-oscuro' {
+      color: #072440;
+    }
+    @if $color == 'negro' {
+        color: black;
+      }
+    @if $fontWeight== 'grueso' {
+        font-weight: 400;
+        font-size: 18px;
+    }
+    @if $fontWeight== 'supergrueso' {
+      font-weight: 700;
+      font-size: 18px;
+  }
 
-//   }
-//   @mixin buttonSquare3($color:null) {
-//     box-shadow: 0 0 0 0 rgba(34,36,38,.15) inset;
-//     border-radius: .28571429rem!important;
-//     padding: .78571429em 1.5em .78571429em;
-// color: white;
-//     height: 44px;
-//     background-color:$colorBotonSecundario;
-//     padding: 5px;
-//     border: 2px solid $colorBotonSecundario;
-//     cursor: pointer;
-//     padding: 10px;
-//     transition: 0.5s;
-//     display: flex;
-//     align-items: center;
-//     text-align: center;
-//     margin-bottom: 10px;
-//     gap: 10px;
+  }
+  @mixin buttonSquare3($color:null) {
+    box-shadow: 0 0 0 0 rgba(34,36,38,.15) inset;
+    border-radius: .28571429rem!important;
+    padding: .78571429em 1.5em .78571429em;
+color: white;
+    height: 44px;
+    background-color:$colorBotonSecundario;
+    padding: 5px;
+    border: 2px solid $colorBotonSecundario;
+    cursor: pointer;
+    padding: 10px;
+    transition: 0.5s;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 10px;
+    gap: 10px;
 
-//     &:hover {
-//         background-color: $colorPrincipal;
-//         border: solid 2px $colorPrincipal;
+    &:hover {
+        background-color: $colorPrincipal;
+        border: solid 2px $colorPrincipal;
 
-//     }
-//     @if $color== 'verde' {
-//         background-color:$colorBotonExcel;
-//     }
+    }
+    @if $color== 'verde' {
+        background-color:$colorBotonExcel;
+    }
  
-// }
+ }

@@ -15,10 +15,11 @@ import PanelSuperAdministrador from "../pages/PanelSuperAdministrador";
 import PlanDeEstudios from "../pages/PlanDeEstudios";
 import Notas from "../pages/Notas";
 import RecursosEstudiantes from "../pages/RecursosEstudiantes";
-import CalendarioConFechaActual from "../pages/CronogramaEstudiantes";
-import RecursosEducativosDocente from "../pages/RecursosEducativosDocente";
 import RecursosEducativos from "../components/recursosEducativos/client";
+import Cursos from "../components/recursosEducativos/Cursos"
+import CronogramaEstudiantes from "../components/cronograma/CalendarioVisualizacion";
 const AppRouter = () => {
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -37,14 +38,13 @@ const AppRouter = () => {
           <Route path="/registro-administradores" element={<PanelSuperAdministrador />} />
           {/* MODULO DE FORMADOR*/}
           <Route path='/asistencia' element={<AsistenciaPage/>}/>
-          <Route path="/recursoseducativos" element={<RecursosEducativosDocente/>}/>
-          <Route path="/agregarrecursoseducativos/:tituloCurso" element={<RecursosEducativos />} />
+          <Route path='/cursos-disponibles-recursos-educativos' element={<Cursos/>}/>
+          <Route path="/recursos-educativos/:cursoId" element={<RecursosEducativos />} />
           {/* MODULO DE ESTUDIANTE*/}
           <Route path='/plan' element={<PlanDeEstudios/>}/>
           <Route path='/notas' element={<Notas/>}/>
           <Route path='/recursos' element={<RecursosEstudiantes/>}/>
-          <Route path="/cronogramaestudiante" element={<CalendarioConFechaActual/>} />
-
+          <Route path="/calendario" element={<CronogramaEstudiantes/>}></Route>
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
