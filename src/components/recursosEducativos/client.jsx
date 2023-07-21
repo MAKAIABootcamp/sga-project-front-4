@@ -13,7 +13,7 @@ const RecursosEducativos = () => {
   const course = useSelector((state) => state.curso);
 
   const { cursoId } = useParams();
-  console.log({ cursoId });
+  const idCurso = cursoId.cursoId;
 
   const [modulo, setModulo] = useState('');
   const [tipoRecurso, setTipoRecurso] = useState('grabacion');
@@ -95,16 +95,15 @@ const serverData = {
 // console.log(nuevoRecurso);
 //   Resto del código...
 // };
-const handleSubmit = (e,cursoIdObj) => {
+const handleSubmit = (e,idCurso) => {
   e.preventDefault();
 
   if (cursoActual) {
     // Get the base endpoint URL from cursoActual.endpointUrl
-    const baseEndpoint = "http://localhost:3000/cursos"
-    const { cursoId } = cursoIdObj;
-    // Get the endpoint URL for the selected tipoRecurso
-    const endpoint = `${baseEndpoint}/${tipoRecurso}/${cursoIdObj}`;
-console.log(endpoint);
+    const baseEndpoint = "http://localhost:3000/recursos"
+    console.log(cursoId);
+    const endpoint = `${baseEndpoint}/${tipoRecurso}/${cursoId}`;
+    console.log(endpoint);
     // Simulate a new resource with the form data
     const nuevoRecurso = {
       modulo: modulo,
