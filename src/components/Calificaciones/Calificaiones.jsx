@@ -1,172 +1,96 @@
-import { Space, Table, } from 'antd';
-import { useEffect, useState } from 'react';
-import { fuctionGet } from '../../services/getUsers';
+import { Progress, Table, } from 'antd';
 import BotonesFiltrado from '../Asistencia/BtnFintrado/BotonesFiltrado';
+import { useSelector } from 'react-redux';
+import { Dropdown } from 'antd';
+import './StylesCalificaciones.scss'
 
 
 const Calificaiones = () => {
 
-  const [students, setStudents] = useState([])
 
-  useEffect(() => {
-    fuctionGet('students')
-      .then((response) => {
-        if (!students.length) {
-          setStudents(response)
+  const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.arrCohorte)
 
+  const items = [
+    {
+      key: '1',
+      label: 'Editar',
+    },
+    {
+      key: '2',
+      label: 'Eliminar',
+    },
+
+  ];
+  const onMenuClick = (e) => {
+    console.log('click', e);
+  };
+
+  const CustomColumnHeader = ({ title }) => {
+
+    const primeraFecha = arrayEstudiantes.find((estudiante) => estudiante.calificaciones.workshop.fecha);
+    const fechaEncontrada = primeraFecha && primeraFecha.calificaciones.workshop.fecha;
+    return (
+      <div className='fecha'>
+        <span>{title}</span>
+        {
+          fechaEncontrada && <span>{fechaEncontrada}</span>
         }
-      })
-      .catch((error) => {
-        console.log('Error al realizar peticion de estudiantes', error);
-      })
-  }, [students])
+      </div>
+    )
+  }
 
-  console.log(students);
+  
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'nombre',
+      title: 'Nombre',
+      dataIndex: 'name',
       key: 'name',
-      render: (text) => <a>{text}</a>,
+      render: (text, record) => <>
+        <img className='imagenPerfil' src={record.photo} alt={text} />
+        <span>{text}     {record.lastname}</span>
+      </>,
     },
     {
-      title: 'Workshop',
+      title: <CustomColumnHeader title={'Workshop'}/>,
       dataIndex: 'calificaciones',
       key: 'calificaciones',
-      render: (cal) => <span>{cal}</span>
+      render: (cal) => <span>{cal.workshop.nota}%</span>
     },
     {
       title: 'Spirit',
       dataIndex: 'calificaciones',
       key: 'calificaciones',
-      // render: (cal) => <span>{cal.sprint.nota}%</span>
+      render: (cal) => <span>{cal.sprint.nota}%</span>
+    },
+    {
+      title: 'Progreso',
+      dataIndex: 'calificaciones',
+      key: 'calificaciones',
+      render: (_, record) => (
+        <Progress percent={((record.calificaciones.workshop.nota + record.calificaciones.sprint.nota) / 100) * 100} />
+      )
     },
     {
       title: 'Action',
       key: 'action',
-      // render: (_, record) => (
-      //   <Space size="middle">
-      //     <a>Invite {record.name}</a>
-      //     <a>Delete</a>
-      //   </Space>
-      // ),
+      render: () => (
+        <Dropdown.Button
+          menu={{
+            items,
+            onClick: onMenuClick,
+          }}
+        >
+        </Dropdown.Button>
+      ),
     },
   ];
 
-  // const students = [
-  //     {
-  //       id: 1,
-  //       foto: 'https://randomuser.me/api/portraits/men/1.jpg',
-  //       nombre: 'John Doe',
-  //       calificaciones: {
-  //         workshop: {
-  //           fecha: '2023-07-01',
-  //           nota: 85
-  //         },
-  //         sprint: {
-  //           fecha: '2023-06-25',
-  //           nota: 90
-  //         }
-  //       }
-  //     },
-  //     {
-  //       id: 2,
-  //       foto: 'https://randomuser.me/api/portraits/men/2.jpg',
-  //       nombre: 'Jane Smith',
-  //       calificaciones: {
-  //         workshop: {
-  //           fecha: '2023-07-02',
-  //           nota: 92
-  //         },
-  //         sprint: {
-  //           fecha: '2023-06-26',
-  //           nota: 87
-  //         }
-  //       }
-  //     },
-  //     {
-  //       id: 3,
-  //       foto: 'https://randomuser.me/api/portraits/men/3.jpg',
-  //       nombre: 'Mark Johnson',
-  //       calificaciones: {
-  //         workshop: {
-  //           fecha: '2023-07-03',
-  //           nota: 80
-  //         },
-  //         sprint: {
-  //           fecha: '2023-06-27',
-  //           nota: 85
-  //         }
-  //       }
-  //     },
-  //     {
-  //       id: 4,
-  //       foto: 'https://randomuser.me/api/portraits/men/4.jpg',
-  //       nombre: 'Emily Davis',
-  //       calificaciones: {
-  //         workshop: {
-  //           fecha: '2023-07-04',
-  //           nota: 88
-  //         },
-  //         sprint: {
-  //           fecha: '2023-06-28',
-  //           nota: 92
-  //         }
-  //       }
-  //     },
-  //     {
-  //       id: 5,
-  //       foto: 'https://randomuser.me/api/portraits/men/5.jpg',
-  //       nombre: 'Michael Wilson',
-  //       calificaciones: {
-  //         workshop: {
-  //           fecha: '2023-07-05',
-  //           nota: 90
-  //         },
-  //         sprint: {
-  //           fecha: '2023-06-29',
-  //           nota: 86
-  //         }
-  //       }
-  //     },
-  //     {
-  //       id: 6,
-  //       foto: 'https://randomuser.me/api/portraits/men/6.jpg',
-  //       nombre: 'Sophia Thompson',
-  //       calificaciones: {
-  //         workshop: {
-  //           fecha: '2023-07-06',
-  //           nota: 95
-  //         },
-  //         sprint: {
-  //           fecha: '2023-06-30',
-  //           nota: 88
-  //         }
-  //       }
-  //     },
-  //     {
-  //       id: 7,
-  //       foto: 'https://randomuser.me/api/portraits/men/7.jpg',
-  //       nombre: 'Oliver Garcia',
-  //       calificaciones: {
-  //         workshop: {
-  //           fecha: '2023-07-07',
-  //           nota: 82
-  //         },
-  //         sprint: {
-  //           fecha: '2023-07-01',
-  //           nota: 90
-  //         }
-  //       }
-  //     }
-  //   ];
-
 
   return (
-    <div>
+    <div className='calificaciones'>
       <BotonesFiltrado />
-      <Table columns={columns} dataSource={students} />
+      <Table columns={columns} dataSource={arrayEstudiantes} />
     </div>
   )
 }

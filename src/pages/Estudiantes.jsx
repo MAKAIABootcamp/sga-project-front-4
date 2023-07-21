@@ -27,6 +27,8 @@ const Estudiantes = () => {
   const estudiantes = useSelector((store) => store.estudiantesReducer.estudiantes);
   console.log("estudiantes desde page estudiantes", estudiantes);
 
+  // const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.arrCohorte)
+
   const dispatch = useDispatch();
   const handleCloseModal = () => {
     setShowModal(false);
@@ -54,9 +56,9 @@ const Estudiantes = () => {
       'El administrador fue eliminado con éxito!',
       'success'
     )
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1000);
   }
 
 
@@ -128,7 +130,7 @@ const Estudiantes = () => {
     key: estudiante.id,
     name: estudiante.name,
     lastname: estudiante.lastname,
-    tipo_documeto: estudiante.tipo_documeto,
+    tipo_documeto: estudiante.tipoDocumento,
     numero_documento: estudiante.numero_documento,
     telefono: estudiante.telefono,
     tipo_entrenamiento: estudiante.tipo_entrenamiento,

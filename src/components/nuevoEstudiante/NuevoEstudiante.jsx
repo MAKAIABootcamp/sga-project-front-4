@@ -63,9 +63,9 @@ const NuevoEstudiante = () => {
       'El administrador fue agregado con éxito!',
       'success'
     )
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1000);
   }
 
 
@@ -146,7 +146,7 @@ const NuevoEstudiante = () => {
             <Field as="select" name="tipo_entrenamiento"  value={participante.tipo_entrenamiento}
               onChange={handleChange}>
               <option value="Backend">Backend</option>
-              <option value="FrontEnd">FrontEnd.</option>
+              <option value="Frontend">Frontend</option>
               <option value="Analisis de datos">Analisis de datos</option>
             </Field>
           </div>
