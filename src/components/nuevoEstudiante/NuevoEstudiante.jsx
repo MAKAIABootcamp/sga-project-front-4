@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import Swal from "sweetalert2";
 import "../../components/nuevoEstudiante/nuevoEstudiante.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch,} from "react-redux";
 import { useState } from "react";
 import { addStudents } from "../../redux/actions/estudiantesActions";
 // import { Button, Input } from 'semantic-ui-react'
@@ -11,7 +11,7 @@ const NuevoEstudiante = () => {
   const validationSchema = Yup.object({
     name: Yup.string().required("El nombre completo es obligatorio"),
     lastname: Yup.string().required("El apellido completo es obligatorio"),
-    numero_documento: Yup.string()
+    numeroDocumento: Yup.string()
       .required("El número de documento es obligatorio")
       .min(8, "El documento debe contener al menos 8 caracteres.")
       .max(10, "El documento no puede contener más de 10 caracteres"),
@@ -24,14 +24,13 @@ const NuevoEstudiante = () => {
     email: Yup.string()
       .email("Debes ingresar un email")
       .required("El e-mail es obligatorio"),
-    cohorte: Yup.string().required("La cohorte es obligatorio"),
+    cohorte: Yup.number().required("La cohorte es obligatorio"),
     estado: Yup.string().required("el estado es obligatorio"),
   });
   const dispatch = useDispatch();
 
   const [participante, setParticipante] = useState({});
-  const estudiantes = useSelector((store) => store.estudiantesReducer.estudiantes);
-  console.log("estudiantes desde page estudiantes", estudiantes);
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -76,13 +75,13 @@ const NuevoEstudiante = () => {
         initialValues={{
           nombres: "",
           apellidos: "",
-          numDocumento: "",
+          numeroDocumento: "",
           email: "",
           teléfono: "",
           dirección: "",
           ciudad: "",
           curso: "",
-          cohorte: "",
+          cohorte: 0,
           edad: "",
         }}
         validationSchema={validationSchema}
@@ -110,17 +109,17 @@ const NuevoEstudiante = () => {
 
           <div className="document">
             <h2>Documento</h2>
-            <Field as="select" name="tipo_documeto" value={participante.tipo_documeto}
+            <Field as="select" name="tipoDocumento" value={participante.tipoDocumento}
               onChange={handleChange}>
               <option value="C.C.">C.C.</option>
               <option value="T.I.">T.I.</option>
               <option value="pep">PEP</option>
             </Field>
-            <Field type="text" name="numero_documento"   value={participante.numero_documento}
+            <Field type="text" name="numeroDocumento"   value={participante.numeroDocumento}
               onChange={handleChange}/>
           </div>
           <ErrorMessage
-            name="numero_documento"
+            name="numeroDocumento"
             component="div"
             style={{ color: "#87CEEB" }}
           />

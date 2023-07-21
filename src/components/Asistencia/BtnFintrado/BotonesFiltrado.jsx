@@ -36,7 +36,7 @@ const BotonesFiltrado = () => {
   const arrFiltroModulo = arrfiltroEntrenamiento.filter(cohorte => cohorte.modulo === modulo)
   // console.log('filtro de modulo',arrFiltroModulo);
  
-  // console.log('Array de filtro de cohorte',arrFiltroCohorte);
+  
 
   const handleChangeEntrenamiento = (value) => {
     console.log(`selected ${value}`);
@@ -49,9 +49,12 @@ const BotonesFiltrado = () => {
   const handleChangeCohorte = (value) => {
     console.log(`selected ${value}`);
     const numero = parseInt(value.split(' ')[1]);
-    const arrFiltroCohorte = arrFiltroModulo.filter(curso => curso.cohorte === numero)
+
+    const arrFiltroCohorte = arrFiltroModulo.filter(curso => parseInt(curso.cohorte, 10) === numero)
     setCohorteFilter(arrFiltroCohorte)
     setCohorteSelect(value);
+
+    console.log('Array de filtro de cohorte',arrFiltroCohorte);
    
   };
   dispatch(filterCohorte(cohorteFilter))

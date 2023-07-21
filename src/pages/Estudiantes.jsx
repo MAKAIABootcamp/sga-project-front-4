@@ -24,10 +24,10 @@ const Estudiantes = () => {
   const [showModal, setShowModal] = useState(false);
   const [students, setEstudents] = useState([]);
 
-  const estudiantes = useSelector((store) => store.estudiantesReducer.estudiantes);
-  console.log("estudiantes desde page estudiantes", estudiantes);
+  // const estudiantes = useSelector((store) => store.estudiantesReducer.estudiantes);
+  // console.log("estudiantes desde page estudiantes", estudiantes);
 
-  // const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.arrCohorte)
+  const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.arrCohorte)
 
   const dispatch = useDispatch();
   const handleCloseModal = () => {
@@ -53,7 +53,7 @@ const Estudiantes = () => {
     dispatch(deleteStudents("estudiantes", id));
     Swal.fire(
       'Buen trabajo!',
-      'El administrador fue eliminado con éxito!',
+      'El estudiante fue eliminado con éxito!',
       'success'
     )
     // setTimeout(() => {
@@ -76,13 +76,13 @@ const Estudiantes = () => {
     },
     {
       title: "Tipo de documeto",
-      dataIndex: "tipo_documeto",
-      key: "tipo_documeto",
+      dataIndex: "tipoDocumento",
+      key: "tipoDocumento",
     },
     {
       title: "# documento",
-      dataIndex: "numero_documento",
-      key: "numero_documento",
+      dataIndex: "numeroDocumento",
+      key: "numeroDocumento",
     },
     {
       title: "Telefono",
@@ -126,18 +126,18 @@ const Estudiantes = () => {
     },
   ];
 
-  const mappedEstudiantes = estudiantes.map((estudiante) => ({
-    key: estudiante.id,
-    name: estudiante.name,
-    lastname: estudiante.lastname,
-    tipo_documeto: estudiante.tipoDocumento,
-    numero_documento: estudiante.numero_documento,
-    telefono: estudiante.telefono,
-    tipo_entrenamiento: estudiante.tipo_entrenamiento,
-    modulo: estudiante.modulo,
-    cohorte: estudiante.cohorte,
-    email: estudiante.email,
-  }));
+  // const mappedEstudiantes = arrayEstudiantes?.map((estudiante) => ({
+  //   key: estudiante.id,
+  //   name: estudiante.name,
+  //   lastname: estudiante.lastname,
+  //   tipoDocumento: estudiante.tipoDocumento,
+  //   numeroDocumento: estudiante.numeroDocumento,
+  //   telefono: estudiante.telefono,
+  //   tipo_entrenamiento: estudiante.tipo_entrenamiento,
+  //   modulo: estudiante.modulo,
+  //   cohorte: estudiante.cohorte,
+  //   email: estudiante.email,
+  // }));
 
   
   // const filterData = (searchQuery) => {
@@ -160,7 +160,7 @@ const Estudiantes = () => {
         "selectedRows: ",
         selectedRows
       );
-      setFallas(selectedRows.length);
+      
     },
   };
 
@@ -212,7 +212,7 @@ const Estudiantes = () => {
             ...rowSelection,
           }}
           columns={columns}
-          dataSource={mappedEstudiantes}
+          dataSource={arrayEstudiantes}
         />
      
     </div>
