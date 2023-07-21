@@ -13,6 +13,7 @@ const BotonesFiltrado = () => {
   const [cohorteSelect, setCohorteSelect] = useState('');
   const [studentsLoaded, setStudentsLoaded] = useState(false);
   const [studentsList, setStudentsList] = useState([]);
+  const [cohorteFilter, setCohorteFilter] = useState([]);
   const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.estudiantes)
   const dispatch = useDispatch();
   const listStudents = () => {
@@ -25,9 +26,17 @@ const BotonesFiltrado = () => {
       setStudentsLoaded(true);
     }
     setStudentsList(arrayEstudiantes);
-  }, [arrayEstudiantes])
+    
+  }, [arrayEstudiantes, listStudents])
 
-  console.log('Estuiantes desde botones de filtrado', studentsList); 
+  // console.log('Estuiantes desde botones de filtrado', studentsList); 
+
+  const arrfiltroEntrenamiento = studentsList.filter(cohorte => cohorte.tipo_entrenamiento === entrenamiento);
+  // console.log('filtro en entrenamiento', arrfiltroEntrenamiento);
+  const arrFiltroModulo = arrfiltroEntrenamiento.filter(cohorte => cohorte.modulo === modulo)
+  // console.log('filtro de modulo',arrFiltroModulo);
+ 
+  // console.log('Array de filtro de cohorte',arrFiltroCohorte);
 
   const handleChangeEntrenamiento = (value) => {
     console.log(`selected ${value}`);
@@ -40,16 +49,28 @@ const BotonesFiltrado = () => {
   const handleChangeCohorte = (value) => {
     console.log(`selected ${value}`);
     const numero = parseInt(value.split(' ')[1]);
-    setCohorteSelect(numero);
+    const arrFiltroCohorte = arrFiltroModulo.filter(curso => curso.cohorte === numero)
+    setCohorteFilter(arrFiltroCohorte)
+    setCohorteSelect(value);
+   
   };
+  dispatch(filterCohorte(cohorteFilter))
 
-  // const arrfiltroEntrenamiento = studentsList.filter(cohorte => cohorte.tipo_entrenamiento === entrenamiento);
-  // console.log('filtro en entrenamiento', arrfiltroEntrenamiento);
-  // const arrFiltroModulo = arrfiltroEntrenamiento.filter(cohorte => cohorte.modulo === modulo)
-  // console.log('filtro de modulo',arrFiltroModulo);
-  // const arrFiltroCohorte = arrFiltroModulo.filter(curso => curso.cohorte === cohorteSelect)
-  // console.log('Array de filtro de cohorte',arrFiltroCohorte);
-  // // dispatch(filterCohorte(arrFiltroCohorte))
+  const cohortesUnicas = new Set();
+
+
+  studentsList.forEach((curso) => {
+    if (curso.tipo_entrenamiento === entrenamiento && curso.modulo === modulo) {
+      cohortesUnicas.add(curso.cohorte);
+    }
+  });
+  
+
+  const opcionesCohorte = Array.from(cohortesUnicas).map((cohorte) => ({
+    label: `${entrenamiento} ${cohorte}`,
+    value: `${entrenamiento} ${cohorte}`,
+    key: `${entrenamiento} ${cohorte.id}`
+  }));
   
   return (
     <div>
@@ -73,8 +94,8 @@ const BotonesFiltrado = () => {
                   value: "Backend",
                 },
                 {
-                  label: "Análisis de Datos",
-                  value: "Análisis de Datos",
+                  label: "Analisis de datos",
+                  value: "Analisis de datos",
                 },
               ],
             },
@@ -111,20 +132,7 @@ const BotonesFiltrado = () => {
           options={[
             {
               label: "Cohorte",
-              options: [
-                {
-                  label: `${entrenamiento} 1`,
-                  value: `${entrenamiento} 1`,
-                },
-                {
-                  label: `${entrenamiento} 2`,
-                  value: `${entrenamiento} 2`,
-                },
-                {
-                  label: `${entrenamiento} 3`,
-                  value: `${entrenamiento} 3`,
-                }
-              ],
+              options: opcionesCohorte
             },
           ]}
         />

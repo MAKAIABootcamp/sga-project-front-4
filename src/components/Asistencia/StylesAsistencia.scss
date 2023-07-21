@@ -3,8 +3,10 @@
 .asistencia {
     display: flex;
     flex-direction: column;
+    width: 100%;
     background-color: $colorFondoContenido;
     padding: 2% 4%;
+    margin-top: 2rem;
 
     h2 {
         display: flex;
