@@ -61,8 +61,9 @@ const FormRegisterAdmin = () => {
               onChange={handleChange}
             >
               <option selected>Selecciona tu tipo de documento</option>
-              <option>Cédula</option>
-              <option>Two</option>
+              <option>C.C</option>
+              <option>T.I</option>
+              <option>PEP</option>
             </select>
           </div>
           <div className="formularioAdmin__inputs">
