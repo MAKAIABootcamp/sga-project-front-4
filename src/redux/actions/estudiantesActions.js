@@ -1,7 +1,7 @@
 import axios from "axios";
-import { setEstudiantes } from "../reducers/estudiantesReducer";
+import { setEstudiantes, addEstudiantes, deleteEstudiantes } from "../reducers/estudiantesReducer";
 
-const URL = 'https://backend-sga-icqb.vercel.app/';
+const URL = 'http://localhost:3000/';
 
 export const getStudents = (endpoint) => {
   return async (dispatch) => {
@@ -14,3 +14,27 @@ export const getStudents = (endpoint) => {
     }
   }
 }
+
+export const addStudents = (endpoint, estudiantes) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.post(`${URL}${endpoint}`, estudiantes);
+      console.log(data);
+      dispatch(addEstudiantes(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const deleteStudents =  (endpoint, id) => {
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(`${URL}${endpoint}/${id}`);
+      console.log(data);
+      dispatch(deleteEstudiantes(id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
