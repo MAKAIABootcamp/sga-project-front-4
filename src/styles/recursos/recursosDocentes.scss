@@ -1,19 +1,24 @@
 @import "../mixin";
 @import "../index.scss";
+@import "../aside/Aside.scss";
 
 button {
     @include buttonSquare3;
-}
+};
 
-;
+
 
 .inputs {
     margin-top: 110px;
-
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
 
     &__titulo {
         display: flex;
         justify-content: center;
+        width: max-content;
         h1 {
         font-weight: bolder;
         font-size: xx-large;
@@ -51,8 +56,8 @@ input{
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-left: 16rem;
         margin-top: 4rem;
+       
 
         @media (min-width: 400px) {
             gap: 10px;

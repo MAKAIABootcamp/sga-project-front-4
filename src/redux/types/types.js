@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-// types.js
-
-export const ACTUALIZAR_EVENTOS = 'ACTUALIZAR_EVENTOS';
-export const AGREGAR_EVENTO = 'AGREGAR_EVENTO';
-export const ELIMINAR_EVENTO = 'ELIMINAR_EVENTO';
-// Agrega más constantes de tipo según tus necesidades
-// types.js
-export const ACTUALIZAR_EVENTO_SELECCIONADO = 'ACTUALIZAR_EVENTO_SELECCIONADO';
-=======
 
 export const eventsTypes = {
  OBTENER_EVENTOS: 'OBTENER_EVENTOS',
@@ -22,4 +12,6 @@ export const adminTypes = {
  ELIMINAR_ADMINISTRADOR: 'ELIMINAR_ADMINISTRADOR',
  ACTUALIZAR_ADMINISTRADOR: 'ACTUALIZAR_ADMINISTRADOR'
 }
->>>>>>> origin/develop
+// types.js
+
+export const FETCH_COURSE_SUCCESS = 'FETCH_COURSE_SUCCESS';

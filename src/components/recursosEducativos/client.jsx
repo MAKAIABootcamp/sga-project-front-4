@@ -1,21 +1,37 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useMediaQuery } from '@material-ui/core';
 import "../../styles/recursos/RecursosDocentes.scss";
 import iconDiapositivas from '../../assets/images/403227.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCourse } from '../../redux/actions/cursosActions';
+import { useParams } from 'react-router-dom';
 
-
-
-const RecursosEducativos = ({ tituloCurso, endpointURL }) => {
+const RecursosEducativos = () => {
+  const dispatch = useDispatch();
   const isDesktop = useMediaQuery('(min-width: 769px)');
+  const course = useSelector((state) => state.curso);
+
+  const { cursoId } = useParams();
+  console.log({ cursoId });
 
   const [modulo, setModulo] = useState('');
   const [tipoRecurso, setTipoRecurso] = useState('grabacion');
   const [enlaceGrabacion, setEnlaceGrabacion] = useState('');
   const [archivos, setArchivos] = useState({});
   const [error, setError] = useState('');
-  const [serverResponse, setServerResponse] = useState(null);
+  const [serverResponse, setServerResponse] = useState([]);
+  const [cursoActual, setCursoActual] = useState(null);
   const [parsedResponses, setParsedResponses] = useState([]);
+  const [recursosTipoSeleccionado, setRecursosTipoSeleccionado] = useState([]); // Agregar estado para almacenar los recursos del tipo seleccionado
+  const [recursosData, setRecursosData] = useState([]);
+  useEffect(() => {
+    setCursoActual(course.curso); 
+   // Almacenamos la información del curso del estado 'course' en 'cursoActual'
+    dispatch(fetchCourse(cursoId));
+
+  }, [dispatch, cursoId, course]);
+
   const handleModuloChange = (e) => {
     setModulo(e.target.value);
   };
@@ -35,58 +51,130 @@ const RecursosEducativos = ({ tituloCurso, endpointURL }) => {
   const handleArchivoChange = (e, tipoRecurso) => {
     const selectedFile = e.target.files[0];
     if (selectedFile && selectedFile.size <= 2000000) {
-      setArchivos(prevState => ({ ...prevState, [tipoRecurso]: selectedFile }));
+      setArchivos((prevState) => ({ ...prevState, [tipoRecurso]: selectedFile }));
       setError('');
     } else {
-      setArchivos(prevState => ({ ...prevState, [tipoRecurso]: null }));
+      setArchivos((prevState) => ({ ...prevState, [tipoRecurso]: null }));
       setError('El archivo debe ser en formato PDF o Word y tener un tamaño máximo de 2MB.');
     }
   };
+
   const handleTipoArchivoChange = (tipoRecurso) => {
     setTipoRecurso(tipoRecurso);
     setEnlaceGrabacion('');
     setArchivos({});
     setError('');
   };
-  
+  // Simulación del servidor como archivo JSON local
+const serverData = {
+  recursos: {
+    grabacion: [],
+    diapositivas: [],
+    lectura: [],
+    ejercicios: [],
+    ejercicios_obligatorios: []
+  }
+};
+// const handleSubmit = (e) => {
+//   e.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  
-    // Realizar validación manual del formulario
-    if (tipoRecurso === 'diapositivas' && !archivos['diapositivas']) {
-      setError('Seleccione un archivo de diapositivas');
-      return;
-    }
-  
-    const data = {
-      modulo,
-      tipoRecurso,
-      enlaceGrabacion,
-      archivos
-    };
-  
-    axios.post('http://localhost:3000/recursosEndpoint1', data)
-      .then(response => {
-        setServerResponse(response.data);
-        console.log(response.data); // Acceder al valor actualizado aquí
-        localStorage.setItem('serverResponse', JSON.stringify(response.data));
-        setError(''); // Limpiar el mensaje de error si el envío del formulario es 
-        setParsedResponses(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-        setError('Error al enviar el formulario. Por favor, inténtelo de nuevo.'); // Establecer el mensaje de error en caso de que falle el envío del formulario
-      });
-  };
-  
  
-  useEffect(()=> { const storedResponses = localStorage.getItem('serverResponse');
-  const parsedResponses = storedResponses ? JSON.parse(storedResponses) : [];
-  setServerResponse(parsedResponses); 
-  console.log(parsedResponses);
+//   const recursosSeleccionados = serverData.recursos[tipoRecurso]; 
+//   Simulamos un nuevo recurso con los datos del formulario
+//   const nuevoRecurso = {
+//     modulo: modulo,
+//     tipoRecurso: tipoRecurso,
+//     enlaceGrabacion: enlaceGrabacion,
+//     archivos: tipoRecurso !== 'grabacion' ? archivos[tipoRecurso] : {}
+//   };
+//  setRecursosTipoSeleccionado([...recursosSeleccionados, nuevoRecurso]);
+//   Agregamos el nuevo recurso a la lista de recursos del tipo seleccionado
+//   serverData.recursos[tipoRecurso] = recursosSeleccionados;
+//   console.log(nuevoRecurso);
 
-  }, [])
+// console.log(nuevoRecurso);
+//   Resto del código...
+// };
+const handleSubmit = (e,cursoIdObj) => {
+  e.preventDefault();
+
+  if (cursoActual) {
+    // Get the base endpoint URL from cursoActual.endpointUrl
+    const baseEndpoint = "http://localhost:3000/cursos"
+    const { cursoId } = cursoIdObj;
+    // Get the endpoint URL for the selected tipoRecurso
+    const endpoint = `${baseEndpoint}/${tipoRecurso}/${cursoIdObj}`;
+console.log(endpoint);
+    // Simulate a new resource with the form data
+    const nuevoRecurso = {
+      modulo: modulo,
+      tipoRecurso: tipoRecurso,
+      enlaceGrabacion: tipoRecurso === 'grabacion' ? enlaceGrabacion : '',
+      archivos: tipoRecurso !== 'grabacion' ? archivos[tipoRecurso] : {}
+    };
+
+    // Make the API call to the corresponding endpoint using axios
+    axios
+      .post(endpoint, nuevoRecurso)
+      .then((response) => {
+        // Handle the response from the server (if needed)
+        console.log('Response from server:', response.data);
+        setServerResponse((prevResponses) => [...prevResponses, response.data]);
+        setError(''); // Clear the error message if the form submission is successful
+      })
+      .catch((error) => {
+        console.error(error);
+        setError('Error al enviar el formulario. Por favor, inténtelo de nuevo.'); // Set the error message in case the form submission fails
+      });
+  } else {
+    setError('El curso no tiene recursos disponibles.');
+  }
+};
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+
+//     Realizar validación manual del formulario
+//     if (tipoRecurso === 'diapositivas' && !archivos['diapositivas']) {
+//       setError('Seleccione un archivo de diapositivas');
+//       return;
+//     }
+//     if (!cursoActual.curso || !cursoActual.curso.recursosEndpoint) {
+//       setError('Endpoint de recursos no definido para este curso.');
+//       return;
+//     }
+
+//     const formData = new FormData();
+//     formData.append('modulo', modulo);
+//     formData.append('tipoRecurso', tipoRecurso);
+//     formData.append('cursoId', cursoId);
+//     formData.append('enlaceGrabacion', enlaceGrabacion);
+// console.log(formData);
+//     Agregar archivos al formData si el tipo de recurso es diferente de grabación
+//     if (tipoRecurso !== 'grabacion') {
+//       const archivo = archivos[tipoRecurso];
+//       formData.append('archivo', archivo);
+//     }
+
+//     Realizar la solicitud POST usando formData para subir archivos
+//     axios.post(cursoActual.curso.recursosEndpoint, formData)
+//       .then((response) => {
+//         setServerResponse((prevResponses) => [...prevResponses, response.data]);
+//         setError(''); // Limpiar el mensaje de error si el envío del formulario es exitoso
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//         setError('Error al enviar el formulario. Por favor, inténtelo de nuevo.'); // Establecer el mensaje de error en caso de que falle el envío del formulario
+//       });
+//   };
+
+//   useEffect(() => {
+//     const storedResponses = localStorage.getItem('serverResponse');
+    
+//     const parsedResponses = storedResponses ? JSON.parse(storedResponses) : [];
+//     setServerResponse(parsedResponses);
+//     console.log(JSON.parse(storedResponses))
+//   }, []);
  
   if (!isDesktop) {
     return (
@@ -130,9 +218,11 @@ const RecursosEducativos = ({ tituloCurso, endpointURL }) => {
           </section>
         </form>
 
-        <div className="card-container inputs__respuesta">
-  {
-    Object.values(parsedResponses).map((response, index) => (
+        {/* <div className="card-container inputs__respuesta">
+  {parsedResponses.length === 0 ? (
+    <p>No hay respuestas disponibles.</p>
+  ) : (
+    parsedResponses.map((response, index) => (
       <div className="card" key={index}>
         <h3>Respuesta {index + 1}</h3>
         <p>Modulo: {response.modulo}</p>
@@ -158,15 +248,16 @@ const RecursosEducativos = ({ tituloCurso, endpointURL }) => {
         )}
       </div>
     ))
-  }
+  )}
 </div>
-      </div>
+       */}
+  </div>
     );
   }
   return (
-    <div className="inputs" style={{ padding: "10px 122px", borderRadius: "5px" }}>
-      <section className="inputs__titulo" style={{ backgroundColor: "#B5B2B2", padding: "10px 20px", borderRadius: "5px" }}>
-        <h1 id=''>Material de estudio</h1>
+    <div className="inputs" style={{  borderRadius: "5px" }}>
+               <section className="inputs__titulo" id='titulo__desktop' style={{ backgroundColor: "#B5B2B2", padding: "10px 20px", borderRadius: "5px" }}>
+        <h1 >Material de estudio</h1>
       </section>
       <form onSubmit={handleSubmit} className="inputs__form__responsive">
         {/* Resto del formulario */}
@@ -245,8 +336,37 @@ const RecursosEducativos = ({ tituloCurso, endpointURL }) => {
               style={{ display: 'none' }}
             />
           </div>
+        
         </section>
-  
+
+  <div>
+    <h2>{`Recursos de tipo ${tipoRecurso}`}</h2>
+    {recursosTipoSeleccionado.map((recurso, index) => (
+      <div key={index}>
+        <p>Modulo: {recurso.modulo}</p>
+        <p>Tipo de Recurso: {recurso.tipoRecurso}</p>
+        {recurso.tipoRecurso === 'grabacion' && (
+          <p>Enlace de Grabación: {recurso.enlaceGrabacion}</p>
+        )}
+        {recurso.tipoRecurso !== 'grabacion' && recurso.archivos && (
+          <div>
+            {Object.entries(recurso.archivos).map(([tipo, archivo], i) => (
+              <div key={i}>
+                <p>{tipo}: </p>
+                {archivo && (
+                  <a href={URL.createObjectURL(archivo)} target="_blank" rel="noopener noreferrer">
+                    Ver archivo
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    ))}
+  </div>
+
+
         {/* Resto del formulario */}
         <div className="inputs__input inputs__responsive" id="inputs__titulo__responsive__desktop">
           <label htmlFor="modulo">Módulo:</label>
@@ -256,9 +376,39 @@ const RecursosEducativos = ({ tituloCurso, endpointURL }) => {
           <button type="submit" id='botonparasubirarchivo'>Subir Archivo</button>
         </section>
       </form>
-      <div className="card-container inputs__respuesta">
-        {/* Respuestas */}
+    
+      {/* <div className="card-container inputs__respuesta">
+  {parsedResponses.length === 0 ? (
+    <p>No hay respuestas disponibles.</p>
+  ) : (
+    parsedResponses.map((response, index) => (
+      <div className="card" key={index}>
+        <h3>Respuesta {index + 1}</h3>
+        <p>Modulo: {response.modulo}</p>
+        <p>Tipo de Recurso: {response.tipoRecurso}</p>
+        {response.tipoRecurso === 'grabacion' && (
+          <div>
+            <p>Enlace de Grabación: {response.enlaceGrabacion}</p>
+          </div>
+        )}
+        {response.tipoRecurso !== 'grabacion' && response.archivos && (
+          <div>
+            {Object.entries(response.archivos).map(([tipo, archivo], i) => (
+              <div key={i}>
+                <p>{tipo}: </p>
+                {archivo && (
+                  <a href={URL.createObjectURL(archivo)} target="_blank" rel="noopener noreferrer">
+                    Ver archivo
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
+    ))
+  )}
+</div> */}
     </div>
   );}
 export default RecursosEducativos;  

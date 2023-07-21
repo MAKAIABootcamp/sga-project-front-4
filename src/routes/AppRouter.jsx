@@ -19,6 +19,7 @@ import RecursosEducativos from "../components/recursosEducativos/client";
 import Cursos from "../components/recursosEducativos/Cursos"
 import CronogramaEstudiantes from "../components/cronograma/CalendarioVisualizacion";
 const AppRouter = () => {
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -38,7 +39,7 @@ const AppRouter = () => {
           {/* MODULO DE FORMADOR*/}
           <Route path='/asistencia' element={<AsistenciaPage/>}/>
           <Route path='/cursos-disponibles-recursos-educativos' element={<Cursos/>}/>
-          <Route path='/recursos-educativos' element={<RecursosEducativos/>}/>
+          <Route path="/recursos-educativos/:cursoId" element={<RecursosEducativos />} />
           {/* MODULO DE ESTUDIANTE*/}
           <Route path='/plan' element={<PlanDeEstudios/>}/>
           <Route path='/notas' element={<Notas/>}/>

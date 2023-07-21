@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { fetchCourse } from '../../redux/actions/cursosActions';
+import { useSelector, useDispatch } from 'react-redux';
+
 const CursoCard = ({ curso, onClick }) => {
   return (
     <div className="card">
-      <img src={curso.imagen} className="card-img-top" alt={curso.titulo} />
+
       <div className="card-body">
         <h5 className="card-title">{curso.titulo}</h5>
         <p className="card-text">{curso.descripcion}</p>
@@ -19,11 +21,12 @@ const CursoCard = ({ curso, onClick }) => {
   );
 };
 
+
 const Cursos = () => {
-  const navigate = useNavigate();
+     const dispatch = useDispatch(); 
+     const navigate = useNavigate();
   const [cursos, setCursos] = useState([]);
 
- 
   useEffect(() => {
     axios.get('http://localhost:3000/cursos')
       .then((response) => {
@@ -35,13 +38,15 @@ const Cursos = () => {
       });
   }, []);
 
-  const handleCursoClick = (cursoId) => {
-    dispatch(fetchCourse(cursoId));
-    navigate(`/cursos/${cursoId}`);
-  };
+
+    const handleCursoClick = (cursoId) => {
+      dispatch(fetchCourse(cursoId));
+     
+      navigate(`/recursos-educativos/${cursoId}`);
+    };
 
   return (
-    <div>
+    <div  style={{ display: 'flex', flexDirection: 'column', paddingLeft:"10px" , gap: "10px",paddingTop: '100px' }}>
       {cursos.map((curso) => (
         <CursoCard
           key={curso.id}
