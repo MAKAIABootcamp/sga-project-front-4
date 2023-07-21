@@ -4,9 +4,12 @@ import logo from "../assets/images/Logo-Bootcamp.png";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { loginActionAsync } from "../redux/actions/userActions";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch(); 
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()
@@ -14,25 +17,27 @@ const Login = () => {
       .required("El correo electrónico es obligatorio"),
     password: Yup.string()
       .required("La contraseña es un campo obligatorio")
-      .min(8, "La contraseña debe tener al menos 8 caracteres.")
-      .max(20, "La contraseña debe tener como máximo 20 caracteres.")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-        "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial."
-      ),
+      // .min(8, "La contraseña debe tener al menos 8 caracteres.")
+      // .max(20, "La contraseña debe tener como máximo 20 caracteres.")
+      // .matches(
+      //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      //   "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial."
+      // ),
   });
 
-  const handleSubmit = (values) => {
+  const handleLogin = (values) => {
     console.log(values);
-  };
+    dispatch(loginActionAsync(values.email, values.password));
+  }
+
+  // const handleSubmit = (values) => {
+  //   console.log(values);
+  // };
 
   const handleToForgetPassword = () => {
     navigate("/olvidar-contrasena");
   };
 
-  const handleToPanel = () => {
-    navigate("/dashboard");
-  };
   return (
     <section
       className="gradient-form"
@@ -56,7 +61,7 @@ const Login = () => {
                         password: "",
                       }}
                       validationSchema={validationSchema}
-                      onSubmit={handleSubmit}
+                      onSubmit={handleLogin}
                     >
                       {({ errors, touched, isValid }) => (
                         <Form>
@@ -108,7 +113,7 @@ const Login = () => {
                             <button
                               className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                               type="submit"
-                              onClick={handleToPanel}
+                              // onClick={handleToPanel}
                               disabled={!isValid}
                             >
                               INGRESAR

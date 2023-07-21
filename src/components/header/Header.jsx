@@ -6,6 +6,8 @@ import "../../styles/header/Header.scss";
 import { BsBoxArrowRight } from "react-icons/bs";
 import { BsPerson } from "react-icons/bs";
 import { useNavigate } from "react-router";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/firebaseConfig";
 
 const Header = ({ handleMenuToggle }) => {
   const [listProfileOpen, setListProfileOpen] = useState(false);
@@ -78,6 +80,7 @@ const Header = ({ handleMenuToggle }) => {
 
                   <li>
                     <a
+                      onClick={()=> signOut(auth)}
                       className="dropdown-item d-flex align-items-center"
                       href="#"
                     >
