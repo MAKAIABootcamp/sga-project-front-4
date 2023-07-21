@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setEstudiantes } from "../reducers/estudiantesReducer";
+import { setCohorte, setEstudiantes } from "../reducers/estudiantesReducer";
 
 const URL = 'https://backend-sga-icqb.vercel.app/';
 
@@ -14,3 +14,14 @@ export const getStudents = (endpoint) => {
     }
   }
 }
+
+export const filterCohorte = (cohorte) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setCohorte(cohorte));
+    } catch (error) {
+      console.log('error', error);
+    }
+  }
+}
+

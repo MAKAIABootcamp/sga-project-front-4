@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     estudiantes: [],
+    arrCohorte: [],
+    
 };
 
 const studentSlice = createSlice({
@@ -10,12 +12,16 @@ const studentSlice = createSlice({
 
     reducers: {
         setEstudiantes: (state, action) => {
-            state.eventos = action.payload
+            state.estudiantes = action.payload
         },
+        setCohorte: (state, action) => {
+            state.arrCohorte = action.payload
+        }
     }
 });
 
 export const {
-    setEstudiantes
+    setEstudiantes,
+    setCohorte,
 } = studentSlice.actions;
 export default studentSlice.reducer;
