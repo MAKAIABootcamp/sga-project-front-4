@@ -6,6 +6,7 @@ export const loginActionAsync = (email, password) => {
   return async (dispatch) => {
     try {
       const response = await login(email, password);
+      console.log(response)
       if (response) {
         dispatch(loginActionSync(response));
         const Toast = Swal.mixin({
@@ -29,7 +30,7 @@ export const loginActionAsync = (email, password) => {
           icon: 'error',
           title: '¡El usuario no existe!',
           showConfirmButton: false,
-          // timer: 1000
+          timer: 1000
         })
       }
     } catch (error) {

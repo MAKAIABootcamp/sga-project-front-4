@@ -33,6 +33,9 @@ export const login = async (email, password) => {
     if (usersFromCollection.length) {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       console.log(user);
+       // Verifica el valor del rol antes de devolver el objeto user
+       console.log("Rol del usuario:", usersFromCollection[0].rol);
+       console.log("info del usuario:", usersFromCollection[0]);
       return usersFromCollection[0];
     }
     return null;

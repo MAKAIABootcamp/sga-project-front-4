@@ -29,29 +29,12 @@ import { Spinner } from "react-bootstrap";
 import { Box, CircularProgress } from "@mui/material";
 
 const AppRouter = () => {
-  // useEffect(() => {
-  // crearUsuario();
-  // }, [])
-  // const crearUsuario = async () => {
-  //   const email = "jhonmariocartagena@gmail.com";
-  //   const password="123456"
-  //   try {
-  //     const { user } = await createUserWithEmailAndPassword(
-  //       auth,
-  //       email,
-  //       password
-  //     );
-  //     console.log(user);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   const [checking, setCheking] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(undefined);
 
-  const { user } = useSelector((store) => store.userReducer);
-  console.log(user);
+  const usuarios = useSelector((store) => store.userReducer);
+  console.log(usuarios);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
