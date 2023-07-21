@@ -11,6 +11,7 @@ import './StylesAsistencia.scss'
 import { useCallback, useEffect, useState } from "react";
 import { utils, writeFileXLSX } from 'xlsx';
 import BotonesFiltrado from "./BtnFintrado/BotonesFiltrado";
+import { useSelector } from "react-redux";
 
 
 
@@ -24,84 +25,85 @@ const PageAsistencia = () => {
   
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [students, setStudents] = useState([
-    {
-      key: 1,
-      name: "Jose",
-      apellido: "Sanmiguel",
-      doc: 10014053343,
-      tel: "+57 311 859 9554",
-      email: 'example@example.com',
-      asistencia: 10,
-      observaciones: ''
-    },
-    {
-      key: 2,
-      name: "Luisa",
-      apellido: "Urrego",
-      doc: 10014053343,
-      tel: "+57 311 859 9554",
-      email: 'example@example.com',
-      asistencia: 5,
-      observaciones: ''
-    },
-    {
-      key: 3,
-      name: "Yesid",
-      apellido: "Vanegas",
-      doc: 10014053343,
-      tel: "+57 311 859 9554",
-      email: 'example@example.com',
-      asistencia: 8,
-      observaciones: ''
-    },
-    {
-      key: 4,
-      name: "John",
-      apellido: "Cartagena",
-      doc: 10014053343,
-      tel: "+57 311 859 9554",
-      email: 'example@example.com',
-      asistencia: 9,
-      observaciones: ''
-    },
-    {
-      key: 5,
-      name: "Angie",
-      apellido: "Moreno",
-      doc: 10014053343,
-      tel: "+57 311 859 9554",
-      email: 'example@example.com',
-      asistencia: 10,
-      observaciones: ''
-    },
-  ]);
+  const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.arrCohorte)
+  // const [students, setStudents] = useState([
+  //   {
+  //     key: 1,
+  //     name: "Jose",
+  //     apellido: "Sanmiguel",
+  //     doc: 10014053343,
+  //     tel: "+57 311 859 9554",
+  //     email: 'example@example.com',
+  //     asistencia: 10,
+  //     observaciones: ''
+  //   },
+  //   {
+  //     key: 2,
+  //     name: "Luisa",
+  //     apellido: "Urrego",
+  //     doc: 10014053343,
+  //     tel: "+57 311 859 9554",
+  //     email: 'example@example.com',
+  //     asistencia: 5,
+  //     observaciones: ''
+  //   },
+  //   {
+  //     key: 3,
+  //     name: "Yesid",
+  //     apellido: "Vanegas",
+  //     doc: 10014053343,
+  //     tel: "+57 311 859 9554",
+  //     email: 'example@example.com',
+  //     asistencia: 8,
+  //     observaciones: ''
+  //   },
+  //   {
+  //     key: 4,
+  //     name: "John",
+  //     apellido: "Cartagena",
+  //     doc: 10014053343,
+  //     tel: "+57 311 859 9554",
+  //     email: 'example@example.com',
+  //     asistencia: 9,
+  //     observaciones: ''
+  //   },
+  //   {
+  //     key: 5,
+  //     name: "Angie",
+  //     apellido: "Moreno",
+  //     doc: 10014053343,
+  //     tel: "+57 311 859 9554",
+  //     email: 'example@example.com',
+  //     asistencia: 10,
+  //     observaciones: ''
+  //   },
+  // ]);
   const [fallas, setFallas] = useState(0);
 
   const exportFile = useCallback(() => {
-    const ws = utils.json_to_sheet(students);
+    const ws = utils.json_to_sheet(arrayEstudiantes);
     const wb = utils.book_new();
     utils.book_append_sheet(wb, ws, 'Data');
     writeFileXLSX(wb, 'Prueba.xlsx');
-  }, [students]);
+  }, [arrayEstudiantes]);
 
 
   
 
   useEffect(() => {
-    const filtered = students.filter((user) => (user.name).toLowerCase().includes(searchTerm.toLowerCase()));
+    const filtered = arrayEstudiantes.filter((user) => (user.name).toLowerCase().includes(searchTerm.toLowerCase()));
     setFilteredUsers(filtered)
-  }, [searchTerm, students]);
+  }, [searchTerm, arrayEstudiantes]);
 
   const selectionType = 'checkbox';
   const columns = [
     {
       title: 'Apellido',
-      dataIndex: 'apellido',
-      render: (text) =>
+      dataIndex: 'lastname',
+      render: (text, record) =>
         <>
           <span className="apodo">
-            {text.slice(0, 2)}
+            {record.name.slice(0, 2)}
           </span>
           <a>{text}</a>
         </>
@@ -114,11 +116,11 @@ const PageAsistencia = () => {
     },
     {
       title: 'Documento',
-      dataIndex: 'doc',
+      dataIndex: 'numeroDocumento',
     },
     {
       title: 'Teléfono',
-      dataIndex: 'tel',
+      dataIndex: 'telefono',
     },
     {
       title: 'Email',
@@ -159,10 +161,10 @@ const PageAsistencia = () => {
         <div className="infoAsistencia">
           <div className="totalidad">
             <p>
-              Total de estudiantes: <span>{students.length}</span>
+              Total de estudiantes: <span>{arrayEstudiantes.length}</span>
             </p>
             <p>
-              Total de fallas: <span>{students.length - fallas}</span>
+              Total de fallas: <span>{arrayEstudiantes.length - fallas}</span>
             </p>
           </div>
 

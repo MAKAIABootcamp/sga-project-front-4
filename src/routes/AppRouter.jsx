@@ -16,9 +16,9 @@ import PlanDeEstudios from "../pages/PlanDeEstudios";
 import Notas from "../pages/Notas";
 import RecursosEstudiantes from "../pages/RecursosEstudiantes";
 import Calificaiones from "../components/Calificaciones/Calificaiones";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useEffect } from "react";
-import { auth } from "../firebase/firebaseConfig";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { useEffect } from "react";
+// import { auth } from "../firebase/firebaseConfig";
 
 const AppRouter = () => {
   

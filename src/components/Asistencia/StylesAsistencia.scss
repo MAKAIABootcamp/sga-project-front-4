@@ -3,8 +3,10 @@
 .asistencia {
     display: flex;
     flex-direction: column;
+    width: 100%;
     background-color: $colorFondoContenido;
     padding: 2% 4%;
+    margin-top: 2rem;
 
     h2 {
         display: flex;
@@ -68,9 +70,8 @@
         align-items: center;
         margin-top: 1.6rem;
 
-        a {
-            font-size: 1.2rem;
-            font-weight: 600;
+        span {
+            font-size: 1rem;
         }
     }
 

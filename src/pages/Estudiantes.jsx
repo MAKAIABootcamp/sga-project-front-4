@@ -24,8 +24,10 @@ const Estudiantes = () => {
   const [showModal, setShowModal] = useState(false);
   const [students, setEstudents] = useState([]);
 
-  const estudiantes = useSelector((store) => store.estudiantesReducer.estudiantes);
-  console.log("estudiantes desde page estudiantes", estudiantes);
+  // const estudiantes = useSelector((store) => store.estudiantesReducer.estudiantes);
+  // console.log("estudiantes desde page estudiantes", estudiantes);
+
+  const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.arrCohorte)
 
   const dispatch = useDispatch();
   const handleCloseModal = () => {
@@ -124,7 +126,7 @@ const Estudiantes = () => {
     },
   ];
 
-  const mappedEstudiantes = estudiantes.map((estudiante) => ({
+  const mappedEstudiantes = arrayEstudiantes.map((estudiante) => ({
     key: estudiante.id,
     name: estudiante.name,
     lastname: estudiante.lastname,
