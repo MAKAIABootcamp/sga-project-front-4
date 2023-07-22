@@ -1,6 +1,6 @@
 import axios from "axios";
 import { auth, dataBase } from "../firebase/firebaseConfig";
-import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { collections } from "./data";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
@@ -19,7 +19,8 @@ export const fuctionGet = async (endpoint) => {
 const colection = collections.USUARIOS;
 const refCollection = collection(dataBase, colection);
 
-export const login = async (email, password) => {
+
+export const getUserFromCollection = async (email) => {
   const usersFromCollection = [];
   try {
     const q = query(refCollection, where("email", "==", email));
@@ -30,13 +31,34 @@ export const login = async (email, password) => {
         ...doc.data(),
       })
     );
-    if (usersFromCollection.length) {
+    if (usersFromCollection.length) return usersFromCollection[0];
+
+    return null;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export const login = async (email, password) => {
+  // const usersFromCollection = [];
+  try {
+    // const q = query(refCollection, where("email", "==", email));
+    // const querySnapshot = await getDocs(q);
+    // querySnapshot.forEach((doc) =>
+    //   usersFromCollection.push({
+    //     id: doc.id,
+    //     ...doc.data(),
+    //   })
+    // );
+    const usersFromCollection = await getUserFromCollection(email);
+    if (usersFromCollection) {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       console.log(user);
        // Verifica el valor del rol antes de devolver el objeto user
-       console.log("Rol del usuario:", usersFromCollection[0].rol);
-       console.log("info del usuario:", usersFromCollection[0]);
-      return usersFromCollection[0];
+       console.log("Rol del usuario:", usersFromCollection.rol);
+       console.log("info del usuario:", usersFromCollection);
+      return usersFromCollection;
     }
     return null;
   } catch (error) {

@@ -1,5 +1,7 @@
 import { login } from "../../services/getUsers";
-import { collections } from "../../services/data";
+//import { collections } from "../../services/data";
+import { loginUser } from "../reducers/userReducer";
+import { getUserFromCollection } from "../../services/getUsers";
 import Swal from 'sweetalert2';
 
 export const loginActionAsync = (email, password) => {
@@ -8,7 +10,7 @@ export const loginActionAsync = (email, password) => {
       const response = await login(email, password);
       console.log(response)
       if (response) {
-        dispatch(loginActionSync(response));
+        dispatch(loginUser(response));
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -39,9 +41,20 @@ export const loginActionAsync = (email, password) => {
   };
 };
 
-export const loginActionSync = (user) => {
-  return {
-    type: collections.USUARIOS,
-    payload: user,
-  };
-};
+export const keepInfoUserAction = (email) => {
+  return async (dispatch) => {
+    try {
+      const user = await getUserFromCollection(email);
+      dispatch(loginUser(user));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
+
+// export const loginActionSync = (user) => {
+//   return {
+//     type: collections.USUARIOS,
+//     payload: user,
+//   };
+// };

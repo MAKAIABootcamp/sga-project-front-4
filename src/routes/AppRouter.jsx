@@ -17,35 +17,43 @@ import Notas from "../pages/Notas";
 import RecursosEstudiantes from "../pages/RecursosEstudiantes";
 import Calificaiones from "../components/Calificaciones/Calificaiones";
 import {
-  createUserWithEmailAndPassword,
+  //createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "../firebase/firebaseConfig";
 import PublicRouter from "./PublicRouter";
 import PrivateRouter from "./PrivateRouter";
-import { useSelector } from "react-redux";
-import { Spinner } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
+//import { Spinner } from "react-bootstrap";
 import { Box, CircularProgress } from "@mui/material";
+import SuperAdminRouter from "./SuperAdminRouter";
+import { keepInfoUserAction } from "../redux/actions/userActions";
+import AdminRouter from "./AdminRouter";
+import FormadorRoute from "./FormadorRouter";
+import EstudiantesRoute from "./EstudianteRoutes";
 
 const AppRouter = () => {
-
+  const dispatch = useDispatch();
   const [checking, setCheking] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(undefined);
 
-  const usuarios = useSelector((store) => store.userReducer);
-  console.log(usuarios);
+  const { user: loggedUser } = useSelector((store) => store.userReducer);
+  console.log(loggedUser);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user?.uid) {
         setIsLoggedIn(true);
+        if (!loggedUser) {
+          dispatch(keepInfoUserAction(user.email));
+        }
       } else {
         setIsLoggedIn(false);
       }
       setCheking(false);
     });
-  }, [setIsLoggedIn, setCheking]);
+  }, [setIsLoggedIn, setCheking, dispatch, loggedUser]);
 
   if (checking) {
     return (
@@ -68,22 +76,38 @@ const AppRouter = () => {
         <Route element={<PrivateRouter isAutentication={isLoggedIn} />}>
           <Route element={<Layout />}>
             <Route path="/dashboard" element={<Panel />} />
-            {/* MODULOS DE PANEL DE ADMINISTRADOR */}
-            <Route path="/estudiantes" element={<Estudiantes />} />
-            <Route path="/cronograma" element={<Cronograma />} />
             <Route path="/perfil" element={<PerfilPage />} />
-            {/* MODULO REGISTRO SUPER ADMINISTRADOR */}
-            <Route
-              path="/registro-administradores"
-              element={<PanelSuperAdministrador />}
-            />
+            {/* MODULOS DE PANEL DE ADMINISTRADOR */}
+            <Route element={<AdminRouter userType={loggedUser?.rol} />}>
+              <Route path="/estudiantes" element={<Estudiantes />} />
+
+
+            </Route>
+
+            <Route element={<FormadorRoute userType={loggedUser?.rol} />}>
+              <Route path="/calificaciones" element={<Calificaiones />} />
+              <Route path="/asistencia" element={<AsistenciaPage />} />
+              <Route path="/cronograma" element={<Cronograma />} />
+              <Route path="/recursos" element={<RecursosEstudiantes />} />
+            </Route>
+
+            <Route element={<EstudiantesRoute userType={loggedUser?.rol} />}>
+              <Route path="/notas" element={<Notas />} />
+              <Route path="/plan" element={<PlanDeEstudios />} />
+            </Route>
+
             {/* MODULO DE FORMADOR*/}
-            <Route path="/asistencia" element={<AsistenciaPage />} />
-            <Route path="/calificaciones" element={<Calificaiones />} />
+
+
             {/* MODULO DE ESTUDIANTE*/}
-            <Route path="/plan" element={<PlanDeEstudios />} />
-            <Route path="/notas" element={<Notas />} />
-            <Route path="/recursos" element={<RecursosEstudiantes />} />
+
+            {/* MODULO REGISTRO SUPER ADMINISTRADOR */}
+            <Route element={<SuperAdminRouter userType={loggedUser?.rol} />}>
+              <Route
+                path="/registro-administradores"
+                element={<PanelSuperAdministrador />}
+              />
+            </Route>
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />
