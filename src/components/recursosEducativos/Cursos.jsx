@@ -14,7 +14,7 @@ const CursoCard = ({ curso, onClick }) => {
         <p className="card-text">Duración: {curso.duracion}</p>
         <p className="card-text">Instructor: {curso.instructor}</p>
         <button className="btn btn-primary" onClick={onClick}>
-          Ir al Curso
+          Agregar Archivos
         </button>
       </div>
     </div>
