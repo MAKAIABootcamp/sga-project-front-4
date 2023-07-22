@@ -13,6 +13,7 @@ const RecursosEducativos = () => {
   const course = useSelector((state) => state.curso);
 
   const { cursoId } = useParams();
+
   const idCurso = cursoId.cursoId;
 
   const [modulo, setModulo] = useState('');
@@ -100,7 +101,7 @@ const handleSubmit = (e,idCurso) => {
 
   if (cursoActual) {
     // Get the base endpoint URL from cursoActual.endpointUrl
-    const baseEndpoint = "http://localhost:3000/recursos"
+    const baseEndpoint = "http://localhost:3000"
     console.log(cursoId);
     const endpoint = `${baseEndpoint}/${tipoRecurso}/${cursoId}`;
     console.log(endpoint);
