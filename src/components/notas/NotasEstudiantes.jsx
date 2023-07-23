@@ -45,14 +45,16 @@ const NotasEstudiantes = () => {
           ]}
           />
         </article>
-        <Tooltip title="2 Sprints completados de 4">
-        <Progress
-          percent={50}
-          success={{
-            percent: 50,
-          }}
-        />
-        </Tooltip>
+        <div className="notas__barra">
+          <Tooltip title="2 Sprints completados de 4">
+          <Progress
+            percent={50}
+            success={{
+              percent: 50,
+            }}
+          />
+          </Tooltip>
+        </div>
 
         <Space direction="vertical" size={16}>
           <Card title="Sprint 2 - aerolíneas" style={{ width: '100%' }} extra={<p>Completado</p>}>
@@ -74,7 +76,7 @@ const NotasEstudiantes = () => {
           <Card title="Sprint 1 - E-commerce" style={{ width: '100%' }} extra={<p>Completado</p>}>
           <p>Fecha de entrega: Abril 23, 2023</p>
             <Progress type="circle" percent={70} size={70} className="porcentaje"/>
-            <Button type="primary">
+            <Button type="primary" onClick={showModal}>
               Feedback
             </Button>
           </Card>
@@ -92,7 +94,7 @@ const NotasEstudiantes = () => {
         </section>
 
         <section className="notas__promedio">
-        <Card title="Nota promedio" style={{ width: '100%' }} extra={<select><option value="1">Fundamentos</option><option value="2">Profundización</option></select>}>
+        <Card title="Nota promedio"  extra={<select style={{ width: 'auto', backgroundColor: '#f6f9ff'}}> <option value="1">Fundamentos</option><option value="2">Profundización</option></select>}>
           <Tooltip title="2 Sprints completados de 4">
           <Progress
             percent={80}

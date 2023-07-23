@@ -1,11 +1,14 @@
+@import '../../styles/index.scss';
+
 .notas{
     display: flex;
     flex-direction: row;
-    align-items: center;
-    background-color: #6AB3EE;
-    margin-left: 5%;
-    padding: 3%;
-
+    align-items: baseline;
+    background-color: $colorFondoContenido;
+    padding: 0% 4%;
+    width: 100%;
+    height: 100vh;
+    margin-top: 46px;
 }
 
 .notas__cards{
@@ -18,6 +21,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.notas__barra{
+    margin: 3% 0%;
 }
 
 .porcentaje{
