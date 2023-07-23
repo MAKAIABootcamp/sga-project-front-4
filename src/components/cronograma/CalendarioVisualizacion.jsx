@@ -7,11 +7,17 @@ import interactionPlugin from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
 import { getEvents } from "../../services/getEvents";
 import "../../styles/cronograma/Cronograma.scss";
+
 const CalendarioVisualizacion = () => {
   const [eventos, setEventos] = useState([]);
   const [selectedWeek, setSelectedWeek] = useState(null);
   const [selectedDay, setSelectedDay] = useState(null);
   const [isMobile, setIsMobile] = useState(window.matchMedia("(max-width: 768px)").matches);
+  const [showAgenda, setShowAgenda] = useState(false);
+
+  const toggleAgendaView = () => {
+    setShowAgenda((prevState) => !prevState);
+  };
 
   useEffect(() => {
     getEvents().then((data) => {
@@ -33,9 +39,8 @@ const CalendarioVisualizacion = () => {
   const handleEventClick = (info) => {
     if (!isMobile) {
       const event = info.event;
-      console.log(event);
       const { title, start, end } = event;
-  
+
       setSelectedDay({
         title,
         fechaInicio: start,
@@ -43,43 +48,38 @@ const CalendarioVisualizacion = () => {
       });
     }
   };
-  
 
   const colorearEvento = (tipo) => {
-    let backgroundColor = "#3788D8"; // Por defecto: azul
-    let textColor = "#FFFFFF"; // Por defecto: blanco
-  
+    let backgroundColor = "#3788D8";
+    let textColor = "#FFFFFF";
+
     if (tipo === "festivo") {
-      backgroundColor = "#E74C3C"; // Festivos: rojo
+      backgroundColor = "#E74C3C";
     } else if (tipo === "entrega") {
-      backgroundColor = "#27AE60"; // Entregas: verde
+      backgroundColor = "#27AE60";
     } else if (tipo === "clase") {
-      backgroundColor = "#F39C12"; // Clases: amarillo
+      backgroundColor = "#F39C12";
     }
-  
+
     return { backgroundColor, textColor };
   };
-  
+
   const ajustarContenidoEvento = (info) => {
     const event = info.event;
     const { backgroundColor, textColor } = colorearEvento(event.extendedProps.tipo);
-  
-    // Verificar si es vista móvil o escritorio
+
     if (isMobile) {
-      // Vista móvil: Mostrar fecha de inicio y fin del evento
       return {
         html: `<div class="custom-event" style="background-color: ${backgroundColor}; color: ${textColor};">${event.title} - ${event.start.toLocaleDateString()} ${event.end ? `- ${event.end.toLocaleDateString()}` : ''}</div>`,
       };
     } else {
-      // Vista de escritorio: Mostrar solo el título del evento
       return {
         html: `<div class="custom-event custom-event-circle" style="background-color: ${backgroundColor};"></div>`,
-        backgroundColorClass: `event-background-${event.id}`, // Agregamos una clase con el color de fondo correspondiente
+        backgroundColorClass: `event-background-${event.id}`,
       };
-      
-      
     }
   };
+
   const renderConvenciones = () => {
     return (
       <table>
@@ -106,8 +106,7 @@ const CalendarioVisualizacion = () => {
       </table>
     );
   };
-  
-  
+
   const calendarOptions = {
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
     timeZone: "America/Bogota",
@@ -115,66 +114,68 @@ const CalendarioVisualizacion = () => {
     locale: esLocale,
     events: eventos,
     editable: false,
-    initialView: isMobile ? "listWeek" : "dayGridMonth",
+    initialView: showAgenda ? "listWeek" : isMobile ? "listWeek" : "dayGridMonth",
     eventContent: ajustarContenidoEvento,
-    dayHeaderContent: isMobile
-      ? (args) => {
-          return args.dayNumberText;
-        }
-      : undefined,
-    eventDidMount: isMobile
-      ? (info) => {
-          info.el.style.cursor = "pointer";
-        }
-      : undefined,
+    dayHeaderContent: isMobile ? (args) => args.dayNumberText : undefined,
+    eventDidMount: isMobile ? (info) => (info.el.style.cursor = "pointer") : undefined,
     weekNumberFormat: isMobile ? "w" : undefined,
-   
   };
 
-
+  const agendaOptions = {
+    initialView: "listWeek",
+  };
 
   return (
-    <section style={{height: isMobile ? "18rem" : "18rem", marginTop:isMobile? "8rem":"10rem"}} className="seccionCalendarioVisualizacion">
-      <div className="seccionCalendarioVisualizacion__container" >
+    <section style={{ height: isMobile ? "18rem" : "18rem", marginTop: isMobile ? "8rem" : "10rem" }} className="seccionCalendarioVisualizacion">
+      <div className="seccionCalendarioVisualizacion__container">
         <div id="calendar" className="custom-calendar">
           {isMobile && (
             <div className="seccionCalendarioVisualizacion__titulo">
-              <h2 >Agenda</h2>
+              <h2>Agenda</h2>
               {selectedWeek && <p>Semana seleccionada: {selectedWeek}</p>}
               {selectedDay && <p>Día seleccionado: {selectedDay}</p>}
             </div>
           )}
           <FullCalendar {...calendarOptions} />
         </div>
-        <div className="seccionCalendarioVisualizacion__eventDetails"  style={{ display:isMobile? "none" : "flex" }}>
-          <div><h1>Haga click en un evento para ver los detalles aquí</h1> </div>
-          
-  {selectedDay && (
-    <div className="seccionCalendarioVisualizacion__eventoSeleccionado"  style={{ display:isMobile? "none" : "flex" }}>
+        <div className="seccionCalendarioVisualizacion__eventDetails" style={{ display: isMobile ? "none" : "flex" }}>
+          <div>
+            <h1>Haga click en un evento para ver los detalles aquí</h1>
+          </div>
 
-      <section>
-          <h3>{selectedDay.title}</h3>
-      <p>{selectedDay.detalles}</p>
-      <p>Hora de inicio: {selectedDay.fechaInicio.toLocaleTimeString()}</p>
-      {selectedDay.fechaFin && (
-        <p>Hora de fin: {selectedDay.fechaFin.toLocaleTimeString()}</p>
-      )}  
-      </section>
-  
-    </div>
-  )}
-</div>
-      </div>{isMobile ? (
-        // Vista móvil: Tabla de convenciones en el header
-        <header>
-          {renderConvenciones()}
-        </header>
-      ) : (
-        // Vista de escritorio: Tabla de convenciones en el footer
-        <footer>
-          {renderConvenciones()}
-        </footer>
+          {selectedDay && (
+            <div className="seccionCalendarioVisualizacion__eventoSeleccionado" style={{ display: isMobile ? "none" : "flex" }}>
+              <section>
+                <h3>{selectedDay.title}</h3>
+                <p>{selectedDay.detalles}</p>
+                <p>Hora de inicio: {selectedDay.fechaInicio.toLocaleTimeString()}</p>
+                {selectedDay.fechaFin && <p>Hora de fin: {selectedDay.fechaFin.toLocaleTimeString()}</p>}
+              </section>
+            </div>
+          )}
+        </div>
+      </div>
+      {!isMobile && (
+        <div className="seccionCalendarioVisualizacion__desktopView">
+          {showAgenda ? (
+            <>
+              <div className="seccionCalendarioVisualizacion__monthlyCalendar">
+                <FullCalendar {...calendarOptions} />
+              </div>
+              <div className="seccionCalendarioVisualizacion__weeklyCalendar">
+                <FullCalendar {...agendaOptions} />
+              </div>
+            </>
+          ) : (
+            <div className="seccionCalendarioVisualizacion__toggleAgendaButton">
+              <button onClick={toggleAgendaView}>
+                Mostrar Agenda Semanal
+              </button>
+            </div>
+          )}
+        </div>
       )}
+      {renderConvenciones()}
     </section>
   );
 };

@@ -17,7 +17,7 @@ import Notas from "../pages/Notas";
 import RecursosEstudiantes from "../pages/RecursosEstudiantes";
 import RecursosEducativos from "../components/recursosEducativos/RecursosEducativos";
 import Cursos from "../components/recursosEducativos/Cursos"
-import CronogramaEstudiantes from "../components/cronograma/CalendarioVisualizacion";
+import CronogramaEstudiantes from "../pages/CronogramaEstudiantes";
 const AppRouter = () => {
   
   return (
