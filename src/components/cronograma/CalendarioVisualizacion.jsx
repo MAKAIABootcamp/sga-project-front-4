@@ -134,11 +134,11 @@ const CalendarioVisualizacion = () => {
 
 
   return (
-    <section style={{height: isMobile ? "18rem" : "column", marginTop:isMobile? "8rem":"0px"}} className="seccionCalendarioVisualizacion">
+    <section style={{height: isMobile ? "18rem" : "18rem", marginTop:isMobile? "8rem":"10rem"}} className="seccionCalendarioVisualizacion">
       <div className="seccionCalendarioVisualizacion__container" >
         <div id="calendar" className="custom-calendar">
           {isMobile && (
-            <div className="container__titulo">
+            <div className="seccionCalendarioVisualizacion__titulo">
               <h2 >Agenda</h2>
               {selectedWeek && <p>Semana seleccionada: {selectedWeek}</p>}
               {selectedDay && <p>Día seleccionado: {selectedDay}</p>}
@@ -146,15 +146,21 @@ const CalendarioVisualizacion = () => {
           )}
           <FullCalendar {...calendarOptions} />
         </div>
-        <div className="event-details">
+        <div className="seccionCalendarioVisualizacion__eventDetails"  style={{ display:isMobile? "none" : "flex" }}>
+          <div><h1>Haga click en un evento para ver los detalles aquí</h1> </div>
+          
   {selectedDay && (
-    <div className="container__eventoSeleccionado"  style={{ display:isMobile? "none" : "flex" }}>
-      <h3>{selectedDay.title}</h3>
+    <div className="seccionCalendarioVisualizacion__eventoSeleccionado"  style={{ display:isMobile? "none" : "flex" }}>
+
+      <section>
+          <h3>{selectedDay.title}</h3>
       <p>{selectedDay.detalles}</p>
       <p>Hora de inicio: {selectedDay.fechaInicio.toLocaleTimeString()}</p>
       {selectedDay.fechaFin && (
         <p>Hora de fin: {selectedDay.fechaFin.toLocaleTimeString()}</p>
-      )}
+      )}  
+      </section>
+  
     </div>
   )}
 </div>
