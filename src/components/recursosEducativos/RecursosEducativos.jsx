@@ -21,7 +21,7 @@ const RecursosEducativos = () => {
   const [serverResponse, setServerResponse] = useState([]);
   const [cursoActual, setCursoActual] = useState(null);
   const [recursosTipoSeleccionado, setRecursosTipoSeleccionado] = useState([]); // Agregar estado para almacenar los recursos del tipo seleccionado
-
+const [nombreRecurso,setNombreRecurso]= useState(""); 
   useEffect(() => {
     setCursoActual(course.curso); 
     dispatch(fetchCourse(cursoId));
@@ -49,6 +49,8 @@ const RecursosEducativos = () => {
     if (selectedFile && selectedFile.size <= 2000000) {
       setArchivos((prevState) => ({ ...prevState, [tipoRecurso]: selectedFile }));
       setError('');
+      setNombreRecurso(selectedFile.name)
+      
     } else {
       setArchivos((prevState) => ({ ...prevState, [tipoRecurso]: null }));
       setError('El archivo debe ser en formato PDF o Word y tener un tamaño máximo de 2MB.');
@@ -77,7 +79,8 @@ const handleSubmit = (e,idCurso) => {
       modulo: modulo,
       tipoRecurso: tipoRecurso,
       enlaceGrabacion: tipoRecurso === 'grabacion' ? enlaceGrabacion : '',
-      archivos: tipoRecurso !== 'grabacion' ? archivos[tipoRecurso] : {}
+      archivos: tipoRecurso !== 'grabacion' ? archivos[tipoRecurso] : {},
+      nombreArchivo:nombreRecurso
     };
 
     // Make the API call to the corresponding endpoint using axios
@@ -143,7 +146,16 @@ if (!isDesktop) {
         {/* Mostrar todos los archivos subidos */}
         {serverResponse.map((recurso, index) => (
           <div key={index} className='inputs__respuesta'>
-            <p>Agregado: {recurso.modulo} {recurso.tipoRecurso}</p>
+           {recurso.enlaceGrabacion ? (
+      <p>
+        Agregado: {recurso.modulo},
+        <a href={recurso.enlaceGrabacion} target="_blank" rel="noopener noreferrer">
+          <i className="fas fa-play-circle"></i> Enlace de grabación
+        </a>
+      </p>
+    ) : (
+      <p>Agregado: {recurso.modulo}, {recurso.nombreArchivo}</p>
+    )}
           </div>
         ))}
       </div>
@@ -169,11 +181,20 @@ if (!isDesktop) {
             value={enlaceGrabacion}
             onChange={handleEnlaceGrabacionChange}
           />
-           {getArchivosSubidosTipoSeleccionado('grabacion').map((recurso, index) => (
+ {getArchivosSubidosTipoSeleccionado('grabacion').map((recurso, index) => (
   <div key={index} className='inputs__respuesta'>
-    <p>Agregado:{recurso.modulo}</p>
+    {recurso.enlaceGrabacion ? (
+      <p>
+        Agregado: {recurso.modulo},
+        <a href={recurso.enlaceGrabacion} target="_blank" rel="noopener noreferrer">
+          <i className="fas fa-play-circle"></i> Enlace de grabación
+        </a>
+      </p>
+    ) : (
+      <p>Agregado: {recurso.modulo}, {recurso.nombreArchivo}</p>
+    )}
   </div>
-           ))}
+))}
         </div>
         <section className='inputs__division'>
           <div className="inputs__input inputs__responsive">
@@ -192,7 +213,7 @@ if (!isDesktop) {
             />
             {getArchivosSubidosTipoSeleccionado('diapositivas').map((recurso, index) => (
   <div key={index} className='inputs__respuesta'>
-    <p>Agregado: {recurso.modulo}</p>
+      <p>Agregado:{recurso.modulo}, {recurso.nombreArchivo}</p>
   </div>
 ))}
 
@@ -214,7 +235,7 @@ if (!isDesktop) {
             />
               {getArchivosSubidosTipoSeleccionado('lectura').map((recurso, index) => (
   <div key={index}  className='inputs__respuesta'>
-    <p>Agregado: {recurso.modulo}</p>
+      <p>Agregado:{recurso.modulo}, {recurso.nombreArchivo}</p>
   </div>
 ))}
           </div>
@@ -236,7 +257,7 @@ if (!isDesktop) {
             />
                 {getArchivosSubidosTipoSeleccionado('ejercicios').map((recurso, index) => (
   <div key={index}  className='inputs__respuesta'>
-    <p>Agregado:{recurso.modulo}</p>
+   <p>Agregado:{recurso.modulo}, {recurso.nombreArchivo}</p>
   </div>
 ))}
           </div>
@@ -256,7 +277,7 @@ if (!isDesktop) {
             />
                 {getArchivosSubidosTipoSeleccionado('ejercicios__obligatorios').map((recurso, index) => (
   <div key={index}  className='inputs__respuesta'>
-    <p>Agregado:{recurso.modulo}</p>
+       <p>Agregado:{recurso.modulo}, {recurso.nombreArchivo}</p>
   </div>
 ))}
           </div>

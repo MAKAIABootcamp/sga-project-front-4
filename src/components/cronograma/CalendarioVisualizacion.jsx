@@ -33,12 +33,16 @@ const CalendarioVisualizacion = () => {
   const handleEventClick = (info) => {
     if (!isMobile) {
       const event = info.event;
+      console.log(event);
       const { title, start, end } = event;
   
       alert(`Detalles del evento:
         Título: ${title}
         Fecha de inicio: ${start.toLocaleDateString()}
-        Fecha de fin: ${end ? end.toLocaleDateString() : 'N/A'}`);
+        Fecha de fin: ${end ? end.toLocaleDateString() : 'N/A'}
+       
+        ` );
+       
     }
   };
 
@@ -48,7 +52,6 @@ const CalendarioVisualizacion = () => {
   
     if (tipo === "festivo") {
       backgroundColor = "#E74C3C"; // Festivos: rojo
-      textColor = "#FF0000"; // Festivos: rojo
     } else if (tipo === "entrega") {
       backgroundColor = "#27AE60"; // Entregas: verde
     } else if (tipo === "clase") {
