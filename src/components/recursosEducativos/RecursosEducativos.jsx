@@ -20,8 +20,9 @@ const RecursosEducativos = () => {
   const [error, setError] = useState('');
   const [serverResponse, setServerResponse] = useState([]);
   const [cursoActual, setCursoActual] = useState(null);
-  const [recursosTipoSeleccionado, setRecursosTipoSeleccionado] = useState([]); // Agregar estado para almacenar los recursos del tipo seleccionado
 const [nombreRecurso,setNombreRecurso]= useState(""); 
+const [selectedResourceId, setSelectedResourceId] = useState(null);
+
   useEffect(() => {
     setCursoActual(course.curso); 
     dispatch(fetchCourse(cursoId));
@@ -103,6 +104,26 @@ const handleSubmit = (e,idCurso) => {
 const getArchivosSubidosTipoSeleccionado = (tipoRecurso) => {
   return serverResponse.filter((recurso) => recurso.tipoRecurso === tipoRecurso);
 };
+const handleDeleteRecurso = () => {
+  if (selectedResourceId) {
+    // Realizar la petición DELETE al servidor para eliminar el recurso
+    const baseEndpoint = "http://localhost:3000"; // Actualiza la URL base según corresponda
+    const endpoint = `${baseEndpoint}/${selectedResourceId}`;
+  
+    axios
+      .delete(endpoint)
+      .then(() => {
+        // Actualizar el estado para eliminar el recurso de la lista de serverResponse
+        setServerResponse((prevResponses) => prevResponses.filter((recurso) => recurso.id !== selectedResourceId));
+        setSelectedResourceId(null); // Limpiar el id seleccionado después de eliminar el recurso
+      })
+      .catch((error) => {
+        console.error(error);
+        setError('Error al eliminar el recurso. Por favor, inténtelo de nuevo.');
+      });
+  }
+};
+
 
 if (!isDesktop) {
   return (
@@ -156,6 +177,7 @@ if (!isDesktop) {
     ) : (
       <p>Agregado: {recurso.modulo}, {recurso.nombreArchivo}</p>
     )}
+     <i className="fas fa-trash-alt" onClick={() => setSelectedResourceId(recurso.id)}></i>
           </div>
         ))}
       </div>

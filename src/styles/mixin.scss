@@ -35,6 +35,10 @@
     font-weight: 600;
     font-size: 14px;
 }
+@if $fontWeight== 'supergrande' {
+  font-weight: 700;
+  font-size: 28px;
+}
 
 
   }

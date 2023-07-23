@@ -6,7 +6,7 @@ import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
 import { getEvents } from "../../services/getEvents";
-
+import "../../styles/cronograma/Cronograma.scss";
 const CalendarioVisualizacion = () => {
   const [eventos, setEventos] = useState([]);
   const [selectedWeek, setSelectedWeek] = useState(null);
@@ -36,15 +36,14 @@ const CalendarioVisualizacion = () => {
       console.log(event);
       const { title, start, end } = event;
   
-      alert(`Detalles del evento:
-        Título: ${title}
-        Fecha de inicio: ${start.toLocaleDateString()}
-        Fecha de fin: ${end ? end.toLocaleDateString() : 'N/A'}
-       
-        ` );
-       
+      setSelectedDay({
+        title,
+        fechaInicio: start,
+        fechaFin: end ? end : null,
+      });
     }
   };
+  
 
   const colorearEvento = (tipo) => {
     let backgroundColor = "#3788D8"; // Por defecto: azul
@@ -74,8 +73,11 @@ const CalendarioVisualizacion = () => {
     } else {
       // Vista de escritorio: Mostrar solo el título del evento
       return {
-        html: `<div class="custom-event" style="background-color: ${backgroundColor}; color: ${textColor};">${event.title}</div>`,
+        html: `<div class="custom-event custom-event-circle" style="background-color: ${backgroundColor};"></div>`,
+        backgroundColorClass: `event-background-${event.id}`, // Agregamos una clase con el color de fondo correspondiente
       };
+      
+      
     }
   };
   
@@ -103,19 +105,34 @@ const CalendarioVisualizacion = () => {
    
   };
 
+
+
   return (
-    <section>
-      <div className="container" style={{ padding: isMobile ? "8rem" : "8rem" }}>
+<section style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginLeft: '8px' }}>
+      <div className="container" >
         <div id="calendar" className="custom-calendar">
           {isMobile && (
-            <div>
-              <h2>Agenda</h2>
+            <div className="container__titulo">
+              <h2 >Agenda</h2>
               {selectedWeek && <p>Semana seleccionada: {selectedWeek}</p>}
               {selectedDay && <p>Día seleccionado: {selectedDay}</p>}
             </div>
           )}
           <FullCalendar {...calendarOptions} />
         </div>
+        <div className="event-details">
+  {selectedDay && (
+    <div className="container__eventoSeleccionado"  style={{ display:isMobile? "none" : "flex" }}>
+      <h3>{selectedDay.title}</h3>
+      <p>{selectedDay.detalles}</p>
+      <p>Hora de inicio: {selectedDay.fechaInicio.toLocaleTimeString()}</p>
+      {selectedDay.fechaFin && (
+        <p>Hora de fin: {selectedDay.fechaFin.toLocaleTimeString()}</p>
+      )}
+    </div>
+  )}
+</div>
+
       </div>
     </section>
   );
