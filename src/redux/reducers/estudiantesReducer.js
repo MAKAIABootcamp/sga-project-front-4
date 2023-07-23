@@ -18,8 +18,8 @@ const studentSlice = createSlice({
             state.arrCohorte = action.payload;
         },
         deleteEstudiantes: (state, action) => {
-            state.estudiantes = state.eventos.filter(
-                (evento) => evento.id !== action.payload
+            state.estudiantes = state.estudiantes.filter(
+                (estudiante) => estudiante.id !== action.payload
               );
           },
         setCohorte: (state, action) => {

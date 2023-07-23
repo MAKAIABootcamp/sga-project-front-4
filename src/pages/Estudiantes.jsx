@@ -1,35 +1,37 @@
 import dayjs from "dayjs";
 import { Input } from "antd";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import { BsDownload } from "react-icons/bs";
 import { Table, Popconfirm } from "antd";
 import { Progress } from "antd";
 import "../styles/admin_estudiantes/estudiantes.scss";
 import NuevoEstudiante from "../components/nuevoEstudiante/NuevoEstudiante";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BotonesFiltrado from "../components/Asistencia/BtnFintrado/BotonesFiltrado";
-import { deleteStudents, getStudents } from "../redux/actions/estudiantesActions";
+import {
+  deleteStudents,
+  getStudents,
+} from "../redux/actions/estudiantesActions";
 import { useDispatch, useSelector } from "react-redux";
 import { MdDeleteForever } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
-// import ButtonsFiltro from "../components/buttonsFiltro/ButtonsFiltro";
-// import { utils, writeFileXLSX } from 'xlsx';
 const { Search } = Input;
 const today = dayjs();
+// import ButtonsFiltro from "../components/buttonsFiltro/ButtonsFiltro";
+// import { utils, writeFileXLSX } from 'xlsx';
 // import AdminEstudiantes from '../components/adminEstudiantes/AdminEstudiantes'
 
 const Estudiantes = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [students, setEstudents] = useState([]);
-
-  // const estudiantes = useSelector((store) => store.estudiantesReducer.estudiantes);
-  // console.log("estudiantes desde page estudiantes", estudiantes);
-
-  const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.arrCohorte)
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const dispatch = useDispatch();
+
+  const arrayEstudiantes = useSelector(
+    (store) => store.estudiantesReducer.arrCohorte
+  );
+
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -37,31 +39,39 @@ const Estudiantes = () => {
   const handleOpenModal = () => {
     setShowModal(true);
   };
-  // const exportFile = useCallback(() => {
-  //   const ws = utils.json_to_sheet(students);
-  //   const wb = utils.book_new();
-  //   utils.book_append_sheet(wb, ws, 'Data');
-  //   writeFileXLSX(wb, 'Prueba.xlsx');
-  // }, [students]);
+
+  const handleEliminarParticipante = async (id) => {
+    try {
+      await dispatch(deleteStudents("estudiantes", id));
+      setFilteredUsers((prevFilteredUsers) =>
+        prevFilteredUsers.filter((estudiante) => estudiante.id !== id)
+      );
+      Swal.fire(
+        "Buen trabajo!",
+        "El estudiante fue eliminado con éxito!",
+        "success"
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
   useEffect(() => {
-    dispatch(getStudents("estudiantes"))
+    dispatch(getStudents("estudiantes"));
   }, [dispatch]);
 
-  const handleEliminarParticipante = (id) => {
-    dispatch(deleteStudents("estudiantes", id));
-    Swal.fire(
-      'Buen trabajo!',
-      'El estudiante fue eliminado con éxito!',
-      'success'
-    )
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 1000);
-  }
-
-
+  useEffect(() => {
+    const filtered = arrayEstudiantes.filter((user) =>
+      Object.values(user).some(
+        (value) =>
+          value &&
+          value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+    setFilteredUsers(filtered);
+  }, [searchTerm, arrayEstudiantes]);
+  const onSearch = (value) => console.log(value);
   const selectionType = "checkbox";
   const columns = [
     {
@@ -119,39 +129,12 @@ const Estudiantes = () => {
           okText="Sí"
           cancelText="Cancelar"
         >
-          <MdDeleteForever/>
+          <MdDeleteForever />
           <CiEdit />
         </Popconfirm>
-      )
+      ),
     },
   ];
-
-  // const mappedEstudiantes = arrayEstudiantes?.map((estudiante) => ({
-  //   key: estudiante.id,
-  //   name: estudiante.name,
-  //   lastname: estudiante.lastname,
-  //   tipoDocumento: estudiante.tipoDocumento,
-  //   numeroDocumento: estudiante.numeroDocumento,
-  //   telefono: estudiante.telefono,
-  //   tipo_entrenamiento: estudiante.tipo_entrenamiento,
-  //   modulo: estudiante.modulo,
-  //   cohorte: estudiante.cohorte,
-  //   email: estudiante.email,
-  // }));
-
-  
-  // const filterData = (searchQuery) => {
-  //   if (!searchQuery) return estudiantes;
-  //   const searchFields = ["name", "lastname", "tipo_documeto", "numero_documento", "telefono", "tipo_entrenamiento", "modulo", "cohorte", "email"];
-  //   return estudiantes.filter((estudiante) =>
-  //     searchFields.some((field) =>
-  //       (estudiante[field] || "").toString().toLowerCase().includes(searchQuery.toLowerCase())
-  //     )
-  //   );
-  // };
-
-  // const filteredEstudiantes = filterData(searchQuery);
-
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -160,40 +143,47 @@ const Estudiantes = () => {
         "selectedRows: ",
         selectedRows
       );
-      
     },
   };
 
+
+  // const exportFile = useCallback(() => {
+  //   const ws = utils.json_to_sheet(students);
+  //   const wb = utils.book_new();
+  //   utils.book_append_sheet(wb, ws, 'Data');
+  //   writeFileXLSX(wb, 'Prueba.xlsx');
+  // }, [students]);
+
   return (
     <div className="estudiantes">
-        <div className="infoAsistencia">
-          <div className="totalidad">
-            <p>
-              {/* Total de estudiantes: <span>{filteredEstudiantes.length}</span> */}
-            </p>
-          </div>
+      <div className="infoAsistencia">
+        <div className="totalidad">
+          <p>
+            Total de resultados: <span>{arrayEstudiantes.length}</span>
+          </p>
+        </div>
 
-          <div className="">
-            <div>
-              <BotonesFiltrado />
-            </div>
-            <div className="search">
-              <Search
-                placeholder="Buscar participante"
-                //  value={searchQuery}
-                //  onChange={(e) => setSearchQuery(e.target.value)}
-                enterButton
-              />
-              <button className="button__agg" onClick={handleOpenModal}>
-                Agregar
-              </button>
-              {/* <button className="btnDescarga" onClick={exportFile}>
+        <div className="">
+          <div>
+            <BotonesFiltrado />
+          </div>
+          <div className="search">
+            <Search
+              placeholder="Buscar participante"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onSearch={onSearch}
+              enterButton
+            />
+            <button className="button__agg" onClick={handleOpenModal}>
+              Agregar
+            </button>
+            {/* <button className="btnDescarga" onClick={exportFile}>
                 <BsDownload />
               </button> */}
-            </div>
-            <div></div>
           </div>
         </div>
+      </div>
       <Modal show={showModal} onHide={handleCloseModal}>
         <NuevoEstudiante />
         <div className="container__button">
@@ -203,18 +193,16 @@ const Estudiantes = () => {
         </div>
       </Modal>
 
-     
-        <Table
-         style={{width: "5rem"}}
-          className="tabla"
-          rowSelection={{
-            type: selectionType,
-            ...rowSelection,
-          }}
-          columns={columns}
-          dataSource={arrayEstudiantes}
-        />
-     
+      <Table
+        style={{ width: "5rem" }}
+        className="tabla"
+        rowSelection={{
+          type: selectionType,
+          ...rowSelection,
+        }}
+        columns={columns}
+        dataSource={filteredUsers}
+      />
     </div>
   );
 };
