@@ -80,6 +80,32 @@ const CalendarioVisualizacion = () => {
       
     }
   };
+  const renderConvenciones = () => {
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo de Evento</th>
+            <th>Color</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Festivo</td>
+            <td style={{ backgroundColor: "#E74C3C" }}></td>
+          </tr>
+          <tr>
+            <td>Entrega</td>
+            <td style={{ backgroundColor: "#27AE60" }}></td>
+          </tr>
+          <tr>
+            <td>Clase</td>
+            <td style={{ backgroundColor: "#F39C12" }}></td>
+          </tr>
+        </tbody>
+      </table>
+    );
+  };
   
   
   const calendarOptions = {
@@ -108,8 +134,8 @@ const CalendarioVisualizacion = () => {
 
 
   return (
-<section style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start', marginLeft: '8px' }}>
-      <div className="container" >
+    <section style={{height: isMobile ? "18rem" : "column", marginTop:isMobile? "8rem":"0px"}} className="seccionCalendarioVisualizacion">
+      <div className="seccionCalendarioVisualizacion__container" >
         <div id="calendar" className="custom-calendar">
           {isMobile && (
             <div className="container__titulo">
@@ -132,8 +158,17 @@ const CalendarioVisualizacion = () => {
     </div>
   )}
 </div>
-
-      </div>
+      </div>{isMobile ? (
+        // Vista móvil: Tabla de convenciones en el header
+        <header>
+          {renderConvenciones()}
+        </header>
+      ) : (
+        // Vista de escritorio: Tabla de convenciones en el footer
+        <footer>
+          {renderConvenciones()}
+        </footer>
+      )}
     </section>
   );
 };

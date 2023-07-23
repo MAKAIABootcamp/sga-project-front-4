@@ -68,13 +68,24 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 }
-.container{
+.seccionCalendarioVisualizacion{
+  display: flex;
+  gap:2rem;
+  flex-direction: column;
+  header{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+ 
+  }
+  &__container{
+    height: 180rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
   gap: 100px;
-  padding-top: 8rem;
+
   margin-left: 44px;
   &__eventoSeleccionado{
     background-color: $colorBotonSecundario;
@@ -86,6 +97,8 @@ flex-direction: column;
     }
   }
 }
+}
+
 
 .fc .fc-media-screen {
   width: max-content;
