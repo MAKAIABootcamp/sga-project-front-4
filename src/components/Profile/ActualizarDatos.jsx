@@ -53,49 +53,49 @@ const ActualizarDatos = () => {
         <form>
           <div>
             <label>Nombre Completo</label>
-            <input type="text" value={"Kevin Anderson"} />
+            <input type="text" defaultValue={"Kevin Anderson"} />
           </div>
           <div>
             <label>Sobre mi</label>
             <textarea
 
               rows="4"
-              value={
+              defaultValue={
                 "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, illum magni consequatur ab possimus non debitis iure eum temporibus facere ducimus quidem neque perspiciatis, atque dolore fuga inventore commodi expedita?"
               }
             ></textarea>
           </div>
           <div>
             <label>Compañía</label>
-            <input type="text" value={"Makaia"} />
+            <input type="text" defaultValue={"Makaia"} />
           </div>
           <div>
             <label>Trabajo</label>
-            <input type="text" value={"Web Designer"} />
+            <input type="text" defaultValue={"Web Designer"} />
           </div>
           <div>
             <label>País</label>
-            <input type="text" value={"Colombia"} />
+            <input type="text" defaultValue={"Colombia"} />
           </div>
           <div>
             <label>Dirección</label>
-            <input type="text" value={"Calle falsa 123"} />
+            <input type="text" defaultValue={"Calle falsa 123"} />
           </div>
           <div>
             <label>Teléfono</label>
-            <input type="text" value={"(436) 486-3538x29071"} />
+            <input type="text" defaultValue={"(436) 486-3538x29071"} />
           </div>
           <div>
             <label>Email</label>
-            <input type="text" value={"k.anderson@example.com"} />
+            <input type="text" defaultValue={"k.anderson@example.com"} />
           </div>
           <div>
             <label>Slack</label>
-            <input type="text" value={"https://slack.com/#"} />
+            <input type="text" defaultValue={"https://slack.com/#"} />
           </div>
           <div>
             <label>LinkedIn</label>
-            <input type="text" value={"https://linkedin.com/#"} />
+            <input type="text" defaultValue={"https://linkedin.com/#"} />
           </div>
         </form>
         <div className="actualizarDatos__btnSave">
