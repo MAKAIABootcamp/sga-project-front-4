@@ -2,18 +2,16 @@ import "./StylesDetallePerfil.scss";
 import "./StylesActualizar.scss";
 import { BsTrashFill } from "react-icons/bs";
 import { useRef, useState } from "react";
-import { BsUpload } from 'react-icons/bs';
+import { BsUpload } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import fileUpLoad from "../../services/fileUpload";
 import { updateInfoUserAction } from "../../redux/actions/userActions";
 
-
 const ActualizarDatos = () => {
-
   const { user: loggedUser } = useSelector((store) => store.userReducer);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    nombre: '' || loggedUser?.nombre,
+    nombre: "" || loggedUser?.nombre,
     sobremi: loggedUser?.sobremi || "",
     compania: loggedUser?.compania || "",
     trabajo: loggedUser?.trabajo || "",
@@ -36,7 +34,6 @@ const ActualizarDatos = () => {
   };
 
   const fileInputRef = useRef(null);
- 
 
   const handleFileSelect = () => {
     fileInputRef.current.click();
@@ -45,7 +42,7 @@ const ActualizarDatos = () => {
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     // Aquí puedes manejar la lógica de carga del archivo seleccionado
-    console.log('Archivo seleccionado:', file);
+    console.log("Archivo seleccionado:", file);
     const avatarLink = await fileUpLoad(file);
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -53,28 +50,23 @@ const ActualizarDatos = () => {
     }));
   };
 
-
-
   const handleClickEnviar = () => {
-    dispatch(updateInfoUserAction(loggedUser?.id, formData))
-  }
+    dispatch(updateInfoUserAction(loggedUser?.id, formData));
+  };
   return (
     <div className="detalle">
       <div className="actualizarDatos">
         <div className="actualizarDatos__image">
           <h4>Imagen de perfil</h4>
           <div>
-            <img
-              src={loggedUser?.foto}
-              alt={loggedUser?.nombre}
-            />
+            <img src={loggedUser?.foto} alt={loggedUser?.nombre} />
 
             <div className="actualizarDatos__image__btns">
               <input
                 type="file"
                 accept="image/*"
                 ref={fileInputRef}
-                style={{ display: 'none' }}
+                style={{ display: "none" }}
                 onChange={handleFileChange}
               />
               <button className="btn1" onClick={handleFileSelect}>
@@ -84,13 +76,17 @@ const ActualizarDatos = () => {
                 <BsTrashFill style={{ color: "#fff", fontSize: "1.1rem" }} />
               </button>
             </div>
-
           </div>
         </div>
         <form>
           <div>
             <label>Nombre Completo</label>
-            <input  type="text" defaultValue={loggedUser?.nombre} onChange={handleInputChange} />
+            <input
+              type="text"
+              defaultValue={loggedUser?.nombre}
+              onChange={handleInputChange}
+              name="nombre"
+            />
           </div>
           <div>
             <label>Sobre mi</label>
@@ -98,47 +94,95 @@ const ActualizarDatos = () => {
               rows="4"
               defaultValue={loggedUser?.sobremi}
               onChange={handleFileChange}
+              name="sobremi"
             ></textarea>
           </div>
           <div>
             <label>Compañía</label>
-            <input type="text" defaultValue={loggedUser?.compania} onChange={handleInputChange} />
+            <input
+              type="text"
+              defaultValue={loggedUser?.compania}
+              onChange={handleInputChange}
+              name="compania"
+            />
           </div>
           <div>
             <label>Trabajo</label>
-            <input type="text" defaultValue={loggedUser?.trabajo} onChange={handleInputChange}/>
+            <input
+              type="text"
+              defaultValue={loggedUser?.trabajo}
+              onChange={handleInputChange}
+              name="trabajo"
+            />
           </div>
           <div>
             <label>País</label>
-            <input type="text" defaultValue={loggedUser?.pais} onChange={handleInputChange} />
+            <input
+              type="text"
+              defaultValue={loggedUser?.pais}
+              onChange={handleInputChange}
+              name="pais"
+            />
           </div>
           <div>
             <label>Dirección</label>
-            <input type="text" defaultValue={loggedUser?.direccion} onChange={handleInputChange} />
+            <input
+              type="text"
+              defaultValue={loggedUser?.direccion}
+              onChange={handleInputChange}
+              name="direccion"
+            />
           </div>
           <div>
             <label>Teléfono</label>
-            <input type="text" defaultValue={loggedUser?.telefono} onChange={handleInputChange} />
+            <input
+              type="text"
+              defaultValue={loggedUser?.telefono}
+              onChange={handleInputChange}
+              name="telefono"
+            />
           </div>
           <div>
             <label>Email</label>
-            <input type="text" defaultValue={loggedUser?.email} onChange={handleInputChange} />
+            <input
+              type="text"
+              defaultValue={loggedUser?.email}
+              onChange={handleInputChange}
+              name="email"
+            />
           </div>
           <div>
             <label>Slack</label>
-            <input type="text" defaultValue={loggedUser?.slack} onChange={handleInputChange} />
+            <input
+              type="text"
+              defaultValue={loggedUser?.slack}
+              onChange={handleInputChange}
+              name="slack"
+            />
           </div>
           <div>
             <label>LinkedIn</label>
-            <input type="text" defaultValue={loggedUser?.linkedin} onChange={handleInputChange} />
+            <input
+              type="text"
+              defaultValue={loggedUser?.linkedin}
+              onChange={handleInputChange}
+              name="linkedin"
+            />
           </div>
           <div>
             <label>GitHub</label>
-            <input type="text" defaultValue={loggedUser?.github} onChange={handleInputChange} />
+            <input
+              type="text"
+              defaultValue={loggedUser?.github}
+              onChange={handleInputChange}
+              name="github"
+            />
           </div>
         </form>
         <div className="actualizarDatos__btnSave">
-          <button onClick={() => handleClickEnviar()}  type="submit">Guardar Cambios</button>
+          <button onClick={() => handleClickEnviar()} type="submit">
+            Guardar Cambios
+          </button>
         </div>
       </div>
     </div>
