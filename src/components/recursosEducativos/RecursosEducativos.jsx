@@ -51,6 +51,7 @@ const [selectedResourceId, setSelectedResourceId] = useState(null);
       setArchivos((prevState) => ({ ...prevState, [tipoRecurso]: selectedFile }));
       setError('');
       setNombreRecurso(selectedFile.name)
+      console.log(selectedFile.name);
       
     } else {
       setArchivos((prevState) => ({ ...prevState, [tipoRecurso]: null }));
