@@ -63,8 +63,8 @@ const RutaNoPermitida = () => {
         </header>
         <div className="content">
           <h1>403</h1>
-          <h2>Page not found</h2>
-          <p>I tried to catch some fog, but I mist</p>
+          <h2>Sin acceso</h2>
+          <p>Lo sentimos, esta ruta no es permitida</p>
         </div>
         <img  id="parallax-image" onMouseMove={handleMouseMove}
       onClick={handleMouseMove}  onMouseLeave={handleMouseLeave} className='imageRutaNoPermitida' src="http://www.supah.it/dribbble/008/008.jpg" alt="403 Error" />

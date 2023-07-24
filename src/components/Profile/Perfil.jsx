@@ -39,9 +39,10 @@ const Perfil = () => {
           <h2 className="name">{loggedUser?.nombre}   {loggedUser?.apellido}</h2>
           <p style={{fontSize:'1.3rem'}}>{loggedUser?.rol}</p>
           <div className="icons">
-            <CgSlack className="icon" />
-            <BsGithub className="icon" />
-            <BsLinkedin className="icon" />
+            <a href={loggedUser?.salck}><CgSlack className="icon" /></a>
+            <a href={loggedUser?.github}><BsGithub className="icon" /></a>
+            <a href={loggedUser?.linkedin}> <BsLinkedin className="icon" /></a>
+           
           </div>
         </div>
         <div className="perfil__info">

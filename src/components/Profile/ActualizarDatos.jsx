@@ -1,26 +1,63 @@
 import "./StylesDetallePerfil.scss";
 import "./StylesActualizar.scss";
 import { BsTrashFill } from "react-icons/bs";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { BsUpload } from 'react-icons/bs';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import fileUpLoad from "../../services/fileUpload";
+import { updateInfoUserAction } from "../../redux/actions/userActions";
+
 
 const ActualizarDatos = () => {
 
+  const { user: loggedUser } = useSelector((store) => store.userReducer);
+  const dispatch = useDispatch();
+  const [formData, setFormData] = useState({
+    nombre: '' || loggedUser?.nombre,
+    sobremi: loggedUser?.sobremi || "",
+    compania: loggedUser?.compania || "",
+    trabajo: loggedUser?.trabajo || "",
+    pais: loggedUser?.pais || "",
+    direccion: loggedUser?.direccion || "",
+    telefono: loggedUser?.telefono || "",
+    email: loggedUser?.email || "",
+    slack: loggedUser?.slack || "",
+    linkedin: loggedUser?.linkedin || "",
+    github: loggedUser?.github || "",
+    foto: loggedUser?.foto || "",
+  });
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
   const fileInputRef = useRef(null);
+ 
 
   const handleFileSelect = () => {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
     // Aquí puedes manejar la lógica de carga del archivo seleccionado
     console.log('Archivo seleccionado:', file);
+    const avatarLink = await fileUpLoad(file);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      foto: avatarLink,
+    }));
   };
 
-  const { user: loggedUser } = useSelector((store) => store.userReducer);
-  console.log(loggedUser);
+
+
+  const handleClickEnviar = () => {
+    dispatch(updateInfoUserAction(loggedUser?.id, formData))
+  }
   return (
     <div className="detalle">
       <div className="actualizarDatos">
@@ -53,53 +90,55 @@ const ActualizarDatos = () => {
         <form>
           <div>
             <label>Nombre Completo</label>
-            <input type="text" defaultValue={"Kevin Anderson"} />
+            <input  type="text" defaultValue={loggedUser?.nombre} onChange={handleInputChange} />
           </div>
           <div>
             <label>Sobre mi</label>
             <textarea
-
               rows="4"
-              defaultValue={
-                "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, illum magni consequatur ab possimus non debitis iure eum temporibus facere ducimus quidem neque perspiciatis, atque dolore fuga inventore commodi expedita?"
-              }
+              defaultValue={loggedUser?.sobremi}
+              onChange={handleFileChange}
             ></textarea>
           </div>
           <div>
             <label>Compañía</label>
-            <input type="text" defaultValue={"Makaia"} />
+            <input type="text" defaultValue={loggedUser?.compania} onChange={handleInputChange} />
           </div>
           <div>
             <label>Trabajo</label>
-            <input type="text" defaultValue={"Web Designer"} />
+            <input type="text" defaultValue={loggedUser?.trabajo} onChange={handleInputChange}/>
           </div>
           <div>
             <label>País</label>
-            <input type="text" defaultValue={"Colombia"} />
+            <input type="text" defaultValue={loggedUser?.pais} onChange={handleInputChange} />
           </div>
           <div>
             <label>Dirección</label>
-            <input type="text" defaultValue={"Calle falsa 123"} />
+            <input type="text" defaultValue={loggedUser?.direccion} onChange={handleInputChange} />
           </div>
           <div>
             <label>Teléfono</label>
-            <input type="text" defaultValue={"(436) 486-3538x29071"} />
+            <input type="text" defaultValue={loggedUser?.telefono} onChange={handleInputChange} />
           </div>
           <div>
             <label>Email</label>
-            <input type="text" defaultValue={"k.anderson@example.com"} />
+            <input type="text" defaultValue={loggedUser?.email} onChange={handleInputChange} />
           </div>
           <div>
             <label>Slack</label>
-            <input type="text" defaultValue={"https://slack.com/#"} />
+            <input type="text" defaultValue={loggedUser?.slack} onChange={handleInputChange} />
           </div>
           <div>
             <label>LinkedIn</label>
-            <input type="text" defaultValue={"https://linkedin.com/#"} />
+            <input type="text" defaultValue={loggedUser?.linkedin} onChange={handleInputChange} />
+          </div>
+          <div>
+            <label>GitHub</label>
+            <input type="text" defaultValue={loggedUser?.github} onChange={handleInputChange} />
           </div>
         </form>
         <div className="actualizarDatos__btnSave">
-          <button type="submit">Guardar Cambios</button>
+          <button onClick={() => handleClickEnviar()}  type="submit">Guardar Cambios</button>
         </div>
       </div>
     </div>

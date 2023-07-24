@@ -11,10 +11,9 @@ const DetallePerfil = () => {
             <div className='detalle__sobremi'>
                 <h5 className='title'>Sobre mi</h5>
                 <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam,
-                    illum magni consequatur ab possimus non debitis iure eum
-                    temporibus facere ducimus quidem neque perspiciatis, atque dolore
-                    fuga inventore commodi expedita?
+                  {
+                    loggedUser?.sobremi
+                  }
                 </p>
             </div>
             <div className='detalle__info'>
@@ -22,13 +21,13 @@ const DetallePerfil = () => {
                 <div className='info'>
                     <span>Nombre Completo</span>
                     <div>
-                        <p>{loggedUser?.nombre}   {loggedUser?.apellido}</p>
+                        <p>{loggedUser?.nombre}</p>
                     </div>
                 </div>
                 <div className='info'>
                     <span>Compañía</span>
                     <div>
-                        <p>Makaia</p>
+                        <p>{loggedUser?.compania}</p>
                     </div>
                 </div>
                 <div className='info'>

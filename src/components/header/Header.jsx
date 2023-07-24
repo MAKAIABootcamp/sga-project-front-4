@@ -44,7 +44,7 @@ const Header = ({ handleMenuToggle }) => {
                 onClick={handleListProfile}
               >
                 <img src={loggedUser?.foto} alt="Profile" className="rounded-circle" />
-                <span className="d-none d-md-block dropdown-toggle ps-2">{loggedUser?.nombre}   {loggedUser?.apellido}</span>
+                <span className="d-none d-md-block dropdown-toggle ps-2">{loggedUser?.nombre}</span>
               </a>
               {listProfileOpen && (
                 <ul
@@ -59,7 +59,7 @@ const Header = ({ handleMenuToggle }) => {
                   }}
                 >
                   <li className="dropdown-header">
-                    <h6>{loggedUser?.nombre}   {loggedUser?.apellido}</h6>
+                    <h6>{loggedUser?.nombre}</h6>
                     <span>{loggedUser?.rol}</span>
                   </li>
                   <li>

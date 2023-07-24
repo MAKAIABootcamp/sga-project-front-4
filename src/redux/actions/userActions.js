@@ -3,9 +3,9 @@ import { login } from "../../services/getUsers";
 import { loginUser } from "../reducers/userReducer";
 import { getUserFromCollection } from "../../services/getUsers";
 import Swal from 'sweetalert2';
-import { getFirestore, updateDoc, doc } from 'firebase/firestore';
-import { dataBase } from "../../firebase/firebaseConfig";
-
+// import { getFirestore, updateDoc, doc } from 'firebase/firestore';
+import { dataBase } from '../../firebase/firebaseConfig'
+import {  doc, updateDoc } from "firebase/firestore";
 
 export const loginActionAsync = (email, password) => {
   return async (dispatch) => {
@@ -55,33 +55,19 @@ export const keepInfoUserAction = (email) => {
   }
 }
 
-export const updateInfoUserAction = async (userId, newdata) => {
-  
+export const updateInfoUserAction = (userId, newdata) => {
+  return async (dispatch) => {
     try {
-      // await updateProfile(auth.currentUser, {
-      //   photoURL: foto,
-      //   displayName: nombre,
-      //   sobremi: sobremi,
-      //   compania: compania,
-      //   trabajo: trabajo,
-      //   pais: pais,
-      //   direccion: direccion,
-      //   telefono: telefono,
-      //   email: email,
-      //   salck: salck,
-      //   linkedin: linkedin
-      // })
+      const docRef = doc(dataBase, "usuarios", userId);
+      const resp = await updateDoc(docRef, newdata);
 
-      const useRef = doc(getFirestore(dataBase), 'user', userId);
-
-      await updateDoc(useRef, newdata);
-
+      dispatch(loginUser(resp))
       console.log('Datos actualizados correctamente');
 
     } catch (error) {
       console.log('error al realizar la actualizacion de la informacion', error);
     }
-  
+  }
 }
 
 // export const loginActionSync = (user) => {
