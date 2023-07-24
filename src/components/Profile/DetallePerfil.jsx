@@ -1,7 +1,11 @@
+import { useSelector } from 'react-redux';
 import './StylesDetallePerfil.scss'
 
 
 const DetallePerfil = () => {
+
+    const { user: loggedUser } = useSelector((store) => store.userReducer);
+  console.log(loggedUser);
     return (
         <div className="detalle">
             <div className='detalle__sobremi'>
@@ -18,7 +22,7 @@ const DetallePerfil = () => {
                 <div className='info'>
                     <span>Nombre Completo</span>
                     <div>
-                        <p>Kevin Anderson</p>
+                        <p>{loggedUser?.nombre}   {loggedUser?.apellido}</p>
                     </div>
                 </div>
                 <div className='info'>
@@ -30,31 +34,31 @@ const DetallePerfil = () => {
                 <div className='info'>
                     <span>Trabajo</span>
                     <div>
-                        <p>Web Designer</p>
+                        <p>{loggedUser?.trabajo}</p>
                     </div>
                 </div>
                 <div className='info'>
                     <span>País</span>
                     <div>
-                        <p>Colombia</p>
+                        <p>{loggedUser?.pais}</p>
                     </div>
                 </div>
                 <div className='info'>
                     <span>Dirección</span>
                     <div>
-                        <p>Calle falsa 123</p>
+                        <p>{loggedUser?.direccion}</p>
                     </div>
                 </div>
                 <div className='info'>
                     <span>Teléfono</span>
                     <div>
-                        <p>(436) 486-3538x29071</p>
+                        <p>{loggedUser?.telefono}</p>
                     </div>
                 </div>
                 <div className='info'>
                     <span>Email</span>
                     <div>
-                        <p>k.anderson@example.com</p>
+                        <p>{loggedUser?.email}</p>
                     </div>
                 </div>
             </div>

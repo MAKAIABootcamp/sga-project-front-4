@@ -5,6 +5,7 @@ import { useState } from "react";
 import ActualizarDatos from "./ActualizarDatos";
 import DetallePerfil from "./DetallePerfil";
 import "./StylesPerfil.scss";
+import { useSelector } from "react-redux";
 
 
 const Perfil = () => {
@@ -20,7 +21,8 @@ const Perfil = () => {
     setMostrarActualizar(false);
     setBotonSeleccionado("detalle");
   };
-
+  const { user: loggedUser } = useSelector((store) => store.userReducer);
+  console.log(loggedUser);
   return (
     <div className="perfil">
       <h3>Perfil</h3>
@@ -29,13 +31,13 @@ const Perfil = () => {
         <div className="perfil__img">
           <figure>
             <img
-              src="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/img/profile-img.jpg"
-              alt="Usuario"
+              src={loggedUser?.foto}
+              alt={loggedUser?.nombre}
             />
           </figure>
 
-          <h2 className="name">Kevin Anderson</h2>
-          <p style={{fontSize:'1.3rem'}}>Administrador</p>
+          <h2 className="name">{loggedUser?.nombre}   {loggedUser?.apellido}</h2>
+          <p style={{fontSize:'1.3rem'}}>{loggedUser?.rol}</p>
           <div className="icons">
             <CgSlack className="icon" />
             <BsGithub className="icon" />

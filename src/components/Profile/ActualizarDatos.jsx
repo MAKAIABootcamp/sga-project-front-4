@@ -3,6 +3,7 @@ import "./StylesActualizar.scss";
 import { BsTrashFill } from "react-icons/bs";
 import { useRef } from "react";
 import { BsUpload } from 'react-icons/bs';
+import { useSelector } from "react-redux";
 
 const ActualizarDatos = () => {
 
@@ -17,6 +18,9 @@ const ActualizarDatos = () => {
     // Aquí puedes manejar la lógica de carga del archivo seleccionado
     console.log('Archivo seleccionado:', file);
   };
+
+  const { user: loggedUser } = useSelector((store) => store.userReducer);
+  console.log(loggedUser);
   return (
     <div className="detalle">
       <div className="actualizarDatos">
@@ -24,26 +28,26 @@ const ActualizarDatos = () => {
           <h4>Imagen de perfil</h4>
           <div>
             <img
-              src="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/img/profile-img.jpg"
-              alt=""
+              src={loggedUser?.foto}
+              alt={loggedUser?.nombre}
             />
-            
-              <div className="actualizarDatos__image__btns">
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={fileInputRef}
-                  style={{ display: 'none' }}
-                  onChange={handleFileChange}
-                />
-                <button className="btn1" onClick={handleFileSelect}>
-                  <BsUpload style={{ color: "#fff", fontSize: "1.1rem" }} />
-                </button>
+
+            <div className="actualizarDatos__image__btns">
+              <input
+                type="file"
+                accept="image/*"
+                ref={fileInputRef}
+                style={{ display: 'none' }}
+                onChange={handleFileChange}
+              />
+              <button className="btn1" onClick={handleFileSelect}>
+                <BsUpload style={{ color: "#fff", fontSize: "1.1rem" }} />
+              </button>
               <button className="btn2">
                 <BsTrashFill style={{ color: "#fff", fontSize: "1.1rem" }} />
               </button>
-              </div>
-            
+            </div>
+
           </div>
         </div>
         <form>
@@ -54,7 +58,7 @@ const ActualizarDatos = () => {
           <div>
             <label>Sobre mi</label>
             <textarea
-             
+
               rows="4"
               value={
                 "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam, illum magni consequatur ab possimus non debitis iure eum temporibus facere ducimus quidem neque perspiciatis, atque dolore fuga inventore commodi expedita?"

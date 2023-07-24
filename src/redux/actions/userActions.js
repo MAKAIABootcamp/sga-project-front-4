@@ -3,6 +3,8 @@ import { login } from "../../services/getUsers";
 import { loginUser } from "../reducers/userReducer";
 import { getUserFromCollection } from "../../services/getUsers";
 import Swal from 'sweetalert2';
+import { auth } from "../../firebase/firebaseConfig"
+import { updateProfile } from "firebase/auth";
 
 export const loginActionAsync = (email, password) => {
   return async (dispatch) => {
@@ -26,7 +28,7 @@ export const loginActionAsync = (email, password) => {
           icon: 'success',
           title: '¡Ingreso exitoso!'
         })
-      }else{
+      } else {
         Swal.fire({
           position: 'center',
           icon: 'error',
@@ -48,6 +50,29 @@ export const keepInfoUserAction = (email) => {
       dispatch(loginUser(user));
     } catch (error) {
       console.log(error);
+    }
+  }
+}
+
+export const updateInfoUserAction = (foto, nombre, sobremi, compania, trabajo, pais, direccion, telefono, email, salck, linkedin) => {
+  return async () => {
+    try {
+      await updateProfile(auth.currentUser, {
+        photoURL: foto,
+        displayName: nombre,
+        sobremi: sobremi,
+        compania: compania,
+        trabajo: trabajo,
+        pais: pais,
+        direccion: direccion,
+        telefono: telefono,
+        email: email,
+        salck: salck,
+        linkedin: linkedin
+      })
+
+    } catch (error) {
+      console.log('error al realizar la actualizacion de la informacion', error);
     }
   }
 }
