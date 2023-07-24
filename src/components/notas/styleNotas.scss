@@ -20,7 +20,7 @@
 .notas__cards-header{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .notas__barra{
@@ -28,13 +28,13 @@
 }
 
 .porcentaje{
-    position: relative;
-    left: 70%;
-    margin-top: -10%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -15%;
 }
 .porcentaje2{
-    position: relative;
-    left: 35%;
+    display: flex;
+    justify-content: center;
 }
 
 .notas__porcentajes{
@@ -44,8 +44,14 @@
     margin-top: 7%;
     gap: 20px;
     width: 25vw;
+
 }
 
+.notas__porcentajes p{
+    display: flex;
+    justify-content: center;
+    margin: 5% 0% 0%;
+}
 // .notas__actual{
 //     background-color: white;
 //     border-radius: 5%;
