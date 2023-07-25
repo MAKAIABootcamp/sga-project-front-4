@@ -4,14 +4,13 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
 import { Input} from 'antd';
-import { BsDownload } from "react-icons/bs";
 import { Table } from 'antd';
 import { Progress } from 'antd';
 import './StylesAsistencia.scss'
-import { useCallback, useEffect, useState } from "react";
-import { utils, writeFileXLSX } from 'xlsx';
+import { useEffect, useState } from "react";
 import BotonesFiltrado from "./BtnFintrado/BotonesFiltrado";
 import { useSelector } from "react-redux";
+import BtnDescarga from "../BotonDescarga/BtnDescarga";
 
 
 
@@ -26,66 +25,9 @@ const PageAsistencia = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.arrCohorte)
-  // const [students, setStudents] = useState([
-  //   {
-  //     key: 1,
-  //     name: "Jose",
-  //     apellido: "Sanmiguel",
-  //     doc: 10014053343,
-  //     tel: "+57 311 859 9554",
-  //     email: 'example@example.com',
-  //     asistencia: 10,
-  //     observaciones: ''
-  //   },
-  //   {
-  //     key: 2,
-  //     name: "Luisa",
-  //     apellido: "Urrego",
-  //     doc: 10014053343,
-  //     tel: "+57 311 859 9554",
-  //     email: 'example@example.com',
-  //     asistencia: 5,
-  //     observaciones: ''
-  //   },
-  //   {
-  //     key: 3,
-  //     name: "Yesid",
-  //     apellido: "Vanegas",
-  //     doc: 10014053343,
-  //     tel: "+57 311 859 9554",
-  //     email: 'example@example.com',
-  //     asistencia: 8,
-  //     observaciones: ''
-  //   },
-  //   {
-  //     key: 4,
-  //     name: "John",
-  //     apellido: "Cartagena",
-  //     doc: 10014053343,
-  //     tel: "+57 311 859 9554",
-  //     email: 'example@example.com',
-  //     asistencia: 9,
-  //     observaciones: ''
-  //   },
-  //   {
-  //     key: 5,
-  //     name: "Angie",
-  //     apellido: "Moreno",
-  //     doc: 10014053343,
-  //     tel: "+57 311 859 9554",
-  //     email: 'example@example.com',
-  //     asistencia: 10,
-  //     observaciones: ''
-  //   },
-  // ]);
   const [fallas, setFallas] = useState(0);
 
-  const exportFile = useCallback(() => {
-    const ws = utils.json_to_sheet(arrayEstudiantes);
-    const wb = utils.book_new();
-    utils.book_append_sheet(wb, ws, 'Data');
-    writeFileXLSX(wb, 'Prueba.xlsx');
-  }, [arrayEstudiantes]);
+
 
 
   
@@ -175,9 +117,7 @@ const PageAsistencia = () => {
             <div className="search">
               <Search placeholder="Buscar participante" value={searchTerm} onChange={(e) =>setSearchTerm(e.target.value) }  onSearch={onSearch} enterButton />
               
-              <button className="btnDescarga" onClick={exportFile}>
-                <BsDownload />
-              </button>
+              <BtnDescarga arrayEstudiantes={arrayEstudiantes ? arrayEstudiantes : ''} nombreArchivo={'Asistencia.xlsx'}/> 
             </div>
           </div>
         </div>

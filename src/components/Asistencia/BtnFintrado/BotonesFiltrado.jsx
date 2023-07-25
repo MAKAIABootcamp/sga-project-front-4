@@ -48,7 +48,7 @@ const BotonesFiltrado = () => {
   };
   const handleChangeCohorte = (value) => {
     console.log(`selected ${value}`);
-    const numero = parseInt(value.split(' ')[1]);
+    const numero = parseInt(value.match(/\d+/)[0]);
 
     const arrFiltroCohorte = arrFiltroModulo.filter(curso => parseInt(curso.cohorte, 10) === numero)
     setCohorteFilter(arrFiltroCohorte)
@@ -97,8 +97,8 @@ const BotonesFiltrado = () => {
                   value: "Backend",
                 },
                 {
-                  label: "Analisis de datos",
-                  value: "Analisis de datos",
+                  label: "Análisis de datos",
+                  value: "Análisis de datos",
                 },
               ],
             },

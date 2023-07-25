@@ -16,7 +16,7 @@ const DetallePerfil = () => {
                   }
                 </p>
             </div>
-            <div className='detalle__info'>
+            <div className='detalle__infor'>
                 <h4 className='title'>Detalles del perfil</h4>
                 <div className='info'>
                     <span>Nombre Completo</span>
