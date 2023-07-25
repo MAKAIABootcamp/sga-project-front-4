@@ -1,7 +1,7 @@
 import axios from "axios";
 import { addEvento, deleteEvento, setEventos } from "../reducers/eventsReducer";
 
-const URL = "http://localhost:3000/";
+const URL = "https://backend-sga.onrender.com/";
 
 export const listEvents = (endpoint) => {
   return async (dispatch) => {
