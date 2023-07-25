@@ -75,22 +75,22 @@ const Estudiantes = () => {
       key: "lastname",
     },
     {
-      title: "Tipo de documeto",
+      title: "Tipo de documento",
       dataIndex: "tipoDocumento",
       key: "tipoDocumento",
     },
     {
-      title: "# documento",
+      title: "Número de documento",
       dataIndex: "numeroDocumento",
       key: "numeroDocumento",
     },
     {
-      title: "Telefono",
+      title: "Teléfono",
       dataIndex: "telefono",
       key: "telefono",
     },
     {
-      title: "Tipo de entrenamiento",
+      title: "Entrenamiento",
       dataIndex: "tipo_entrenamiento",
       key: "tipo_entrenamiento",
     },
