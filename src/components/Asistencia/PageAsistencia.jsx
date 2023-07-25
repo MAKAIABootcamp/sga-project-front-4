@@ -94,7 +94,7 @@ const PageAsistencia = () => {
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-      setFallas(selectedRows)
+      setFallas(selectedRows.length)
     },
 
   };
@@ -111,7 +111,7 @@ const PageAsistencia = () => {
               Total de estudiantes: <span>{arrayEstudiantes.length}</span>
             </p>
             <p>
-              Total de fallas: <span>{arrayEstudiantes.length - fallas.length }</span>
+              Total de fallas: <span>{arrayEstudiantes.length - fallas }</span>
             </p>
           </div>
 
