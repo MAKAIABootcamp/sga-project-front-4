@@ -26,6 +26,7 @@ const PageAsistencia = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.arrCohorte)
   const [fallas, setFallas] = useState(0);
+  
 
 
 
@@ -37,7 +38,11 @@ const PageAsistencia = () => {
     setFilteredUsers(filtered)
   }, [searchTerm, arrayEstudiantes]);
 
-  const selectionType = 'checkbox';
+  const handleDateChange = (date) => {
+    console.log(date.$d);
+  }
+ 
+
   const columns = [
     {
       title: 'Apellido',
@@ -72,7 +77,7 @@ const PageAsistencia = () => {
       title: '% Asistencia',
       dataIndex: 'asistencia',
       render: (asistencia) => (
-        <Progress percent={(asistencia / 10) * 100} />
+        <Progress percent={(asistencia * 100) / 80} />
       )
     },
     {
@@ -89,7 +94,7 @@ const PageAsistencia = () => {
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-      setFallas(selectedRows.length)
+      setFallas(selectedRows)
     },
 
   };
@@ -106,7 +111,7 @@ const PageAsistencia = () => {
               Total de estudiantes: <span>{arrayEstudiantes.length}</span>
             </p>
             <p>
-              Total de fallas: <span>{arrayEstudiantes.length - fallas}</span>
+              Total de fallas: <span>{arrayEstudiantes.length - fallas.length }</span>
             </p>
           </div>
 
@@ -131,7 +136,7 @@ const PageAsistencia = () => {
               justifyContent="center"
             >
               <Grid item>
-                <DateCalendar defaultValue={today} disableFuture />
+                <DateCalendar defaultValue={today} disableFuture onChange={handleDateChange} />
               </Grid>
             </Grid>
           </LocalizationProvider>
@@ -142,7 +147,7 @@ const PageAsistencia = () => {
       <div className="asistencia__table">
         <Table className="tabla"
           rowSelection={{
-            type: selectionType,
+            type: 'checkbox',
             ...rowSelection,
           }}
           columns={columns}

@@ -22,7 +22,7 @@ const Header = ({ handleMenuToggle }) => {
     navigate("/perfil")
   }
   const { user: loggedUser } = useSelector((store) => store.userReducer);
-  console.log(loggedUser);
+  // console.log(loggedUser);
   return (
     <>
       <header className="header fixed-top d-flex align-items-center">

@@ -2,7 +2,7 @@ import axios from "axios";
 import { setEstudiantes, addEstudiantes, deleteEstudiantes, setCohorte } from "../reducers/estudiantesReducer";
 
 
-const URL = 'http://localhost:3000/';
+const URL = 'https://backend-sga.onrender.com/';
 
 export const getStudents = (endpoint) => {
   return async (dispatch) => {

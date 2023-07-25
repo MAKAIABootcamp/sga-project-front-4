@@ -14,6 +14,7 @@ const Calificaiones = () => {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [inputDesabler, setInputDesabler] = useState(true);
 
   const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.arrCohorte)
   console.log(arrayEstudiantes);
@@ -33,8 +34,12 @@ const Calificaiones = () => {
     },
 
   ];
+
   const onMenuClick = (e) => {
-    console.log('click', e);
+    console.log('click', e.key);
+    if(e.key == 1){
+      setInputDesabler(false);
+    }
   };
 
   const CustomColumnWorshop = ({ title }) => {
@@ -44,7 +49,7 @@ const Calificaiones = () => {
       <div className='fecha'>
         <div className='workshop'>
           {title}
-          <input className='valorNota' defaultValue={arrayEstudiantes[0]?.calificaciones?.workshop?.porcentaje} />
+          <input className='valorNota' disabled = {inputDesabler} defaultValue={arrayEstudiantes[0]?.calificaciones?.workshop?.porcentaje} />
         </div>
         {
           fechaEncontrada && <span className='fechaEncontrada'>{fechaEncontrada}</span>
@@ -60,7 +65,7 @@ const Calificaiones = () => {
       <div className='fecha'>
         <div className='workshop'>
           {title}
-          <input className='valorNota' defaultValue={arrayEstudiantes[0]?.calificaciones?.sprint?.porcentaje} />
+          <input className='valorNota' disabled = {inputDesabler} defaultValue={arrayEstudiantes[0]?.calificaciones?.sprint?.porcentaje} />
         </div>
         {
           fechaEncontrada && <span className='fechaEncontrada'>{fechaEncontrada}</span>
@@ -75,7 +80,8 @@ const Calificaiones = () => {
       title: 'Nombre',
       dataIndex: 'name',
       key: 'name',
-      render: (text, record) => <>
+      render: (text, record) => 
+      <>
         <img className='imagenPerfil' src={record.photo} alt={text} />
         <span>{text}     {record.lastname}</span>
       </>,
@@ -84,20 +90,22 @@ const Calificaiones = () => {
       title: <CustomColumnWorshop title={'Workshop'} />,
       dataIndex: 'calificaciones',
       key: 'calificaciones',
-      render: (cal) => <input className='inputNota' type="text" defaultValue={cal.workshop.nota} />
+      render: (cal) => <input className='inputNota' type="text" defaultValue={cal.workshop.nota} disabled = {inputDesabler} />
     },
     {
       title: <CustomColumnSprint title={'Sprint'} />,
       dataIndex: 'calificaciones',
       key: 'calificaciones',
-      render: (cal) => <input className='inputNota' type='text' defaultValue={cal.sprint.nota} />
+      render: (cal) => <input className='inputNota' type='text' defaultValue={cal.sprint.nota} disabled = {inputDesabler}/>
     },
     {
       title: 'Progreso',
       dataIndex: 'calificaciones',
       key: 'calificaciones',
       render: (_, record) => (
-        <Progress percent={((record.calificaciones.workshop.nota + record.calificaciones.sprint.nota) / 100) * 100} />
+
+        <Progress percent={(
+          (parseFloat(record.calificaciones.workshop.nota) * parseFloat(record.calificaciones.workshop.porcentaje) + parseFloat(record.calificaciones.sprint.nota) * parseFloat(record.calificaciones.sprint.porcentaje) ) / 100) } />
       )
     },
     {
@@ -107,6 +115,7 @@ const Calificaiones = () => {
         <Dropdown
         menu={{
           items,
+          onClick: onMenuClick,
         }}
         placement="top"
       >

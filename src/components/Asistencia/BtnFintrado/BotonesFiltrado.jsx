@@ -57,7 +57,10 @@ const BotonesFiltrado = () => {
     console.log('Array de filtro de cohorte',arrFiltroCohorte);
    
   };
-  dispatch(filterCohorte(cohorteFilter))
+  useEffect(() => {
+    // Este efecto se ejecutará cada vez que 'cohorteFilter' cambie
+    dispatch(filterCohorte(cohorteFilter));
+  }, [cohorteFilter, dispatch]);
 
   const cohortesUnicas = new Set();
 
@@ -72,7 +75,7 @@ const BotonesFiltrado = () => {
   const opcionesCohorte = Array.from(cohortesUnicas).map((cohorte) => ({
     label: `${entrenamiento} ${cohorte}`,
     value: `${entrenamiento} ${cohorte}`,
-    key: `${entrenamiento} ${cohorte.id}`
+    key: `${entrenamiento} ${cohorte.key}`
   }));
   
   return (
