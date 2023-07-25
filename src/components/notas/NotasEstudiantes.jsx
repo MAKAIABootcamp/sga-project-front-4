@@ -1,12 +1,13 @@
 import { useState } from "react";
 import "./styleNotas.scss";
-import { Button, Card, Modal, Progress, Select, Space, Tooltip } from 'antd';
+import { Button, Card, Modal, Progress, Select, Space, Table, Tooltip } from 'antd';
 import userProfile from "../../assets/images/profile-img.jpg";
+import { useSelector } from "react-redux";
 
 const NotasEstudiantes = () => {
   const [selectedValue, setSelectedValue] = useState("Sprints");
-  let nota2 = 90;
-  let nota1 = 70;
+  let nota2 = 9*10;
+  let nota1 = 7*10;
 
   const handleChange = (value) => {
     setSelectedValue(value); 
@@ -28,8 +29,11 @@ const NotasEstudiantes = () => {
 
   const promedioNotas = (nota1 + nota2) / 2;
 
+  const calificaciones  = useSelector((store) => store.estudiantesReducer.estudiantes)
+
   return (
     <main className="notas">
+
       <aside className="notas__cards">
         <article className="notas__cards-header">
           <Select defaultValue="Módulo" style={{ width: 150}}> 
