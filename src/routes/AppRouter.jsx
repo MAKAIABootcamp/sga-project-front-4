@@ -27,11 +27,10 @@ import PrivateRouter from "./PrivateRouter";
 import { useSelector, useDispatch } from "react-redux";
 //import { Spinner } from "react-bootstrap";
 import { Box, CircularProgress } from "@mui/material";
-import SuperAdminRouter from "./SuperAdminRouter";
 import { keepInfoUserAction } from "../redux/actions/userActions";
-import AdminRouter from "./AdminRouter";
-import FormadorRoute from "./FormadorRouter";
-import EstudiantesRoute from "./EstudianteRoutes";
+import { userTypes } from '../services/data';
+import RutaNoPermitida from "../components/RutaNoPermitida/RutaNoPermitida";
+
 
 const AppRouter = () => {
   const dispatch = useDispatch();
@@ -57,7 +56,7 @@ const AppRouter = () => {
 
   if (checking) {
     return (
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", justifyContent: 'center', alignItems: "center", height: '100vh' }}>
         <CircularProgress />
       </Box>
     );
@@ -78,36 +77,33 @@ const AppRouter = () => {
             <Route path="/dashboard" element={<Panel />} />
             <Route path="/perfil" element={<PerfilPage />} />
             {/* MODULOS DE PANEL DE ADMINISTRADOR */}
-            <Route element={<AdminRouter userType={loggedUser?.rol} />}>
-              <Route path="/estudiantes" element={<Estudiantes />} />
+            {/* <Route element={<AdminRouter userType={loggedUser?.rol} />}> */}
+            <Route path="/estudiantes" element={loggedUser?.rol === userTypes.ADMINISTRADOR ?  <Estudiantes /> : <RutaNoPermitida />} />
+            {/* </Route> */}
 
-
-            </Route>
-
-            <Route element={<FormadorRoute userType={loggedUser?.rol} />}>
-              <Route path="/calificaciones" element={<Calificaiones />} />
-              <Route path="/asistencia" element={<AsistenciaPage />} />
-              <Route path="/cronograma" element={<Cronograma />} />
-              <Route path="/recursos" element={<RecursosEstudiantes />} />
-            </Route>
-
-            <Route element={<EstudiantesRoute userType={loggedUser?.rol} />}>
-              <Route path="/notas" element={<Notas />} />
-              <Route path="/plan" element={<PlanDeEstudios />} />
-            </Route>
-
+            
             {/* MODULO DE FORMADOR*/}
-
+            {/* <Route element={<FormadorRoute userType={loggedUser?.rol} />}> */}
+            <Route path="/calificaciones" element={loggedUser?.rol === userTypes.FORMADOR || loggedUser?.rol === userTypes.ADMINISTRADOR  ?  <Calificaiones /> : <RutaNoPermitida />} />
+            <Route path="/asistencia" element={loggedUser?.rol === userTypes.FORMADOR || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <AsistenciaPage /> : <RutaNoPermitida />} />
+            <Route path="/cronograma" element={loggedUser?.rol === userTypes.FORMADOR || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <Cronograma /> : <RutaNoPermitida />} />
+            <Route path="/recursos" element={loggedUser?.rol === userTypes.FORMADOR || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <RecursosEstudiantes /> : <RutaNoPermitida />} />
+            {/* </Route> */}
 
             {/* MODULO DE ESTUDIANTE*/}
+            {/* <Route element={<EstudiantesRoute userType={loggedUser?.rol} />}> */}
+            <Route path="/notas" element={loggedUser?.rol === userTypes.ESTUDIANTE || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <Notas /> : <RutaNoPermitida />} />
+            <Route path="/plan" element={loggedUser?.rol === userTypes.ESTUDIANTE || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <PlanDeEstudios /> : <RutaNoPermitida />} />
+            {/* Falta cronograma de visualización del estudiante */}
+            {/* </Route> */}
 
             {/* MODULO REGISTRO SUPER ADMINISTRADOR */}
-            <Route element={<SuperAdminRouter userType={loggedUser?.rol} />}>
-              <Route
-                path="/registro-administradores"
-                element={<PanelSuperAdministrador />}
-              />
-            </Route>
+            {/* <Route element={<SuperAdminRouter userType={loggedUser?.rol} />}> */}
+            <Route
+              path="/registro-administradores"
+              element={loggedUser?.rol === userTypes.SUPERADMIN ?  <PanelSuperAdministrador /> : <RutaNoPermitida />}
+            />
+            {/* </Route> */}
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

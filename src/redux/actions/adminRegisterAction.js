@@ -5,7 +5,7 @@ import {
   setAdministradores,
 } from "../reducers/adminRegisterReducer";
 
-const URL = "http://localhost:3000/";
+const URL = "https://backend-sga.onrender.com/";
 
 export const listAdmin = (endpoint) => {
   return async (dispatch) => {

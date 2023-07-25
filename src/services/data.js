@@ -5,8 +5,8 @@ export const collections = {
 }
 
 export const userTypes = {
-    ADMINISTRADOR: "administrador",
-    ESTUDIANTE: "estudiantes",
-    SUPERADMIN: "super administrador",
-    FORMADOR: "formador"
+    ADMINISTRADOR: "Administrador",
+    ESTUDIANTE: "Estudiante",
+    SUPERADMIN: "Super Administrador",
+    FORMADOR: "Formador"
 }

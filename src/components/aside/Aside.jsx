@@ -49,7 +49,7 @@ const Aside = ({hamburguerMenu,}) => {
   return (
     <>
       {hamburguerMenu && (
-        <aside
+        <div
           id="sidebar"
           className={`sidebar ${hamburguerMenu ? "menu-open" : ""}`}
         >
@@ -63,7 +63,7 @@ const Aside = ({hamburguerMenu,}) => {
             </li>
              ))}
           </ul>
-        </aside>
+        </div>
       )}
     </>
   );
