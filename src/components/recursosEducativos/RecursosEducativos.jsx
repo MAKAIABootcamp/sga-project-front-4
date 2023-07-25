@@ -6,7 +6,7 @@ import iconDiapositivas from '../../assets/images/403227.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCourse } from '../../redux/actions/cursosActions';
 import { useParams } from 'react-router-dom';
-
+import { FaTrashAlt } from 'react-icons/fa';
 const RecursosEducativos = () => {
   const dispatch = useDispatch();
   const isDesktop = useMediaQuery('(min-width: 769px)');
@@ -38,6 +38,7 @@ const [selectedResourceId, setSelectedResourceId] = useState(null);
     setTipoRecurso(selectedTipoRecurso);
     setEnlaceGrabacion('');
     setArchivos({});
+    setNombreRecurso(selectedFile.name)
     setError('');
   };
 
@@ -66,7 +67,7 @@ const [selectedResourceId, setSelectedResourceId] = useState(null);
     setError('');
   };
 
-const handleSubmit = (e,idCurso) => {
+const handleSubmit = (e,nombreRecurso) => {
   e.preventDefault();
 
   if (cursoActual) {
@@ -172,13 +173,15 @@ if (!isDesktop) {
       <p>
         Agregado: {recurso.modulo},
         <a href={recurso.enlaceGrabacion} target="_blank" rel="noopener noreferrer">
-          <i className="fas fa-play-circle"></i> Enlace de grabación
         </a>
       </p>
     ) : (
-      <p>Agregado: {recurso.modulo}, {recurso.nombreArchivo}</p>
+      <><p>Agregado: {recurso.modulo},{recurso.nombreArchivo}</p>  
+       <FaTrashAlt onClick={() => handleDeleteRecurso(recurso.id)} /> {/* Use the trash icon here */}
+      </>
+      
     )}
-     <i className="fas fa-trash-alt" onClick={() => setSelectedResourceId(recurso.id)}></i>
+
           </div>
         ))}
       </div>
@@ -229,6 +232,7 @@ if (!isDesktop) {
             </label>
             <input
               onClick={() => handleTipoArchivoChange('diapositivas')} 
+              onChange={(e) => handleArchivoChange(e, "diapositivas")}
               type="file"
               id="diapositivasInput"
               accept=".pdf,.doc,.docx"
@@ -255,6 +259,7 @@ if (!isDesktop) {
               onClick={() => handleTipoArchivoChange('lectura')} 
               accept=".pdf,.doc,.docx"
               style={{ display: 'none' }} // Oculta el input
+              onChange={(e) => handleArchivoChange(e, "lectura")}
             />
               {getArchivosSubidosTipoSeleccionado('lectura').map((recurso, index) => (
   <div key={index}  className='inputs__respuesta'>
@@ -277,6 +282,7 @@ if (!isDesktop) {
               onClick={() => handleTipoArchivoChange('ejercicios')} 
               accept=".pdf,.doc,.docx"
               style={{ display: 'none' }}
+              onChange={(e) => handleArchivoChange(e, "ejercicios")}
             />
                 {getArchivosSubidosTipoSeleccionado('ejercicios').map((recurso, index) => (
   <div key={index}  className='inputs__respuesta'>
@@ -295,6 +301,7 @@ if (!isDesktop) {
               type="file"
               id="ejerciciosObligatoriosInput"
               onClick={() => handleTipoArchivoChange('ejercicios_obligatorios')} 
+              onChange={(e) => handleArchivoChange(e, "ejercicios_obligatorios")}
               accept=".pdf,.doc,.docx"
               style={{ display: 'none' }}
             />

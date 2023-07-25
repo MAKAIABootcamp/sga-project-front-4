@@ -7,10 +7,10 @@ import interactionPlugin from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
 import { getEvents } from "../../services/getEvents";
 import "../../styles/cronograma/Cronograma.scss";
-import { useMediaQuery } from "@material-ui/core"; // Importing useMediaQuery
+ // Importing useMediaQuery
 
 const CalendarioVisualizacion = () => {
-  const isDesktop = useMediaQuery("(min-width: 769px)"); // Using useMediaQuery hook for desktop view
+// Using useMediaQuery hook for desktop view
 
   useEffect(() => {
     getEvents().then((data) => {
@@ -18,7 +18,21 @@ const CalendarioVisualizacion = () => {
     });
   }, []); 
   
-  // Rest of the code...
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 769);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 769);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Limpia el listener del evento al desmontar el componente
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
 
   const getView = () => {
     return isDesktop ? "dayGridMonth" : "listWeek"; // Using isDesktop from useMediaQuery to determine the view mode
@@ -70,21 +84,41 @@ const CalendarioVisualizacion = () => {
     return { backgroundColor, textColor };
   };
 
-
-
-
-  const calendarOptions = {
-    plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-    timeZone: "America/Bogota",
-    eventClick: handleEventClick,
-    locale: esLocale,
-    events: eventos,
-    editable: false,
-    initialView: getView,
-    eventContent: ajustarContenidoEvento,
-   
-  };
+  const MobileCalendar = () => {
+    const calendarOptions = {
+      plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+      timeZone: "America/Bogota",
+      eventClick: handleEventClick,
+      locale: esLocale,
+      events: eventos,
+      editable: false,
+      initialView: "listWeek",
+      eventContent: ajustarContenidoEvento,
+    };
+    return (
+      <FullCalendar {...calendarOptions} />
+    )
+    
+  }
   
+  const DesktopCalendar = () => {
+    const calendarOptions = {
+      plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+      timeZone: "America/Bogota",
+      eventClick: handleEventClick,
+      locale: esLocale,
+      events: eventos,
+      editable: false,
+      initialView: "dayGridMonth",
+      eventContent: ajustarContenidoEvento,
+    };
+    return (
+      <FullCalendar {...calendarOptions} />
+    )
+  }
+  
+
+
   const renderConvenciones = () => {
     return (
       <table>
@@ -112,11 +146,11 @@ const CalendarioVisualizacion = () => {
     );
   };
   const getCalendarHeight = () => {
-    return getView() === "listWeek" ? "600px" : "18rem";
+    return getView() === "listWeek" ? "5rem" : "18rem";
   };
   return (
     <section
-    style={{ height: getCalendarHeight(), marginTop: getView() === "listWeek" ? "8rem" : "10rem" }}
+    style={{ height: getCalendarHeight(), marginTop: getView() === "listWeek" ? "3rem " : "10rem" }}
     className="seccionCalendarioVisualizacion"
     >
       <div className="seccionCalendarioVisualizacion__container">
@@ -127,7 +161,7 @@ const CalendarioVisualizacion = () => {
               {selectedDay && <p>Día seleccionado: {selectedDay}</p>}
             </div>
           )}
-          <FullCalendar {...calendarOptions} />
+             {isDesktop ? <DesktopCalendar/>:<MobileCalendar/>}
         </div>
         <div
           className="seccionCalendarioVisualizacion__eventDetails"
