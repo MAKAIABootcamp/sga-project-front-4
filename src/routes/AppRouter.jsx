@@ -38,7 +38,7 @@ const AppRouter = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(undefined);
 
   const { user: loggedUser } = useSelector((store) => store.userReducer);
-  console.log(loggedUser);
+  // console.log(loggedUser);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {

@@ -48,7 +48,7 @@ const BotonesFiltrado = () => {
   };
   const handleChangeCohorte = (value) => {
     console.log(`selected ${value}`);
-    const numero = parseInt(value.split(' ')[1]);
+    const numero = parseInt(value.match(/\d+/)[0]);
 
     const arrFiltroCohorte = arrFiltroModulo.filter(curso => parseInt(curso.cohorte, 10) === numero)
     setCohorteFilter(arrFiltroCohorte)
@@ -57,7 +57,10 @@ const BotonesFiltrado = () => {
     console.log('Array de filtro de cohorte',arrFiltroCohorte);
    
   };
-  dispatch(filterCohorte(cohorteFilter))
+  useEffect(() => {
+    // Este efecto se ejecutará cada vez que 'cohorteFilter' cambie
+    dispatch(filterCohorte(cohorteFilter));
+  }, [cohorteFilter, dispatch]);
 
   const cohortesUnicas = new Set();
 
@@ -72,7 +75,7 @@ const BotonesFiltrado = () => {
   const opcionesCohorte = Array.from(cohortesUnicas).map((cohorte) => ({
     label: `${entrenamiento} ${cohorte}`,
     value: `${entrenamiento} ${cohorte}`,
-    key: `${entrenamiento} ${cohorte.id}`
+    key: `${entrenamiento} ${cohorte.key}`
   }));
   
   return (
@@ -97,8 +100,8 @@ const BotonesFiltrado = () => {
                   value: "Backend",
                 },
                 {
-                  label: "Analisis de datos",
-                  value: "Analisis de datos",
+                  label: "Análisis de datos",
+                  value: "Análisis de datos",
                 },
               ],
             },
