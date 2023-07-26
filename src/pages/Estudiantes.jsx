@@ -29,6 +29,7 @@ const Estudiantes = () => {
   const arrayEstudiantes = useSelector(
     (store) => store.estudiantesReducer.arrCohorte
   );
+  console.log(arrayEstudiantes);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -38,11 +39,11 @@ const Estudiantes = () => {
     setShowModal(true);
   };
 
-  const handleEliminarParticipante = async (key) => {
+  const handleEliminarParticipante = async (id) => {
     try {
-      await dispatch(deleteStudents("estudiantes", key));
+      await dispatch(deleteStudents("estudiantes", id));
       setFilteredUsers((prevFilteredUsers) =>
-        prevFilteredUsers.filter((estudiante) => estudiante.key !== key)
+        prevFilteredUsers.filter((estudiante) => estudiante.id !== id)
       );
       Swal.fire(
         "Buen trabajo!",
@@ -60,17 +61,11 @@ const Estudiantes = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    const filtered = arrayEstudiantes.filter((user) =>
-      Object.values(user).some(
-        (value) =>
-          value &&
-          value.toString().toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
-    setFilteredUsers(filtered);
+    const filtered = arrayEstudiantes.filter((user) => (user.name).toLowerCase().includes(searchTerm.toLowerCase()));
+    setFilteredUsers(filtered)
   }, [searchTerm, arrayEstudiantes]);
   const onSearch = (value) => console.log(value);
-  const selectionType = "checkbox";
+
   const columns = [
     {
       title: "Nombre",
@@ -123,7 +118,7 @@ const Estudiantes = () => {
       render: (_, record) => (
         <Popconfirm
           title="¿Estás seguro de eliminar este estudiante?"
-          onConfirm={() => handleEliminarParticipante(record.key)}
+          onConfirm={() => handleEliminarParticipante(record.id)}
           okText="Sí"
           cancelText="Cancelar"
         >
@@ -134,15 +129,7 @@ const Estudiantes = () => {
     },
   ];
 
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      console.log(
-        `selectedRowKeys: ${selectedRowKeys}`,
-        "selectedRows: ",
-        selectedRows
-      );
-    },
-  };
+ 
 
 
   // const exportFile = useCallback(() => {
@@ -191,16 +178,7 @@ const Estudiantes = () => {
         </div>
       </Modal>
 
-      <Table
-        style={{ width: "5rem" }}
-        className="tabla"
-        rowSelection={{
-          type: selectionType,
-          ...rowSelection,
-        }}
-        columns={columns}
-        dataSource={filteredUsers}
-      />
+      <Table columns={columns} dataSource={filteredUsers} />
     </div>
   );
 };

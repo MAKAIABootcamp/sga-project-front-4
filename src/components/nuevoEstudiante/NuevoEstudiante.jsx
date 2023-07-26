@@ -62,9 +62,9 @@ const NuevoEstudiante = () => {
       'El administrador fue agregado con éxito!',
       'success'
     )
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 1000);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   }
 
 
