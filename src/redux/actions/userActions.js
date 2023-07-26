@@ -69,10 +69,3 @@ export const updateInfoUserAction = (userId, newdata) => {
     }
   }
 }
-
-// export const loginActionSync = (user) => {
-//   return {
-//     type: collections.USUARIOS,
-//     payload: user,
-//   };
-// };

@@ -1,37 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    estudiantes: [],
-    arrCohorte: [],
-    
+  estudiantes: [],
+  arrCohorte: [],
 };
 
 const studentSlice = createSlice({
-    name: 'estudiantes',
-    initialState,
+  name: "estudiantes",
+  initialState,
 
-    reducers: {
-        setEstudiantes: (state, action) => {
-            state.estudiantes = action.payload
-        },
-        addEstudiantes: (state, action) => {
-            state.arrCohorte = action.payload;
-        },
-        deleteEstudiantes: (state, action) => {
-            state.estudiantes = state.estudiantes.filter(
-                (estudiante) => estudiante.id !== action.payload
-              );
-          },
-        setCohorte: (state, action) => {
-            state.arrCohorte = action.payload
-        }
-    }
+  reducers: {
+    setEstudiantes: (state, action) => {
+      state.estudiantes = action.payload;
+    },
+    addEstudiantes: (state, action) => {
+      state.arrCohorte = action.payload;
+    },
+    deleteEstudiantes: (state, action) => {
+      state.estudiantes = state.estudiantes.filter(
+        (estudiante) => estudiante.id !== action.payload
+      );
+    },
+    setCohorte: (state, action) => {
+      state.arrCohorte = action.payload;
+    },
+  },
 });
 
-export const {
-    setEstudiantes,
-    addEstudiantes,
-    deleteEstudiantes,
-    setCohorte,
-} = studentSlice.actions;
+export const { setEstudiantes, addEstudiantes, deleteEstudiantes, setCohorte } =
+  studentSlice.actions;
 export default studentSlice.reducer;
