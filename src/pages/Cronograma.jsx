@@ -72,8 +72,8 @@ const Cronograma = () => {
   }, [dispatch]);
 
   return (
-    <section>
-      <div className="container" style={{ padding: "8rem" }}>
+    <section style={{width: "100%"}}>
+      <div className="container" style={{ padding: "4rem" }}>
         <div id="calendar" className="custom-calendar">
         <div className="d-flex justify-content-end">
           <Button onClick={handleDayClick} variant="primary" className="mb-2">Agregar evento</Button>

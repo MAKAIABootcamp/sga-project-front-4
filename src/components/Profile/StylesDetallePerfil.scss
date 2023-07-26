@@ -1,52 +1,51 @@
-.detalle{
+.detalle {
+  display: flex;
+  flex-direction: column;
+  margin: 1.7rem 0 0 0;
+
+  &__sobremi {
     display: flex;
     flex-direction: column;
-    margin: 1.7rem 0 0 0;
 
-    &__sobremi{
-        display: flex;
-        flex-direction: column;
-
-        
-
-        p{
-            font-style: italic ;
-            margin-bottom: 1.7rem;
-        }
+    p {
+      font-style: italic;
+      margin-bottom: 1.7rem;
+      text-align: justify;
     }
-    .title{
-        font-size: 1.4rem;
-        margin-bottom: 1.7rem;
-        font-weight: 600;
-        color: #012970;
-    }
+  }
+  .title {
+    font-size: 1.4rem;
+    margin-bottom: 1.7rem;
+    font-weight: 600;
+    color: #012970;
+  }
 
-    &__infor{
-        display: flex;
-        flex-direction: column;
-        
+  &__infor {
+    display: flex;
+    flex-direction: column;
 
-        .info{
-            display: flex;
-            width: 85%;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-           
-            span{
-                font-size: 1.2rem;
-                font-weight: 300 ;
-                color: rgba(1, 41, 112, 0.6);
-                margin-right: 7rem;
-            }
-            p{
-                font-size: 1.2rem;
-            }
-        }
+    .info {
+      display: flex;
+      width: 85%;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+
+      span {
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: rgba(1, 41, 112, 0.6);
+        margin-right: 7rem;
+      }
+      p {
+        font-size: 1.2rem;
+        text-align: end;
+      }
     }
-    @media screen and (max-width:850px) {
-        .info{
-            display: block;
-        }
+  }
+  @media screen and (max-width: 850px) {
+    .info {
+      display: block;
     }
+  }
 }

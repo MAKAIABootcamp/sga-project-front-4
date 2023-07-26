@@ -4,13 +4,7 @@
       .fc-dayGridMonth-button {
         background-color: #2e6c80;
         box-shadow: 0 4px 8px rgba(106, 179, 238, 0.5);
-      }
-
-
-
-
-
-      
+      }     
 
       .fc-timeGridWeek-button {
         background-color: #2e6c80;
@@ -37,6 +31,10 @@
         background-color: #2e6c80;
         box-shadow: 0 4px 8px rgba(106, 179, 238, 0.5);
       }
+     .fc-toolbar-title {
+        font-size: 1.75em;
+        margin: 0 27px;
+    }
     }
   }
 }
