@@ -152,7 +152,7 @@ const PageAsistencia = () => {
           }}
           columns={columns}
           dataSource={filteredUsers}
-
+          rowKey="id" 
         />
       </div>
       <div className="asistencia__enviar">
