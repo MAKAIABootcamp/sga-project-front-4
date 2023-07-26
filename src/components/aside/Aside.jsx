@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useNavigate } from "react-router-dom";
 import "../../styles/aside/Aside.scss";
 
@@ -15,19 +15,19 @@ const Aside = ({ hamburguerMenu }) => {
     },
     {
       name: "Asistencia",
-      url: "",
+      url: "/asistencia",
     },
     {
       name: "Recursos educativos",
       url: "/recursos",
     },
     {
-      name: "Notas",
-      url: "/notas",
+      name: "Calificaciones",
+      url: "/calificaciones",
     },
     {
       name: "Seguimiento académico",
-      url: "",
+      url: "/notas",
     },
     {
       name: "Plan de estudios",
@@ -58,24 +58,21 @@ const Aside = ({ hamburguerMenu }) => {
   return (
     <>
       {hamburguerMenu && (
-        <aside
+        <div
           id="sidebar"
           className={`sidebar ${hamburguerMenu ? "menu-open" : ""}`}
         >
           <ul className="sidebar-nav" id="sidebar-nav">
-            {AsideList.map((item, index) => (
-              <li className="nav-item" key={item.name}>
-                <a
-                  className="nav-link collapsed"
-                  onClick={() => handleMenuItemClick(item.url)}
-                >
-                  <i className="bi bi-grid"></i>
-                  <span>{item.name}</span>
-                </a>
-              </li>
-            ))}
+          {AsideList.map((item, index) => (
+            <li key={index} className="nav-item">
+              <a className="nav-link collapsed" onClick={() => handleMenuItemClick(item.url)}>
+                <i className="bi bi-grid"></i>
+                <span>{item.name}</span>
+              </a>
+            </li>
+             ))}
           </ul>
-        </aside>
+        </div>
       )}
     </>
   );

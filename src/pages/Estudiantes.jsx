@@ -2,74 +2,34 @@ import dayjs from "dayjs";
 import { Input } from "antd";
 import { Modal, Button } from "react-bootstrap";
 import { BsDownload } from "react-icons/bs";
-import { Table } from "antd";
+import { Table, Popconfirm } from "antd";
 import { Progress } from "antd";
 import "../styles/admin_estudiantes/estudiantes.scss";
 import NuevoEstudiante from "../components/nuevoEstudiante/NuevoEstudiante";
 import { useCallback, useEffect, useState } from "react";
-import ButtonsFiltro from "../components/buttonsFiltro/ButtonsFiltro";
+import BotonesFiltrado from "../components/Asistencia/BtnFintrado/BotonesFiltrado";
+import { deleteStudents, getStudents } from "../redux/actions/estudiantesActions";
+import { useDispatch, useSelector } from "react-redux";
+import { MdDeleteForever } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
+import Swal from "sweetalert2";
+// import ButtonsFiltro from "../components/buttonsFiltro/ButtonsFiltro";
 // import { utils, writeFileXLSX } from 'xlsx';
 const { Search } = Input;
 const today = dayjs();
 // import AdminEstudiantes from '../components/adminEstudiantes/AdminEstudiantes'
 
 const Estudiantes = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [students, setStudents] = useState([
-    {
-      key: 1,
-      name: "Jose",
-      apellido: "Sanmiguel",
-      type_doc: "Cédula",
-      doc: 10014053343,
-      email: "example@example.com",
-      entrenamiento: "Front-end",
-      cohorte: "3",
-    },
-    {
-      key: 2,
-      name: "Luisa",
-      apellido: "Urrego",
-      type_doc: "Cédula",
-      doc: 10014053343,
-      email: "example@example.com",
-      entrenamiento: "Front-end",
-      cohorte: "3",
-    },
-    {
-      key: 3,
-      name: "Yesid",
-      apellido: "Vanegas",
-      type_doc: "Cédula",
-      doc: 10014053343,
-      email: "example@example.com",
-      entrenamiento: "Front-end",
-      cohorte: "3",
-    },
-    {
-      key: 4,
-      name: "John",
-      apellido: "Cartagena",
-      type_doc: "Cédula",
-      doc: 10014053343,
-      email: "example@example.com",
-      entrenamiento: "Front-end",
-      cohorte: "3",
-    },
-    {
-      key: 5,
-      name: "Angie",
-      apellido: "Moreno",
-      type_doc: "Cédula",
-      doc: 10014053343,
-      email: "example@example.com",
-      entrenamiento: "Front-end",
-      cohorte: "3",
-    },
-  ]);
-  const [fallas, setFallas] = useState(0);
+  const [students, setEstudents] = useState([]);
+
+  // const estudiantes = useSelector((store) => store.estudiantesReducer.estudiantes);
+  // console.log("estudiantes desde page estudiantes", estudiantes);
+
+  const arrayEstudiantes = useSelector((store) => store.estudiantesReducer.arrCohorte)
+
+  const dispatch = useDispatch();
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -84,58 +44,114 @@ const Estudiantes = () => {
   //   writeFileXLSX(wb, 'Prueba.xlsx');
   // }, [students]);
 
+
   useEffect(() => {
-    const filtered = students.filter((user) =>
-      user.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredUsers(filtered);
-  }, [searchTerm, students]);
+    dispatch(getStudents("estudiantes"))
+  }, [dispatch]);
+
+  const handleEliminarParticipante = (id) => {
+    dispatch(deleteStudents("estudiantes", id));
+    Swal.fire(
+      'Buen trabajo!',
+      'El estudiante fue eliminado con éxito!',
+      'success'
+    )
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1000);
+  }
+
 
   const selectionType = "checkbox";
   const columns = [
     {
       title: "Nombre",
       dataIndex: "name",
-      render: (text) => (
-        <>
-          <span className="apodo">{text.slice(0, 2)}</span>
-          <a>{text}</a>
-        </>
-      ),
+      key: "name",
     },
     {
       title: "Apellido",
-      dataIndex: "apellido",
+      dataIndex: "lastname",
+      key: "lastname",
     },
     {
-      title: "Tipo de documento",
-      dataIndex: "type_doc",
+      title: "Tipo de documeto",
+      dataIndex: "tipoDocumento",
+      key: "tipoDocumento",
     },
     {
-      title: "Documento",
-      dataIndex: "doc",
+      title: "# documento",
+      dataIndex: "numeroDocumento",
+      key: "numeroDocumento",
     },
     {
-      title: "Email",
-      dataIndex: "email",
+      title: "Telefono",
+      dataIndex: "telefono",
+      key: "telefono",
     },
     {
-      title: "Entrenamiento",
-      dataIndex: "entrenamiento",
+      title: "Tipo de entrenamiento",
+      dataIndex: "tipo_entrenamiento",
+      key: "tipo_entrenamiento",
+    },
+    {
+      title: "Módulo",
+      dataIndex: "modulo",
+      key: "modulo",
     },
     {
       title: "Cohorte",
       dataIndex: "cohorte",
+      key: "cohorte",
     },
     {
-      title: "Estado",
-      dataIndex: "estado",
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
     {
       title: "Acciones",
       dataIndex: "estado",
+      render: (_, record) => (
+        <Popconfirm
+          title="¿Estás seguro de eliminar este estudiante?"
+          onConfirm={() => handleEliminarParticipante(record.id)}
+          okText="Sí"
+          cancelText="Cancelar"
+        >
+          <MdDeleteForever/>
+          <CiEdit />
+        </Popconfirm>
+      )
     },
   ];
+
+  // const mappedEstudiantes = arrayEstudiantes?.map((estudiante) => ({
+  //   key: estudiante.id,
+  //   name: estudiante.name,
+  //   lastname: estudiante.lastname,
+  //   tipoDocumento: estudiante.tipoDocumento,
+  //   numeroDocumento: estudiante.numeroDocumento,
+  //   telefono: estudiante.telefono,
+  //   tipo_entrenamiento: estudiante.tipo_entrenamiento,
+  //   modulo: estudiante.modulo,
+  //   cohorte: estudiante.cohorte,
+  //   email: estudiante.email,
+  // }));
+
+  
+  // const filterData = (searchQuery) => {
+  //   if (!searchQuery) return estudiantes;
+  //   const searchFields = ["name", "lastname", "tipo_documeto", "numero_documento", "telefono", "tipo_entrenamiento", "modulo", "cohorte", "email"];
+  //   return estudiantes.filter((estudiante) =>
+  //     searchFields.some((field) =>
+  //       (estudiante[field] || "").toString().toLowerCase().includes(searchQuery.toLowerCase())
+  //     )
+  //   );
+  // };
+
+  // const filteredEstudiantes = filterData(searchQuery);
+
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -144,30 +160,28 @@ const Estudiantes = () => {
         "selectedRows: ",
         selectedRows
       );
-      setFallas(selectedRows.length);
+      
     },
   };
 
-  const onSearch = (value) => console.log(value);
   return (
     <div className="estudiantes">
         <div className="infoAsistencia">
           <div className="totalidad">
             <p>
-              Total de estudiantes: <span>{students.length}</span>
+              {/* Total de estudiantes: <span>{filteredEstudiantes.length}</span> */}
             </p>
           </div>
 
           <div className="">
             <div>
-              <ButtonsFiltro />
+              <BotonesFiltrado />
             </div>
             <div className="search">
               <Search
                 placeholder="Buscar participante"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onSearch={onSearch}
+                //  value={searchQuery}
+                //  onChange={(e) => setSearchQuery(e.target.value)}
                 enterButton
               />
               <button className="button__agg" onClick={handleOpenModal}>
@@ -189,20 +203,18 @@ const Estudiantes = () => {
         </div>
       </Modal>
 
-      <div className="estudiantes__table">
+     
         <Table
+         style={{width: "5rem"}}
           className="tabla"
           rowSelection={{
             type: selectionType,
             ...rowSelection,
           }}
           columns={columns}
-          dataSource={filteredUsers}
+          dataSource={arrayEstudiantes}
         />
-      </div>
-      <div className="estudiantes__enviar">
-        <button type="submit">Enviar</button>
-      </div>
+     
     </div>
   );
 };

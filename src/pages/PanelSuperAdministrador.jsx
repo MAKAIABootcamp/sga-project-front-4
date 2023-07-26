@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import  { useEffect, useState} from "react";
 import { MdDeleteForever } from "react-icons/md";
 import { GrSearch } from "react-icons/gr";
 import { CiEdit } from "react-icons/ci";
@@ -8,13 +8,13 @@ import FormRegisterAdmin from "../components/form_register_admin/FormRegisterAdm
 // import { getAdmin, deleteAdmin } from "../services/getAdmin"
 import { deleteAdmin, listAdmin } from "../redux/actions/adminRegisterAction";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAdministrador } from "../redux/reducers/adminRegisterReducer";
+// import { deleteAdministrador } from "../redux/reducers/adminRegisterReducer";
 import Swal from "sweetalert2";
 
 
 const PanelSuperAdministrador = () => {
   const [showModal, setShowModal] = useState(false);
-  const [administrador, setAdministradores] = useState([]);
+  // const [administrador, setAdministradores] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredAdministradores, setFilteredAdministradores] = useState([]);
   
@@ -82,7 +82,7 @@ const PanelSuperAdministrador = () => {
   }, [dispatch]);
 
   return (
-    <main id="main" className="main__panel">
+    <div id="main" className="main__panel">
       
       <div>
         <div className="container__inputs">
@@ -122,7 +122,7 @@ const PanelSuperAdministrador = () => {
         </Modal>
       </div>
       
-      <table className="table ">
+      <table className="table">
         <thead>
           <tr >
             <th scope="col">#</th>
@@ -153,7 +153,7 @@ const PanelSuperAdministrador = () => {
         ))}
         </tbody>
       </table>
-    </main>
+    </div>
   );
 };
 

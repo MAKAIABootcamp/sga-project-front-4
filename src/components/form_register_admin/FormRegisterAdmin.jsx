@@ -55,14 +55,15 @@ const FormRegisterAdmin = () => {
           <div className="formularioAdmin__inputs">
             <h5>Tipo de documento</h5>
             <select
-              className="select"
+              className="select__form_register"
               name="tipo_documento"
               value={admin.tipo_documento}
               onChange={handleChange}
             >
               <option selected>Selecciona tu tipo de documento</option>
-              <option>Cédula</option>
-              <option>Two</option>
+              <option>C.C</option>
+              <option>T.I</option>
+              <option>PEP</option>
             </select>
           </div>
           <div className="formularioAdmin__inputs">

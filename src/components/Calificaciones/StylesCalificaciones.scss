@@ -1,0 +1,17 @@
+.calificaciones{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 3rem;
+
+    .imagenPerfil{
+        width: 5rem;
+        border-radius: 100px;
+        margin-right: 1rem;
+    }
+
+    .fecha{
+        display: flex;
+        flex-direction: column;
+    }
+}
