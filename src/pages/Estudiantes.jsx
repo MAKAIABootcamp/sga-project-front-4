@@ -1,9 +1,7 @@
-import dayjs from "dayjs";
+
 import { Input } from "antd";
 import { Modal } from "react-bootstrap";
-import { BsDownload } from "react-icons/bs";
 import { Table, Popconfirm } from "antd";
-import { Progress } from "antd";
 import "../styles/admin_estudiantes/estudiantes.scss";
 import NuevoEstudiante from "../components/nuevoEstudiante/NuevoEstudiante";
 import { useEffect, useState } from "react";
@@ -17,7 +15,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
 const { Search } = Input;
-const today = dayjs();
+// const today = dayjs();
 // import ButtonsFiltro from "../components/buttonsFiltro/ButtonsFiltro";
 // import { utils, writeFileXLSX } from 'xlsx';
 // import AdminEstudiantes from '../components/adminEstudiantes/AdminEstudiantes'
@@ -40,11 +38,11 @@ const Estudiantes = () => {
     setShowModal(true);
   };
 
-  const handleEliminarParticipante = async (id) => {
+  const handleEliminarParticipante = async (key) => {
     try {
-      await dispatch(deleteStudents("estudiantes", id));
+      await dispatch(deleteStudents("estudiantes", key));
       setFilteredUsers((prevFilteredUsers) =>
-        prevFilteredUsers.filter((estudiante) => estudiante.id !== id)
+        prevFilteredUsers.filter((estudiante) => estudiante.key !== key)
       );
       Swal.fire(
         "Buen trabajo!",
@@ -125,7 +123,7 @@ const Estudiantes = () => {
       render: (_, record) => (
         <Popconfirm
           title="¿Estás seguro de eliminar este estudiante?"
-          onConfirm={() => handleEliminarParticipante(record.id)}
+          onConfirm={() => handleEliminarParticipante(record.key)}
           okText="Sí"
           cancelText="Cancelar"
         >
