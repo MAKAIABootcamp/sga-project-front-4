@@ -4,11 +4,10 @@ import { Modal, Button } from "react-bootstrap";
 import { DateTime } from "luxon";
 import { useDispatch, useSelector } from "react-redux";
 import { addEvent } from "../../redux/actions/eventsActions";
-import '../../styles/cronograma/styleModal.scss';
+import "../../styles/cronograma/styleModal.scss";
 import Swal from "sweetalert2";
 
 const AgregarEvento = ({ show, onClose }) => {
-
   const [evento, setEvento] = useState({});
   const dispatch = useDispatch();
   const eventos = useSelector((store) => store.eventsReducer.eventos);
@@ -42,27 +41,13 @@ const AgregarEvento = ({ show, onClose }) => {
       end: formattedEnd,
     };
 
-
     console.log(evento);
     dispatch(addEvent("eventos", formattedEvento));
-    Swal.fire(
-      'Buen trabajo!',
-      'Tu evento fue agregado con éxito!',
-      'success'
-    )
-    setTimeout(() => {
-      window.location.reload(); // Recargar la página después de 2 segundos
-    }, 1000);
-
+    Swal.fire("Buen trabajo!", "Tu evento fue agregado con éxito!", "success");
+    // setTimeout(() => {
+    //   window.location.reload(); // Recargar la página después de 2 segundos
+    // }, 1000);
   };
-
-  // useEffect(() => {
-  //   console.log(evento);
-  // }, [evento]);
-
-  // useEffect(() => {
-  //   dispatch(addEvento("eventos", evento));
-  // }, [dispatch]);
 
   return (
     <Modal show={show} onHide={onClose}>
@@ -126,7 +111,7 @@ const AgregarEvento = ({ show, onClose }) => {
           </Form.Group>
           <div className="buttons__actions">
             <Button variant="primary" type="submit">
-            Añadir evento
+              Añadir evento
             </Button>
             <Button variant="secondary" onClick={onClose}>
               Cancelar

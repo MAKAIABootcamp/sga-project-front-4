@@ -80,7 +80,7 @@ const NotasEstudiantes = () => {
             <Progress type="circle" percent={nota2} size={70} className="porcentaje"/>
             <Modal title="Retroalimentación Sprint 2" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
             <p>Fecha de publicación: Abril 25, 2023</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vitae augue felis. Curabitur scelerisque lacus sit amet dignissim condimentum. Vivamus eu rhoncus metus. Mauris tempor suscipit hendrerit. Donec ornare enim non luctus finibus. Pellentesque risus purus, placerat sit amet faucibus non, tristique at lectus. Quisque sed odio dapibus, sagittis metus vestibulum, porttitor lorem.</p>
+            <p>Querido estudiante. Quiero darte un reconocimiento por el trabajo que has realizado en este proyecto. Has hecho un buen progreso y veo que has invertido tiempo y esfuerzo en el diseño y la implementación de la página web. Quiero resaltar los aspectos positivos y también brindarte algunas sugerencias para mejorar en el futuro. Ten en cuenta la estructura de HTML y el diseño Responsive con CSS. En general, tu trabajo es sólido, y estoy seguro de que, con estas sugerencias, podrás aprender más.</p>
             <div>
               <img src={userProfile} alt="Foto Formador"/>
               <p>Escrito por: Formador</p>
