@@ -30,9 +30,6 @@ const FormRegisterAdmin = () => {
         'El administrador fue agregado con éxito!',
         'success'
       )
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
    
   };
 

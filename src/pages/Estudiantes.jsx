@@ -15,10 +15,7 @@ import { MdDeleteForever } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import Swal from "sweetalert2";
 const { Search } = Input;
-// const today = dayjs();
-// import ButtonsFiltro from "../components/buttonsFiltro/ButtonsFiltro";
-// import { utils, writeFileXLSX } from 'xlsx';
-// import AdminEstudiantes from '../components/adminEstudiantes/AdminEstudiantes'
+
 
 const Estudiantes = () => {
   const [showModal, setShowModal] = useState(false);
@@ -128,16 +125,6 @@ const Estudiantes = () => {
       ),
     },
   ];
-
- 
-
-
-  // const exportFile = useCallback(() => {
-  //   const ws = utils.json_to_sheet(students);
-  //   const wb = utils.book_new();
-  //   utils.book_append_sheet(wb, ws, 'Data');
-  //   writeFileXLSX(wb, 'Prueba.xlsx');
-  // }, [students]);
 
   return (
     <div className="estudiantes">

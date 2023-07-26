@@ -17,7 +17,9 @@
   }
 
   &.header .header-nav .nav-profile img {
-    max-height: 36px;
+    max-height: 45px;
+    width: 45px;
+    object-fit: cover;
   }
 }
 

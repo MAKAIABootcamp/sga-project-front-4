@@ -6,6 +6,7 @@ import { BsUpload } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import fileUpLoad from "../../services/fileUpload";
 import { updateInfoUserAction } from "../../redux/actions/userActions";
+import Swal from "sweetalert2";
 
 const ActualizarDatos = () => {
   const { user: loggedUser } = useSelector((store) => store.userReducer);
@@ -52,6 +53,11 @@ const ActualizarDatos = () => {
 
   const handleClickEnviar = () => {
     dispatch(updateInfoUserAction(loggedUser?.id, formData));
+    Swal.fire(
+      'Buen trabajo!',
+      'Tus datos fueron actualizados correctamente!',
+      'success'
+    )
   };
   return (
     <div className="detalle">
@@ -93,7 +99,7 @@ const ActualizarDatos = () => {
             <textarea
               rows="4"
               defaultValue={loggedUser?.sobremi}
-              onChange={handleFileChange}
+              onChange={handleInputChange}
               name="sobremi"
             ></textarea>
           </div>

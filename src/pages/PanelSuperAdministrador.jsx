@@ -58,22 +58,6 @@ const PanelSuperAdministrador = () => {
       'El administrador fue eliminado con éxito!',
       'success'
     )
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
-
-    // return (dispatch) => {
-    //   deleteAdmin(id)
-    //     .then((response) => {
-    //       console.log('Administrador eliminado:', response);
-    //       listAdmin().then((data) => {
-    //         dispatch(deleteAdministrador(data));
-    //       });
-    //     })
-    //     .catch((error) => {
-    //       console.error('Error al eliminar administrador:', error);
-    //     });
-    // };
   }
  
 
