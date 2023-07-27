@@ -20,7 +20,7 @@ const NuevoEstudiante = () => {
       .required("El número de documento es obligatorio")
       .min(8, "El documento debe contener al menos 8 caracteres.")
       .max(10, "El documento no puede contener más de 10 caracteres"),
-    teléfono: Yup.string()
+    telefono: Yup.string()
       .min(7, "El teléfono debe contener al menos 7 caracteres")
       .max(10, "El teléfono no puede contener más de 10 caracteres"),
     tipo_entrenamiento: Yup.string().required(
@@ -29,7 +29,7 @@ const NuevoEstudiante = () => {
     modulo: Yup.string().required("El módulo es obligatorio"),
     email: Yup.string()
       .email("Debes ingresar un email"),
-    cohorte: Yup.number().required("La cohorte es obligatoria"),
+    cohorte: Yup.number(),
   });
   const dispatch = useDispatch();
 
@@ -49,7 +49,7 @@ const NuevoEstudiante = () => {
       participante.name &&
       participante.lastname &&
       participante.numeroDocumento &&
-      participante.teléfono &&
+      participante.telefono &&
       participante.tipo_entrenamiento &&
       participante.modulo &&
       participante.email &&
@@ -82,7 +82,7 @@ const NuevoEstudiante = () => {
           lastname: "",
           numeroDocumento: "",
           email: "",
-          teléfono: "",
+          telefono: "",
           curso: "",
           cohorte: "",
         }}
@@ -153,13 +153,13 @@ const NuevoEstudiante = () => {
             <h2>Número de teléfono</h2>
             <Field
               type="tel"
-              name="teléfono"
+              name="telefono"
               placeholder="Número de teléfono"
-              value={participante.teléfono || ""}
+              value={participante.telefono || ""}
               onChange={handleChange}
             />
             <ErrorMessage
-              name="teléfono"
+              name="telefono"
               component="div"
               style={{ color: "#87CEEB" }}
             />
