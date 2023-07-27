@@ -3,9 +3,8 @@ import * as Yup from "yup";
 import Swal from "sweetalert2";
 import "../../components/nuevoEstudiante/nuevoEstudiante.scss";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { addStudents } from "../../redux/actions/estudiantesActions";
-// import { Button, Input } from 'semantic-ui-react'
 
 const NuevoEstudiante = () => {
   const validationSchema = Yup.object({
@@ -21,8 +20,7 @@ const NuevoEstudiante = () => {
       .required("El número de documento es obligatorio")
       .min(8, "El documento debe contener al menos 8 caracteres.")
       .max(10, "El documento no puede contener más de 10 caracteres"),
-    telefono: Yup.string()
-      .required("El número telefónico es obligatorio")
+    teléfono: Yup.string()
       .min(7, "El teléfono debe contener al menos 7 caracteres")
       .max(10, "El teléfono no puede contener más de 10 caracteres"),
     tipo_entrenamiento: Yup.string().required(
@@ -30,10 +28,8 @@ const NuevoEstudiante = () => {
     ),
     modulo: Yup.string().required("El módulo es obligatorio"),
     email: Yup.string()
-      .email("Debes ingresar un email")
-      .required("El e-mail es obligatorio"),
-    cohorte: Yup.number().required("La cohorte es obligatorio"),
-    estado: Yup.string().required("el estado es obligatorio"),
+      .email("Debes ingresar un email"),
+    cohorte: Yup.number().required("La cohorte es obligatoria"),
   });
   const dispatch = useDispatch();
 
@@ -41,57 +37,57 @@ const NuevoEstudiante = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setParticipante((preveState) => ({
-      ...preveState,
+    setParticipante((prevState) => ({
+      ...prevState,
       [name]: value,
     }));
     console.log(participante.tipoDocumento);
   };
 
-  const handleSubmit = () => {
-    Swal.fire({
-      icon: "success",
-      title: "Participante creado exitosamente",
-      showConfirmButton: false,
-      timer: 1500,
-    })
-      .then(() => {})
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const handleAgregarEstudiantes = () => {
-    dispatch(addStudents("estudiantes", participante));
-    Swal.fire(
-      "Buen trabajo!",
-      "El estudiante fue agregado con éxito!",
-      "success"
-    );
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    if (
+      participante.name &&
+      participante.lastname &&
+      participante.numeroDocumento &&
+      participante.teléfono &&
+      participante.tipo_entrenamiento &&
+      participante.modulo &&
+      participante.email &&
+      participante.cohorte
+    ) {
+      dispatch(addStudents("estudiantes", participante));
+      Swal.fire(
+        "Buen trabajo!",
+        "El estudiante fue agregado con éxito!",
+        "success"
+      );
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } else {
+      Swal.fire(
+        "Error",
+        "Por favor, completa todos los campos obligatorios.",
+        "error"
+      );
+    }
   };
-
 
   return (
     <main className="main">
       <h1 className="title_añadir_estudiante">Añadir estudiante</h1>
       <Formik
         initialValues={{
-          nombres: "",
-          apellidos: "",
+          name: "",
+          lastname: "",
           numeroDocumento: "",
           email: "",
           teléfono: "",
-          dirección: "",
-          ciudad: "",
           curso: "",
-          cohorte: 0,
-          edad: "",
+          cohorte: "",
         }}
         validationSchema={validationSchema}
-        onSubmit={handleSubmit}
+        onSubmit={handleAgregarEstudiantes}
       >
         <Form>
           <div className="names">
@@ -100,14 +96,14 @@ const NuevoEstudiante = () => {
               type="text"
               name="name"
               placeholder="Nombres"
-              value={participante.name}
+              value={participante.name || ""}
               onChange={handleChange}
             />
             <Field
               type="text"
               name="lastname"
               placeholder="Apellidos"
-              value={participante.lastname}
+              value={participante.lastname || ""}
               onChange={handleChange}
             />
           </div>
@@ -130,26 +126,21 @@ const NuevoEstudiante = () => {
             <h2>Documento</h2>
             <select
               name="tipoDocumento"
-              value={participante.tipoDocumento}
+              value={participante.tipoDocumento || ""}
               onChange={handleChange}
             >
-              <option selected>Selecciona tu tipo de documento</option>
-              <option value="CC">C.C.</option>
+              <option value>Selecciona tu tipo de documento</option>
+              <option defaultValue="CC">C.C.</option>
               <option value="TI">T.I.</option>
               <option value="PEP">PEP</option>
             </select>
             <Field
               type="text"
               name="numeroDocumento"
-              value={participante.numeroDocumento}
+              value={participante.numeroDocumento || ""}
               onChange={handleChange}
             />
           </div>
-          {/* <ErrorMessage
-            name="numeroDocumento"
-            component="div"
-            style={{ color: "#87CEEB" }}
-          /> */}
           {!participante.numeroDocumento && (
             <ErrorMessage
               name="numeroDocumento"
@@ -162,13 +153,13 @@ const NuevoEstudiante = () => {
             <h2>Número de teléfono</h2>
             <Field
               type="tel"
-              name="telefono"
+              name="teléfono"
               placeholder="Número de teléfono"
-              value={participante.telefono}
+              value={participante.teléfono || ""}
               onChange={handleChange}
             />
             <ErrorMessage
-              name="telefono"
+              name="teléfono"
               component="div"
               style={{ color: "#87CEEB" }}
             />
@@ -178,13 +169,13 @@ const NuevoEstudiante = () => {
             <h2>Entrenamiento</h2>
             <select
               name="tipo_entrenamiento"
-              value={participante.tipo_entrenamiento}
+              value={participante.tipo_entrenamiento || ""}
               onChange={handleChange}
             >
-              <option selected>Selecciona el entrenamiento</option>
+              <option defaultValue>Selecciona el entrenamiento</option>
               <option value="Backend">Backend</option>
               <option value="Frontend">Frontend</option>
-              <option value="Analisis de datos">Analisis de datos</option>
+              <option value="Análisis de datos">Análisis de datos</option>
             </select>
           </div>
           <ErrorMessage
@@ -197,12 +188,12 @@ const NuevoEstudiante = () => {
             <h2>Módulo</h2>
             <select
               name="modulo"
-              value={participante.modulo}
+              value={participante.modulo || ""}
               onChange={handleChange}
             >
-              <option selected>Selecciona el módulo</option>
+              <option defaultValue>Selecciona el módulo</option>
               <option value="Fundamentos">Fundamentos</option>
-              <option value="Profundizacion">Profundización</option>
+              <option value="Profundización">Profundización</option>
             </select>
           </div>
           <ErrorMessage
@@ -216,7 +207,7 @@ const NuevoEstudiante = () => {
             <Field
               type="number"
               name="cohorte"
-              value={participante.cohorte}
+              value={participante.cohorte || ""}
               onChange={handleChange}
             />
             <ErrorMessage
@@ -232,7 +223,7 @@ const NuevoEstudiante = () => {
               type="email"
               name="email"
               placeholder="example@gmail.com"
-              value={participante.email}
+              value={participante.email || ""}
               onChange={handleChange}
             />
             <ErrorMessage
@@ -241,16 +232,6 @@ const NuevoEstudiante = () => {
               style={{ color: "#87CEEB" }}
             />
           </div>
-
-          {/* <div className="estado">
-            <h2>Estado</h2>
-            <Field type="text" name="estado" />
-            <ErrorMessage
-              name="estado"
-              component="div"
-              style={{ color: "#87CEEB"  }}
-            />
-          </div> */}
 
           <button
             type="submit"
