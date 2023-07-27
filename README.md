@@ -22,7 +22,7 @@ Este proyecto es un aplicativo para monitorear el progreso de los estudiantes a 
 7. Bootstrap, Sass y AntDesign: utilizados para estilizar y mejorar el aspecto visual de la aplicación.
 8. Media Queries y Material UI core: para el diseño responsive de la aplciación.
 9. FullCalendar: librería para gestionar el cronograma
-10. Xlmx: librerría para descargar archivos de Excel.
+10. Xlsx: librerría para descargar archivos de Excel.
 
 ## Roles de Usuario - Alcance
 El alcance del aplicativo se basa en las funcionalidades de cuatro roles o tipos de usuario:
