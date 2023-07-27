@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&family=Raleway:wght@300;400;500&display=swap');
+@import 'bootstrap/dist/css/bootstrap.css';
 
 // ************* COLORS ******************
 $colorPrincipal: #6AB3EE;
@@ -6,6 +7,9 @@ $colorSecundario: #ffffff;
 $colorFondoContenido: #f6f9ff;
 $colorBotonExcel: #6ee13c;
 $colorBotonSecundario: #337cb7;
+
+
+
 
 // ************** TYPOGRAFY FONT ***************
 $tipografiaPrincipal: 'Poppins', sans-serif;
@@ -17,3 +21,30 @@ $tipografiaPrincipal: 'Poppins', sans-serif;
     box-sizing: border-box;
     font-family: $tipografiaPrincipal;
 }
+
+#main {
+    margin-top: 60px;
+    padding: 20px 30px;
+    transition: all 0.3s;
+}
+
+// main {
+//     display: block;
+// }
+
+// @media (min-width: 1200px){
+// #main {
+//     margin-left: 300px;
+// }
+// }
+
+
+.main-with-aside {
+    margin-left: 300px; /* Margen izquierdo cuando el aside está presente */
+  }
+  
+  .main-full-width {
+    margin-left: 0; /* Margen izquierdo cero cuando el aside está oculto */
+  }
+
+

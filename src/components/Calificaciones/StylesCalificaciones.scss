@@ -1,0 +1,105 @@
+.calificaciones {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1rem 3rem;
+    margin-top: 4rem;
+
+    .imagenPerfil {
+        width: 5rem;
+        border-radius: 100px;
+        margin-right: 1rem;
+    }
+
+    .fecha {
+        display: flex;
+        flex-direction: column;
+
+        .fechaEncontrada {
+            font-family: cursive;
+            background-color: #e4f4fb;
+            padding: .5rem .5rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &__table {
+        margin-top: 2rem;
+    }
+
+    .inputNota {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 3rem;
+        background-color: #e4f4fb;
+        color: #2ca7e2;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: .5rem .5rem;
+    }
+
+    .workshop {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: .5rem;
+
+        .valorNota {
+            display: flex;
+            width: 2rem;
+            color: #2ca7e2;
+            font-weight: 700;
+            background-color: #e4f4fb;
+            padding: .2rem .2rem;
+            border-radius: 5px;
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 1rem;
+
+        .cantidadParticipantes {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10%;
+
+        }
+
+        .numberParticipantes {
+            display: flex;
+            width: 2rem;
+            color: #2ca7e2;
+            font-weight: 700;
+            background-color: #e4f4fb;
+            padding: .2rem .3rem;
+            margin-bottom: .7rem;
+            border-radius: 5px;
+        }
+
+        .nameModulo {
+            p {
+                font-size: 1.2rem;
+                font-weight: 600;
+                text-decoration: underline;
+                text-decoration-skip-ink: none;
+                text-underline-offset: .4rem;
+                cursor: pointer;
+                background-color: #e4f4fb;
+                padding: .5rem 1.3rem;
+                border-radius: 10px;
+            }
+        }
+
+    }
+     .barraBusqueda{
+        display: flex;
+        padding: 0rem 15%;
+    }
+}

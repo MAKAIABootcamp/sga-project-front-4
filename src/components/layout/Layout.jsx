@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useState } from "react";
+import { Outlet } from "react-router-dom";
+import Header from "../header/Header";
+import Aside from "../aside/Aside";
+import "../../styles/layout/Layout.scss";
 
 const Layout = () => {
-  return (
-    <div>Layout</div>
-  )
-}
+  const [hamburguerMenu, setHamburguerMenu] = useState(true);
 
-export default Layout
+  const handleMenuToggle = () => {
+    setHamburguerMenu(!hamburguerMenu);
+  };
+  return (
+    <>
+      <Header handleMenuToggle={handleMenuToggle} />
+      <main className="main__aside">
+        <Aside hamburguerMenu={hamburguerMenu} />
+        <Outlet className="outlet" />
+      </main>
+    </>
+  );
+};
+
+export default Layout;
