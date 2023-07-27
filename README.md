@@ -61,7 +61,7 @@ En los siguientes documentos podrás consultar la documentación y el proceso de
 1. Plantilla de registro de proyectos: [Excel Design thinking](https://docs.google.com/spreadsheets/d/1MQfxfJk7TLrXOXbM4TJVpdCHV5XggJaQ/edit?usp=drive_link&ouid=116622975878272974715&rtpof=true&sd=true)
 2. Flujo del aplicativo: [FLUJO SGA MAKAIA](https://docs.google.com/document/d/1_KDRxkwyj0XGY0mLy8PZRAYuVPL7xaSXlVXp7i5vAS4/edit?usp=sharing)
 3. Prototipo: [Prototipo Canva](https://www.canva.com/design/DAFm9CM8B3U/b3mTxCHQwomgyj5S4_Vu2w/view?utm_content=DAFm9CM8B3U&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink)
-4. Despliegue: [URL Firebase](https://sga-makaia.web.app/)
+4. Despliegue: https://sga-makaia.web.app/
 
 # Licencia
 
