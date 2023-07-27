@@ -1,5 +1,5 @@
 import axios from "axios";
-const URL_BASE = "https://backend-sga-icqb.vercel.app/";
+const URL_BASE = "https://backend-sga.onrender.com/";
 
 const endpointEvents = "eventos";
 

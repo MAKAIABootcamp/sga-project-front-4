@@ -1,0 +1,151 @@
+// @import "../mixin";
+@import "../index.scss";
+@import "../aside/Aside.scss";
+
+// button {
+//     @include buttonSquare3;
+// };
+
+
+
+.inputs {
+    margin-top: 110px;
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+&__respuesta {
+    p{
+        // @include Texto1($color: 'azul-oscuro', $fontWeight: 'pequeña');
+
+    }
+}
+    &__titulo {
+        display: flex;
+        justify-content: center;
+        width: max-content;
+         margin-left: 32px;
+        h1 {
+        font-weight: bolder;
+        font-size: xx-large;
+        color:$azul;
+    }
+    }
+
+    label {
+        // @include Texto1($color: 'gris', $fontWeight: 'grueso');
+
+    }
+
+    select {
+        background-color: $colorFondoContenido;
+
+    }
+input{
+    
+    border: solid 2px $gris;
+}
+    option {
+        background-color: $colorBotonSecundario;
+        color: $colorFondoContenido;
+
+        select#mySelect option:selected {
+            /* Estilos para la opción seleccionada */
+            background-color: $colorBotonExcel;
+            color: $colorFondoContenido;
+        }
+    }
+
+    form {
+        gap: 23px;
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 4rem;
+       
+
+        @media (min-width: 400px) {
+            gap: 10px;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 3rem;
+            margin-top: 2rem;
+
+        }
+
+    }
+
+    &__input {
+        gap: 10px;
+        display: flex;
+        padding-top: 10px;
+        align-items: center;
+    }
+    &__division{
+        gap: 10px;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    &__responsive {
+      
+        display: flex;
+     flex-direction: column;
+     border: solid 5px $colorFondoContenido;
+     padding: 28px;
+     
+     
+     label   {
+        // @include Texto1($color: 'negro', $fontWeight: 'supergrueso');
+    }
+    input{
+      width: 300px;
+    } 
+    h2{
+        padding: 30px;
+        // // @include Texto1($color: 'negro', $fontWeight: 'supergrueso');
+
+    }
+    }
+
+    figure {
+        width: 300px;
+        height: 200px;
+        border: 2px dashed $azul; /* Borde punteado */
+        display: flex;
+        align-items: center; /* Centrar verticalmente */
+        justify-content: center; /* Centrar horizontalmente */
+      }
+      
+      img {
+        width: 100px;
+        height: 100px; /* Ajusta la altura de la imagen según tus necesidades */
+        object-fit: contain; /* Ajusta la imagen dentro del contenedor manteniendo la proporción */
+      }
+      
+    input#archivo {
+        border: solid 2px $colorFondoContenido;
+        width: initial;
+
+    }
+
+    button#botonparasubirarchivo {
+        margin-top: 10px;
+    }
+}
+
+#inputs__titulo__responsive__mobile{
+    h1 {
+        font-size: large;
+    }
+
+}
+#inputs__titulo__responsive__desktop{
+
+padding-left: 20%;
+padding-right: 20%;
+}
+

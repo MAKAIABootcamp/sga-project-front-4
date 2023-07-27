@@ -1,6 +1,11 @@
+@import "../mixin.scss";
+@import "../index.scss";
 #calendar {
   &.custom-calendar {
+
     .fc-toolbar-chunk {
+      align-items: baseline;
+      display: flex;
       .fc-dayGridMonth-button {
         background-color: #2e6c80;
         box-shadow: 0 4px 8px rgba(106, 179, 238, 0.5);
@@ -37,4 +42,109 @@
     }
     }
   }
+}
+// #calendar{
+//   div{
+//      display: flex;
+//      justify-content: center;
+//   }
+
+// }
+
+
+/* Estilos para el círculo */
+.custom-event-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Estilos para los colores de fondo */
+.event-background-1 {
+  background-color: #3788d8; /* Azul */
+}
+// .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+//   display: flex;
+// justify-content: center;
+// align-items: center;
+// flex-direction: column;
+// }
+.seccionCalendarioVisualizacion{
+  display: flex;
+  gap:2rem;
+  flex-direction: column;
+  header{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+ 
+  } footer{
+    margin-left: 100px
+  }
+  &__container{
+    height: 180rem;
+  // display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 100px;
+
+  margin-left: 44px;
+
+  }  &__eventDetails{
+    gap:20px;
+    display: flex;
+    flex-direction: column;
+    div{
+      display: flex;
+      justify-content: baseline;
+    }
+    // h1{
+    //   @include Texto1($color:gris, $fontWeight: grueso)
+    // }
+  &__eventoSeleccionado{
+    background-color: $colorBotonSecundario;
+    flex-direction: column;
+    height: 100%;
+    section{
+      display: flex;
+      flex-direction: column;
+      background-color: aliceblue;
+      border-radius: 5px;
+
+    }
+  }
+  &__titulo{
+    // h2{
+    //   padding: 10px 0 10px 0;
+    //   @include Texto1($color:azul-oscuro, $fontWeight: supergrande)
+    // }
+  }
+ 
+}
+}
+
+
+.fc .fc-media-screen {
+  width: max-content;
+}
+.fc-header-toolbar  {
+  div{
+     gap: 10px;
+  }
+ 
+}
+// .fc-toolbar-title {
+//   margin-right: 10px !important;
+// }
+
+.event-background-3 {
+  background-color: #27ae60; /* Verde */
+}
+
+.event-background-4 {
+  background-color: #f39c12; /* Amarillo */
 }

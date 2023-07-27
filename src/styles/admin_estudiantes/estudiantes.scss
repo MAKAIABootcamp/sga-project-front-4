@@ -7,6 +7,7 @@
     padding: 2% 4%;
     width: 100%;
     margin-top: 46px;
+    overflow-x: auto;
 
     h2 {
         display: flex;
@@ -175,6 +176,7 @@
       
     }
     
+    
 }
 .button__cancelar{
     background-color: red;
@@ -198,3 +200,14 @@
     margin-top: 3%;
 }
 
+@media screen and (max-width: 768px) { // Estilos para dispositivos móviles y tablets
+    .tabla-responsive {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .tabla-responsive .ant-table {
+      width: 100%;
+    }
+  }
