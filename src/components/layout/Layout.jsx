@@ -5,7 +5,7 @@ import Aside from "../aside/Aside";
 import "../../styles/layout/Layout.scss";
 
 const Layout = () => {
-  const [hamburguerMenu, setHamburguerMenu] = useState(false);
+  const [hamburguerMenu, setHamburguerMenu] = useState(true);
 
   const handleMenuToggle = () => {
     setHamburguerMenu(!hamburguerMenu);
