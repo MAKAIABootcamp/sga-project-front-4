@@ -1,6 +1,4 @@
-
-  
- .main {
+  .main {
     text-align: center;
     padding: 20px;
     background: linear-gradient(
@@ -23,19 +21,16 @@
     hsl(200deg 71% 53%) 85%,
     hsl(200deg 76% 54%) 100%
   );
-  box-shadow: 0 4px 8px rgba(106, 179, 238, 0.5);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
   border-radius: 5px;
   }
-  
   
   .title_añadir_estudiante {
     font-size: 30px;
     margin-bottom: 1rem;
-    font-weight: 400;
+    font-weight: 600;
     color: black;
   }
-  
-
   
   input,
   select {
@@ -53,20 +48,17 @@
   .email,
   .modulo,
   .teléfono,
-  .dirección,
-  .curso,
-  .cohorte,
-  .edad {
+  .cohorte {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 1rem;
-    gap: 7px;
+    gap: 5px;
+    justify-content: flex-end;
 
     h2 {
-        font-size: 20px;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
+        font-size: 1.2rem;
+        font-weight: 400;
         color: black;
       }
   }
@@ -79,7 +71,7 @@
     border-radius: 4px;
     cursor: pointer;
     margin-top: 29px;
-    width: 30%;
+    width: 25%;
   }
   
   .error-message {
