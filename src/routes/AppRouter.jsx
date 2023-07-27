@@ -15,6 +15,9 @@ import PanelSuperAdministrador from "../pages/PanelSuperAdministrador";
 import PlanDeEstudios from "../pages/PlanDeEstudios";
 import Notas from "../pages/Notas";
 import RecursosEstudiantes from "../pages/RecursosEstudiantes";
+import RecursosEducativos from "../components/recursosEducativos/RecursosEducativos";
+import Cursos from "../components/recursosEducativos/Cursos"
+import CronogramaEstudiantes from "../pages/CronogramaEstudiantes";
 import Calificaiones from "../components/Calificaciones/Calificaiones";
 import {
   //createUserWithEmailAndPassword,
@@ -87,14 +90,18 @@ const AppRouter = () => {
             <Route path="/calificaciones" element={loggedUser?.rol === userTypes.FORMADOR || loggedUser?.rol === userTypes.ADMINISTRADOR  ?  <Calificaiones /> : <RutaNoPermitida />} />
             <Route path="/asistencia" element={loggedUser?.rol === userTypes.FORMADOR || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <AsistenciaPage /> : <RutaNoPermitida />} />
             <Route path="/cronograma" element={loggedUser?.rol === userTypes.FORMADOR || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <Cronograma /> : <RutaNoPermitida />} />
-            <Route path="/recursos" element={loggedUser?.rol === userTypes.FORMADOR || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <RecursosEstudiantes /> : <RutaNoPermitida />} />
+            <Route path='/cursos-disponibles-recursos-educativos' element={loggedUser?.rol === userTypes.FORMADOR || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <Cursos/> : <RutaNoPermitida/> } />
+            <Route path="/recursos-educativos/:cursoId" element={loggedUser?.rol === userTypes.FORMADOR || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <RecursosEducativos /> : <RutaNoPermitida/>} />
+
             {/* </Route> */}
 
             {/* MODULO DE ESTUDIANTE*/}
             {/* <Route element={<EstudiantesRoute userType={loggedUser?.rol} />}> */}
             <Route path="/notas" element={loggedUser?.rol === userTypes.ESTUDIANTE || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <Notas /> : <RutaNoPermitida />} />
             <Route path="/plan" element={loggedUser?.rol === userTypes.ESTUDIANTE || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <PlanDeEstudios /> : <RutaNoPermitida />} />
-            {/* Falta cronograma de visualización del estudiante */}
+            <Route path="/calendario"  element={loggedUser?.rol === userTypes.ESTUDIANTE || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <CronogramaEstudiantes/> : <RutaNoPermitida/> } />
+            <Route path="/recursos" element={loggedUser?.rol === userTypes.ESTUDIANTE || loggedUser?.rol === userTypes.ADMINISTRADOR  ? <RecursosEstudiantes /> : <RutaNoPermitida />} />
+{/* Falta cronograma de visualización del estudiante */}
             {/* </Route> */}
 
             {/* MODULO REGISTRO SUPER ADMINISTRADOR */}

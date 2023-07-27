@@ -4,9 +4,10 @@ import eventsReducer from "../reducers/eventsReducer";
 import adminRegisterReducer from "../reducers/adminRegisterReducer";
 import userReducer from "../reducers/userReducer";
 import estudiantesReducer from "../reducers/estudiantesReducer";
+import cursosReducer from "../reducers/cursosReducer";
 
 const store = configureStore({
-    reducer: {eventsReducer, adminRegisterReducer, userReducer, estudiantesReducer},
+    reducer: {eventsReducer, adminRegisterReducer, userReducer, estudiantesReducer,cursosReducer},
     middleware: [thunk],
 });
 

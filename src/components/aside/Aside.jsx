@@ -2,12 +2,12 @@
 import { useNavigate } from "react-router-dom";
 import "../../styles/aside/Aside.scss";
 
-const Aside = ({hamburguerMenu,}) => {
+const Aside = ({ hamburguerMenu }) => {
   const navigate = useNavigate();
   const AsideList = [
     {
       name: "Estudiantes",
-      url: "/estudiantes" ,
+      url: "/estudiantes",
     },
     {
       name: "Cronograma",
@@ -38,6 +38,14 @@ const Aside = ({hamburguerMenu,}) => {
       url: "/registro-administradores",
     },
     {
+      name: "Recursos Formador",
+      url: "/cursos-disponibles-recursos-educativos",
+    },
+    {
+      name: "Cronograma Estudiante",
+      url: "/calendario",
+    },
+    {
       name: "Perfil",
       url: "/perfil",
     },
@@ -46,6 +54,7 @@ const Aside = ({hamburguerMenu,}) => {
   const handleMenuItemClick = (url) => {
     navigate(url);
   };
+
   return (
     <>
       {hamburguerMenu && (

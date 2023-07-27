@@ -1,0 +1,163 @@
+// @import "../mixin";
+// @import "../index.scss";
+
+// button {
+//   @include buttonSquare3;
+// }
+
+// ;
+
+// .inputs {
+//   display: flex;
+//   flex-direction: row;
+//   align-items: revert;
+//   height: 564px;
+//   justify-content: space-around;
+
+//   @media (min-width: 400px) {
+//     flex-direction: column;
+//   }
+
+//   @include Texto1($color: 'azul-oscuro', $fontWeight: 'grueso');
+
+//   h1 {
+//     font-size: 32px;
+//   }
+
+//   label {
+//     @include Texto1($color: 'gris', $fontWeight: 'grueso');
+
+//   }
+
+//   select {
+//     background-color: $colorFondoContenido;
+//   }
+
+//   form {
+//     gap: 23px;
+//     flex-direction: column;
+//     display: flex;
+//     justify-content: inherit;
+//     align-items: baseline;
+//     margin-left: 16rem;
+//     margin-top: 4rem;
+
+//     @media (min-width: 400px) {
+//       gap: 10px;
+//       flex-direction: column;
+//       display: flex;
+//       justify-content: inherit;
+//       align-items: baseline;
+//       margin-left: 3rem;
+//       margin-top: 2rem;
+
+//     }
+
+//   }
+
+//   &__input {
+//     gap: 10px;
+//     display: flex;
+//   }
+
+//   section {
+//     display: flex;
+//     padding-left: 5rem;
+
+//     @media (max-width: 400px) {
+//       display: flex;
+//       padding-left: 5rem;
+//       padding-right: 5rem;
+
+//       button {
+
+//         @media (max-width: 400px) {
+//           margin: 28px;
+//         }
+
+//         margin-top: 17px;
+//       }
+//     }
+//   }
+
+//   &__respuesta {
+//     flex-direction: row;
+//     display: flex;
+//     div {
+//       gap: 10px;
+//     flex-direction: column;
+//       display: flex;
+//       justify-content: inherit;
+//       align-items: baseline;
+//       margin-left: 3rem;
+//       margin-top: 2rem;
+//       border: solid 2px $colorPrincipal;
+//       padding:20px;
+//     }
+
+//     h3 {
+//       @include Texto1($color: 'azul-oscuro', $fontWeight: 'grueso')
+//     }
+
+//     p {
+//       @include Texto1($color: 'gris', $fontWeight: 'grueso')
+//     }
+//   }
+// }
+
+// #logo2 {
+//   width: 100%;
+//   height: 50%;
+//   background-image: url("https://i.ibb.co/1rHVNwQ/logo2.png");
+//   background-size: contain;
+//   background-position: center;
+// }
+
+// #logo2 img {
+//   width: 100%;
+//   height: 100%;
+// }
+
+// .division {
+//   width: 50%;
+//   /* ajusta la altura según tus necesidades */
+//   float: left;
+// }
+
+// #divisionprincipal {
+//   display: flex;
+//   flex-direction: row;
+// }
+// .card-container {
+//   width: 100%; /* Ajusta el ancho según sea necesario */
+//   overflow-x: auto;
+// }
+
+// .card-wrapper {
+//   display: flex;
+// }
+
+// .card {
+//   width: 300px; /* Ajusta el ancho de cada card según tus necesidades */
+//   margin-right: 10px; 
+//   margin-left: 10px; /* Espacio entre las cards */
+// }
+// .card-body{
+//   h5{
+//     @include Texto1($color: 'azul-oscuro', $fontWeight: 'grueso');
+//     font-size: 32px;
+  
+
+//   }
+//   p{
+//     @include Texto1($color: 'gris', $fontWeight: 'grueso');
+
+//   }
+//   display: flex;
+//   flex-direction: column;
+//   padding: 39px;
+//   gap: 34px;
+//   button{
+//     align-self: center;
+//   }
+// }
